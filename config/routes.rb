@@ -6,6 +6,8 @@ Rails.application.routes.draw do
 
   resources :things, only: [:show]
 
+  resources :people, only: [:show]
+
   resources :institutions, only: [:show]
 
   root to: 'home#show'
