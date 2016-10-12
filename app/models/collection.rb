@@ -6,7 +6,7 @@ class Collection
 
   def initialize(metadata)
     @metadata = metadata
-    @id = metadata['gfs_id'] || 'missing_id'
+    @id = metadata['gfs_id']
     @institution_id = metadata['institution']
     @name = metadata['collection']
   end
