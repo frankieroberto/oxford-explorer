@@ -33,6 +33,22 @@ select {
 .center {
 	text-align: center;
 }
+
+/* home */
 .key span { 
 	padding: 3px;
+}
+
+/* collection */
+.mapette-container {
+	margin-top: -20px;
+	background-color: #002b36;
+	padding: 10px;
+}
+.stats {
+	padding-top:10px; 
+}
+
+.stats li {
+	line-height: 1.25em;	
 }
