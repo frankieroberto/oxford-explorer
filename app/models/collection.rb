@@ -2,7 +2,8 @@ require 'csv'
 
 class Collection
 
-  attr_accessor :id, :institution_id, :name, :size_int
+  attr_accessor :id, :institution_id, :name, :size_int, :types_of_things, :subjects, :places,
+    :people
 
   def initialize(metadata)
     @metadata = metadata
@@ -10,6 +11,10 @@ class Collection
     @institution_id = metadata['institution']
     @name = metadata['collection']
     @size_int = metadata['size'].to_s.gsub(',', '').to_i
+    @types_of_things = metadata['type_of_things'].to_s.split(';').collect(&:strip)
+    @subjects = metadata['subjects'].to_s.split(',').collect(&:strip)
+    @places = metadata['places'].to_s.split(',').collect(&:strip)
+    @people = metadata['names'].to_s.split(';').collect(&:strip)
   end
 
   def [](test)

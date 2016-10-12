@@ -15,16 +15,20 @@
 <div class="row">
 	<div class="offset-by-one eight columns blurb">
 
+
+
 		<p>
-			This collection mostly contains <a href="/types/show.html">type</a>, <a href="/types/show.html">type</a> and <a href="/types/show.html">type</a> things about <a href="/subjects/show.html">subject</a>, <a href="/subjects/show.html">subject</a> and <a href="/subjects/show.html">subject</a></a> from about <a href="/dates/show.html">YYYY</a> to <a href="/dates/show.html">YYYY</a>. Materials are either from or about <a href="/places/show.html">Place</a> and <a href="/places/show.html">Place</a>.
+			This collection mostly contains <%= @collection.types_of_things.collect {|type_of_thing| link_to(type_of_thing, item_type_path(type_of_thing)) }.to_sentence(last_word_connector: ' and ').html_safe %> things about <%= @collection.subjects.collect {|subject| link_to(subject, subject_path(subject)) }.to_sentence(last_word_connector: ' and ').html_safe %> from about <a href="/dates/show.html">YYYY</a> to <a href="/dates/show.html">YYYY</a>. Materials are either from or about <%= @collection.places.collect {|places| link_to(places, "#") }.to_sentence(last_word_connector: ' and ').html_safe %>.
 
 			&nbsp; <small>[ <a href="#">Expand</a> ]</small>
 		</p>
 
-		<p>
-			<a href="/people/show.html">Person</a>, <a href="/people/show.html">Person</a> and <a href="/people/show.html">Person</a> figure quite prominently. There are 0,000 other characters.
-			&nbsp; <small>[ <a href="#">Reveal</a> ]</small>
-		</p>
+    <% if @collection.people.size > 0 %>
+  		<p>
+        <%= @collection.people.collect {|person| link_to(person, "#") }.to_sentence(last_word_connector: ' and ').html_safe %> figure quite prominently. There are 0,000 other characters.
+  			&nbsp; <small>[ <a href="#">Reveal</a> ]</small>
+  		</p>
+    <% end %>
 
 		<h3>0,000 things</h3>
 
