@@ -59,6 +59,9 @@ function setup() {
   .on("mousemove", function(d,i) {
     handleGridMouseMove(d,i);
   })
+  .on("mouseout", function() {
+    hideHud();
+  });
 
 
   d3.json('/latest.json', function(collections) {
@@ -372,7 +375,9 @@ function handleGridMouseMove(d,event) {
           d3.select(grp).raise();
         }
         var d= d3.select(grp).data()[0];
-        updateHudForItem(d);
+        //updateHudForItem(d,cx-window.svgElementOffset.left,cy-window.svgElementOffset.top);
+        updateHudForItem(d,d3.event.pageX-225,d3.event.pageY);
+        console.log(d3.event);
       } else {
         if(!window.isFiltered) {
           if(c.getBoundingClientRect().width > (2*window.defaultRadius) || c.getBoundingClientRect().width < (2*window.defaultRadius)) {
@@ -383,7 +388,7 @@ function handleGridMouseMove(d,event) {
     }
   }
 
-  if(!currentBB) {
+  if(!window.currentBB) {
     hideHud();
   }
 
@@ -418,16 +423,19 @@ function shrinkElement(el) {
 
 }
 
-function updateHudForItem(d) {
+function updateHudForItem(d,x,y) {
   var dr_int = d.pub_dr_int;
   if(!dr_int) {
     // if dr_int is null, set it to 0 - rather than casting null to an integer
     // which I couldn't quite do.
     dr_int = 0;
   }
-  $("#blobiz-hud h1").text(d.institution + ": " + d.department);
-  $("#blobiz-hud h2").text(d.collection + " (" + d.size + " objects, of which "+dr_int+" have digital records)");
-  $("#blobiz-hud").fadeIn();
+  $("#blobviz-hud h1").text(d.institution + ": " + d.department);
+  $("#blobviz-hud h2").text(d.collection + " (" + d.size + " objects, of which "+dr_int+" have digital records)");
+
+  $("#blobviz-hud").css({'left': x, 'top': y});
+
+  $("#blobviz-hud").fadeIn();
 }
 
 function hideHud() {

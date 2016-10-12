@@ -6,7 +6,7 @@
   svg {
     position: absolute;
     margin-left: -250px;
-    margin-top: -100px;
+    margin-top: -50px;
     .ASH {
       background: $inst_ash;
       color: $inst_ash;
@@ -37,9 +37,9 @@
     }
 
     .PRM {
-      background-color: #dc322f;
-      color: #dc322f;
-      fill: #dc322f;
+      background-color: $inst_prm;
+      color: $inst_prm;
+      fill: $inst_prm;
     }
 
     /* HRB */
@@ -65,27 +65,22 @@
 }
 
 #blobviz-hud {
-  /*display: none;*/
-  position: fixed;
-  top:0;
-  bottom: auto;
+  display: none;
+  position: absolute;
   background-color: rgba(0,0,0,0.5);
-  width: 100%;
+  width: 200px;
   z-index: 100;
-
-  .bottom {
-    bottom: 0;
-    top: auto;
-  }
 
   h1 {
     font-family: sans-serif;
     font-weight: bold;
     color: white;
     margin: 10px;
+    font-size: 26px;
   }
 
   h2 {
+    font-size: 18px;
     font-family: sans-serif;
     font-weight: normal;
     color: white;
@@ -108,3 +103,6 @@
   text-transform: uppercase;
 }
 
+form#selectors {
+  z-index: 200;
+}
