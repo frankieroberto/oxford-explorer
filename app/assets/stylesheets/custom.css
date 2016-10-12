@@ -24,17 +24,15 @@ a {
 a:hover {
   color: #268bd2; 
 }
+select {
+	color: #002b36;
+}
 .right {
 	text-align: right;
 }
-nav { 
-	display: block; 
+.center {
+	text-align: center;
 }
-nav a {
-	margin-right: 20px;
-	padding:5px; 
-}
-
 .key span { 
 	padding: 3px;
 }
