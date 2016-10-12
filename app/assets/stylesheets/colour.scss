@@ -1,0 +1,111 @@
+$base03:    #002b36;
+$base02:    #073642;
+$base01:    #586e75;
+$base00:    #657b83;
+$base0:     #839496;
+$base1:     #93a1a1;
+$base2:     #eee8d5;
+$base3:     #fdf6e3;
+$yellow:    #b58900;
+$orange:    #cb4b16;
+$red:       #dc322f;
+$magenta:   #d33682;
+$violet:    #6c71c4;
+$blue:      #268bd2;
+$cyan:      #2aa198;
+$green:     #859900;
+
+$inst_label: #002b36;
+$inst_ash: #b58900;
+$inst_bod: #6c71c4;
+$inst_bod_sp: #cb4b16;
+$inst_hrb: #859900;
+$inst_mhs: #dc322f;
+$inst_mnh: #268bd2;
+$inst_obg: #2aa198;
+$inst_prm: #d33682;
+
+/* ASH */
+.inst-ash {
+  color: $inst_ash !important;
+}
+
+.inst-ash-bg {
+  background: $inst-ash;
+  color: $inst_label;
+}
+
+/* BOD */
+.inst-bod {
+  color: $inst_bod !important;
+}
+
+.inst-bod-bg {
+  background: $inst_bod;
+  color: $inst_label;
+}
+
+/* BOD SPECIAL */
+.inst-bod-sp {
+  color: $inst_bod_sp !important;
+}
+
+.inst-bod-sp-bg {
+  background: $inst_bod_sp;
+  color: $inst_label;
+}
+
+/* HRB */
+
+.inst-hrb {
+  background-color: $inst_hrb !important;
+}
+
+.inst-hrb-bg {
+  background-color: $inst_hrb;
+  color: $inst_label;
+}
+
+/* MHS */
+
+.inst-mhs {
+  background-color: $inst_mhs !important;
+}
+
+.inst-mhs-bg {
+  background-color: $inst_mhs;
+  color: $inst_label;
+}
+
+/* MNH */
+
+.inst-mnh {
+  background-color: $inst_mnh !important;
+}
+
+.inst-mnh-bg {
+  background-color: $inst_mnh;
+  color: $inst_label;
+}
+
+/* OBG */
+
+.inst-obg {
+  background-color: $inst_obg !important;
+}
+
+.inst-obg-bg {
+  background-color: $inst_obg;
+  color: $inst_label;
+}
+
+/* PRM */
+
+.inst-prm {
+  background-color: $inst_prm !important;
+}
+
+.inst-prm-bg {
+  background-color: $inst_prm;
+  color: $inst_label;
+}
