@@ -1,14 +1,59 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
   <head>
-    <title>OxfordExplorer</title>
-    <%= csrf_meta_tags %>
+	<title><%= yield :title %> Oxford Explorer</title>  	
+		<meta charset="utf-8">
+    	<%= csrf_meta_tags %>
+
+	    <%= javascript_include_tag 'application' %>
+		<script src="http://code.jquery.com/jquery-3.1.1.slim.min.js"></script>
+		<script src="https://use.typekit.net/cpp6nbx.js"></script>
+		<script>try{Typekit.load({ async: true });}catch(e){}</script>
 
     <%= stylesheet_link_tag    'application', media: 'all' %>
-    <%= javascript_include_tag 'application' %>
-  </head>
+			
+	</head>
+	
+	<body>
+	<a name="top"></a>
+	
 
-  <body>
-    <%= yield %>
-  </body>
+	<div class="container">
+
+		<header>
+			<div class="row">
+				<div class="twelve columns">
+					Explore the Museums, Libraries and Gardens of Oxford
+				</div>
+			</div>
+		</header>
+
+		<nav>
+			<div class="row">
+				<div class="twelve columns">
+				</div>
+			</div>
+		</nav>
+
+	    <%= yield %>
+
+		<footer>
+			<div class="row">
+				<div class="eight columns">
+					<a href="#top">&uarr; Top</a>
+				</div>
+				<div class="four columns right">
+					By <a href="http://gfns.uk">gfns.uk</a>
+					&bull; 
+					<a href="/about">About this work</a>
+				</div>
+			</div>
+		</footer>
+
+	</div>
+	
+	
+	</body>
+
 </html>
