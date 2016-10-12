@@ -47,6 +47,9 @@ select {
 	background-color: #002b36;
 	padding: 10px;
 }
+.buffer {
+	margin-top: 20px;
+}
 .pie {
 	margin-bottom: 20px; 
 }
