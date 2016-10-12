@@ -12,4 +12,13 @@ module ApplicationHelper
     "#{number_with_delimiter(count) || 0}&nbsp;#{word}".html_safe
   end
 
+  def percentage_with_varying_accuracy(decimal)
+
+    percentage = decimal * 100
+
+    decimal_places = percentage < 0.01 ? 5 : 2
+
+    number_to_percentage(percentage, precision: decimal_places, strip_insignificant_zeros: true)
+  end
+
 end

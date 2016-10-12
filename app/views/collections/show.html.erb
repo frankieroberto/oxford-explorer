@@ -47,8 +47,8 @@
 		<h6>STATS</h6>
 		<ul>
 			<li><%= pluralize_with_delimiter(@collection.size_int, 'thing') %></li>
-			<li>23% have digital metadata</li>
-			<li>2% have a digitised version</li>
+			<li><%= percentage_with_varying_accuracy(@collection.digitized_metadata_size_int.to_f / @collection.size_int) %> have digital metadata</li>
+			<li><%= percentage_with_varying_accuracy(@collection.digitized_size_int.to_f / @collection.size_int) %> have a digitised version</li>
 		</ul>
 	</div>
 </div>
