@@ -18,7 +18,7 @@
 
 
 		<p>
-			This collection mostly contains <%= @collection.types_of_things.collect {|type_of_thing| link_to(type_of_thing, item_type_path(type_of_thing)) }.to_sentence(last_word_connector: ' and ').html_safe %> things about <%= @collection.subjects.collect {|subject| link_to(subject, subject_path(subject)) }.to_sentence(last_word_connector: ' and ').html_safe %> from about <a href="/dates/show.html">YYYY</a> to <a href="/dates/show.html">YYYY</a>. Materials are either from or about <%= @collection.places.collect {|places| link_to(places, "#") }.to_sentence(last_word_connector: ' and ').html_safe %>.
+			This collection mostly contains <%= @collection.types_of_things.collect {|type_of_thing| link_to(type_of_thing, item_type_path(type_of_thing)) }.to_sentence(last_word_connector: ' and ').html_safe %> things about <%= @collection.subjects.collect {|subject| link_to(subject, subject_path(subject)) }.to_sentence(last_word_connector: ' and ').html_safe %> from about <%= @collection.dates %>. Materials are either from or about <%= @collection.places.collect {|places| link_to(places, "#") }.to_sentence(last_word_connector: ' and ').html_safe %>.
 
 			&nbsp; <small>[ <a href="#">Expand</a> ]</small>
 		</p>
