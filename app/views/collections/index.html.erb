@@ -2,75 +2,20 @@
 
 <h1>Collections</h1>
 
-<div class="row">
-	<div class="one column inst-ash-bg center"><a href="#">ASH</a></div>
-	<div class="three columns">
-		<ul>
-			<li><a href="/collections/show.html">Collection Name</a> <small>0,000 things</small></li>
-			<li><a href="/collections/show.html">Collection Name</a> <small>0,000 things</small></li>
-			<li><a href="/collections/show.html">Collection Name</a> <small>0,000 things</small></li>
-			<li><a href="/collections/show.html">Collection Name</a> <small>0,000 things</small></li>
-			<li><a href="/collections/show.html">Collection Name</a> <small>0,000 things</small></li>
-			<li><a href="/collections/show.html">Collection Name</a> <small>0,000 things</small></li>
-			<li><a href="/collections/show.html">Collection Name</a> <small>0,000 things</small></li>
-			<li><a href="/collections/show.html">Collection Name</a> <small>0,000 things</small></li>
-			<li><a href="/collections/show.html">Collection Name</a> <small>0,000 things</small></li>
-		</ul>
-	</div>
-	<div class="one column inst-bod-bg center"><a href="#">BOD</a></div>
-	<div class="three columns">
-		<ul>
-			<li><a href="/collections/show.html">Collection Name</a> <small>0,000 things</small></li>
-			<li><a href="/collections/show.html">Collection Name</a> <small>0,000 things</small></li>
-			<li><a href="/collections/show.html">Collection Name</a> <small>0,000 things</small></li>
-			<li><a href="/collections/show.html">Collection Name</a> <small>0,000 things</small></li>
-			<li><a href="/collections/show.html">Collection Name</a> <small>0,000 things</small></li>
-		</ul>
-	</div>
-	<div class="one column inst-hrb-bg center"><a href="#">HRB</a></div>
-	<div class="three columns">
-		<ul>
-			<li><a href="/collections/show.html">Collection Name</a> <small>0,000 things</small></li>
-		</ul>
-	</div>		
-</div>
-<div class="row">
-	<div class="one column inst-mhs-bg center"><a href="#">MHS</a></div>
-	<div class="three columns">
-		<ul>
-			<li><a href="/collections/show.html">Collection Name</a> <small>0,000 things</small></li>
-			<li><a href="/collections/show.html">Collection Name</a> <small>0,000 things</small></li>
-			<li><a href="/collections/show.html">Collection Name</a> <small>0,000 things</small></li>
-			<li><a href="/collections/show.html">Collection Name</a> <small>0,000 things</small></li>
-			<li><a href="/collections/show.html">Collection Name</a> <small>0,000 things</small></li>
-			<li><a href="/collections/show.html">Collection Name</a> <small>0,000 things</small></li>
-			<li><a href="/collections/show.html">Collection Name</a> <small>0,000 things</small></li>
-			<li><a href="/collections/show.html">Collection Name</a> <small>0,000 things</small></li>
-		</ul>
-	</div>
-	<div class="one column inst-mnh-bg center"><a href="#">MNH</a></div>
-	<div class="three columns">
-		<ul>
-			<li><a href="/collections/show.html">Collection Name</a> <small>0,000 things</small></li>
-			<li><a href="/collections/show.html">Collection Name</a> <small>0,000 things</small></li>
-			<li><a href="/collections/show.html">Collection Name</a> <small>0,000 things</small></li>
-			<li><a href="/collections/show.html">Collection Name</a> <small>0,000 things</small></li>
-		</ul>
-	</div>
-	<div class="one column inst-prm-bg center"><a href="#">PRM</a></div>
-	<div class="three columns">
-		<ul>
-			<li><a href="/collections/show.html">Collection Name</a> <small>0,000 things</small></li>
-			<li><a href="/collections/show.html">Collection Name</a> <small>0,000 things</small></li>
-			<li><a href="/collections/show.html">Collection Name</a> <small>0,000 things</small></li>
-			<li><a href="/collections/show.html">Collection Name</a> <small>0,000 things</small></li>
-			<li><a href="/collections/show.html">Collection Name</a> <small>0,000 things</small></li>
-			<li><a href="/collections/show.html">Collection Name</a> <small>0,000 things</small></li>
-			<li><a href="/collections/show.html">Collection Name</a> <small>0,000 things</small></li>
-			<li><a href="/collections/show.html">Collection Name</a> <small>0,000 things</small></li>
-			<li><a href="/collections/show.html">Collection Name</a> <small>0,000 things</small></li>
-			<li><a href="/collections/show.html">Collection Name</a> <small>0,000 things</small></li>
-			<li><a href="/collections/show.html">Collection Name</a> <small>0,000 things</small></li>
-		</ul>
-	</div>		
-</div>
+<% @collections.group_by(&:institution_id).sort.each_slice(3).each do |row| %>
+
+  <div class="row">
+
+    <% row.each do |group| %>
+      <div class="one column inst-<%= group[0].downcase %>-bg center"><%= link_to group[0], institution_path(group[0]) %></div>
+
+      <div class="three columns">
+        <ul>
+          <% group[1].sort_by(&:name).each do |collection| %>
+            <li><%= link_to collection.name, collection_path(collection.id) %> <small>0,000 things</small></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+  </div>
+<% end %>
