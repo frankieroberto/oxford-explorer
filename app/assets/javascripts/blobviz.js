@@ -64,11 +64,11 @@ function setup() {
   d3.json('/latest.json', function(collections) {
     window.collectionSize = collections.length;
 
-    window.colCount = 24;
+    window.colCount = 19;
     window.rowCount = Math.floor(window.collectionSize / window.colCount) + 1;
-    window.margin = 50;
     window.gridSpacing = 50;
     window.defaultRadius = 20;
+    window.margin = window.defaultRadius;
 
     window.collections = collections.sort;
 
@@ -149,6 +149,8 @@ function setup() {
           .attr('class', function(d) {
             return d.institution;
           })
+
+          window.svgElementOffset = $("#blobviz svg").offset(); 
 
     tidyGroups();
   });
@@ -305,13 +307,17 @@ function sweepFlagForAngle(radians) {
 
 function mouseEventInsideCircle(event,el) {
   el = $(el);
-  if(event.pageX < (el.attr('cx') - el.attr('r'))) {
+
+  relPageX = event.pageX - window.svgElementOffset.left;
+  relPageY = event.pageY - window.svgElementOffset.top;
+
+  if(relPageX < (el.attr('cx') - el.attr('r'))) {
     return false;
-  } else if(event.pageY < (el.attr('cy') - el.attr('r'))) {
+  } else if(relPageY < (el.attr('cy') - el.attr('r'))) {
     return false;
-  } else if(event.pageX > (el.attr('cx') + el.attr('r'))) {
+  } else if(relPageX > (el.attr('cx') + el.attr('r'))) {
     return false;
-  } else if(event.pageY > (el.attr('cy') + el.attr('r'))) {
+  } else if(relPageY > (el.attr('cy') + el.attr('r'))) {
     return false;
   } else {
     return true;
@@ -336,7 +342,9 @@ function calculateBBFor(x,y) {
 }
 
 function handleGridMouseMove(d,event) {
-  var bb = calculateBBFor(d3.event.pageX, d3.event.pageY);
+  relPageX = d3.event.pageX - window.svgElementOffset.left;
+  relPageY = d3.event.pageY - window.svgElementOffset.top;
+  var bb = calculateBBFor(relPageX, relPageY);
 
   //console.log(indexOver);
 
@@ -352,8 +360,8 @@ function handleGridMouseMove(d,event) {
       var cx = parseInt($c.attr('cx'));
       var cy = parseInt($c.attr('cy'));
 
-      var xBetween = between(d3.event.pageX, cx-window.defaultRadius, cx+window.defaultRadius);
-      var yBetween = between(d3.event.pageY-window.margin, cy-window.defaultRadius, cy+window.defaultRadius);
+      var xBetween = between(relPageX, cx-window.defaultRadius, cx+window.defaultRadius);
+      var yBetween = between(relPageY, cy-window.defaultRadius, cy+window.defaultRadius);
       // if cursors is inside it
       if(xBetween && yBetween) {
         window.currentXY= [cx,cy];
@@ -416,16 +424,16 @@ function updateHudForItem(d) {
     // which I couldn't quite do.
     dr_int = 0;
   }
-  $("#hud h1").text(d.institution + ": " + d.department);
-  $("#hud h2").text(d.collection + " (" + d.size + " objects, of which "+dr_int+" have digital records)");
-  $("#hud").fadeIn();
+  $("#blobiz-hud h1").text(d.institution + ": " + d.department);
+  $("#blobiz-hud h2").text(d.collection + " (" + d.size + " objects, of which "+dr_int+" have digital records)");
+  $("#blobiz-hud").fadeIn();
 }
 
 function hideHud() {
   window.slideTimeout = window.setTimeout(function() {
-    $("#hud").fadeOut(function() {
-      $("#hud h1").text("");
-      $("#hud h2").text("");
+    $("#blobiz-hud").fadeOut(function() {
+      $("#blobiz-hud h1").text("");
+      $("#blobiz-hud h2").text("");
     });
   }, 1000);
 }

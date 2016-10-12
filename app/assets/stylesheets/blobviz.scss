@@ -44,13 +44,14 @@
     fill: $inst_hrb;
   }
 
-  #hud {
-    display: none;
+  #blobviz-hud {
+    /*display: none;*/
     position: fixed;
     top:0;
     bottom: auto;
     background-color: rgba(0,0,0,0.5);
     width: 100%;
+    z-index: 100;
 
     .bottom {
       bottom: 0;
