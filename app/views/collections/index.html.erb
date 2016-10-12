@@ -12,7 +12,7 @@
       <div class="three columns">
         <ul>
           <% group[1].sort_by(&:name).each do |collection| %>
-            <li><%= link_to collection.name, collection_path(collection.id) %> <small>0,000 things</small></li>
+            <li><%= link_to collection.name, collection_path(collection.id) %> <small><%= pluralize_with_delimiter(collection.size_int, 'thing') %></small></li>
           <% end %>
         </ul>
       </div>
