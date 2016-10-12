@@ -430,7 +430,7 @@ function updateHudForItem(d,x,y) {
     // which I couldn't quite do.
     dr_int = 0;
   }
-  $("#blobviz-hud h1").text(d.collection + " (" + d.size + " objects, of which "+dr_int+" have digital records)");
+  $("#blobviz-hud h1").text(d.collection + " (" + d.size + " things, of which "+dr_int+" have digital records)");
   $("#blobviz-hud h2").text(d.institution + ": " + d.department);
 
   $("#blobviz-hud").css({'left': x, 'top': y});
