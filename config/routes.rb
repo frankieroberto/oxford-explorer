@@ -6,6 +6,8 @@ Rails.application.routes.draw do
 
   resources :things, only: [:show]
 
+  resources :about, only: [:index]
+
   resources :people, only: [:show]
 
   resources :subjects, only: [:show], controller: :superfields, superfield: 'gfs_subject'
