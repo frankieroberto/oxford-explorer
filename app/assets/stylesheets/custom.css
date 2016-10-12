@@ -17,7 +17,9 @@ footer {
 h1, h2, h3, h4, h5, h6 {
   color: #eee8d5; 
 }
-
+h6 {
+	margin-bottom: 0;
+}
 a {
   color: #fdf6e3; 
 }
@@ -45,10 +47,15 @@ select {
 	background-color: #002b36;
 	padding: 10px;
 }
+.pie {
+	margin-bottom: 20px; 
+}
+.blurb p {
+	font-size: 1.25em;
+}
 .stats {
 	padding-top:10px; 
 }
-
 .stats li {
 	line-height: 1.25em;	
 }
