@@ -54,7 +54,7 @@ function radiusForItem(item) {
 function setup() {
   var svgContainer = d3.select("#blobviz").append("svg")
   .attr("id", "svg")
-  .attr("width", 1280)
+  .attr("width", 1400)
   .attr("height", 930)
   .on("mousemove", function(d,i) {
     handleGridMouseMove(d,i);
@@ -64,11 +64,12 @@ function setup() {
   d3.json('/latest.json', function(collections) {
     window.collectionSize = collections.length;
 
-    window.colCount = 19;
+    window.colCount = 26;
     window.rowCount = Math.floor(window.collectionSize / window.colCount) + 1;
     window.gridSpacing = 50;
     window.defaultRadius = 20;
-    window.margin = window.defaultRadius;
+    //window.margin = window.defaultRadius;
+    window.margin = 100;
 
     window.collections = collections.sort;
 
