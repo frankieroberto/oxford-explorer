@@ -14,8 +14,8 @@ ActiveRecord::Schema.define(version: 20161012141231) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-  enable_extension "unaccent"
   enable_extension "hstore"
+  enable_extension "unaccent"
 
   create_table "people", force: :cascade do |t|
     t.text    "name",                           null: false
