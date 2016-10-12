@@ -30,7 +30,7 @@ namespace :ingest do
         preferred_citation = ead.at_xpath('archdesc/admininfo/prefercite')&.text&.strip
         arrangement = ead.at_xpath('archdesc/arrangement')&.text&.strip
 
-        collection = Collection.find_or_initialize_by(name: title)
+        collection = SubCollection.find_or_initialize_by(name: title)
 
         collection.department ||= department
         collection.dates ||= dates

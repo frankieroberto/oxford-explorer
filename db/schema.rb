@@ -10,14 +10,31 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161012113149) do
+ActiveRecord::Schema.define(version: 20161012141231) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-  enable_extension "hstore"
   enable_extension "unaccent"
+  enable_extension "hstore"
 
-  create_table "collections", force: :cascade do |t|
+  create_table "people", force: :cascade do |t|
+    t.text    "name",                           null: false
+    t.text    "born"
+    t.text    "died"
+    t.text    "other",                                       array: true
+    t.hstore  "identifiers",       default: {}, null: false
+    t.integer "collections_count", default: 0,  null: false
+    t.text    "other_names",       default: [], null: false, array: true
+  end
+
+  create_table "people_in_collections", force: :cascade do |t|
+    t.integer "person_id",         null: false
+    t.integer "sub_collection_id", null: false
+    t.text    "as",                null: false
+    t.index ["person_id", "sub_collection_id"], name: "index_people_in_collections_on_person_id_and_sub_collection_id", unique: true, using: :btree
+  end
+
+  create_table "sub_collections", force: :cascade do |t|
     t.text "name",               null: false
     t.text "department"
     t.text "extent"
@@ -31,23 +48,6 @@ ActiveRecord::Schema.define(version: 20161012113149) do
     t.text "arrangement"
   end
 
-  create_table "people", force: :cascade do |t|
-    t.text    "name",                           null: false
-    t.text    "born"
-    t.text    "died"
-    t.text    "other",                                       array: true
-    t.hstore  "identifiers",       default: {}, null: false
-    t.integer "collections_count", default: 0,  null: false
-    t.text    "other_names",       default: [], null: false, array: true
-  end
-
-  create_table "people_in_collections", force: :cascade do |t|
-    t.integer "person_id",     null: false
-    t.integer "collection_id", null: false
-    t.text    "as",            null: false
-    t.index ["person_id", "collection_id"], name: "index_people_in_collections_on_person_id_and_collection_id", unique: true, using: :btree
-  end
-
-  add_foreign_key "people_in_collections", "collections", on_delete: :cascade
   add_foreign_key "people_in_collections", "people", on_delete: :cascade
+  add_foreign_key "people_in_collections", "sub_collections", on_delete: :cascade
 end
