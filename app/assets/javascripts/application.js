@@ -12,4 +12,8 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require_tree .
+//= require d3.v4.min
+//= require underscore-min
+//= require underscore.string.min
+//= require_tree "." 
+//= stub "blobviz" 
