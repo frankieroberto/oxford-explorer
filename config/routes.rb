@@ -2,7 +2,7 @@ Rails.application.routes.draw do
 
   resources :collections, only: [:index, :show]
 
-  resources :items, only: [:show]
+  resources :things, only: [:show]
 
   resources :institutions, only: [:show]
 
