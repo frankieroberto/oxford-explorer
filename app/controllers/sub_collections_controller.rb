@@ -1,0 +1,2 @@
+class SubCollectionsController < ApplicationController
+end
