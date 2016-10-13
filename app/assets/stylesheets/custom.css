@@ -26,6 +26,9 @@ a {
 a:hover {
   color: #268bd2; 
 }
+p {
+	font-size: 1.25em;
+}
 select {
 	color: #002b36;
 }
@@ -52,9 +55,6 @@ select {
 }
 .pie {
 	margin-bottom: 20px; 
-}
-.blurb p {
-	font-size: 1.25em;
 }
 .stats {
 	padding-top:10px; 
