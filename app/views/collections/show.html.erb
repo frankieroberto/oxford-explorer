@@ -28,7 +28,7 @@
   		</p>
     <% end %>
 
-		<h3>0,000 things</h3>
+		<h3><%= pluralize_with_delimiter(@collection.size_int, 'thing') %></h3>
 
 		<ol>
 			<li><a href="#">Thing</a></li>
@@ -44,7 +44,6 @@
 
 		<h6>STATS</h6>
 		<ul>
-			<li><%= pluralize_with_delimiter(@collection.size_int, 'thing') %></li>
 			<li><%= percentage_with_varying_accuracy(@collection.digitized_metadata_size_int.to_f / @collection.size_int) %> have digital metadata</li>
 			<li><%= percentage_with_varying_accuracy(@collection.digitized_size_int.to_f / @collection.size_int) %> have a digitised version</li>
 		</ul>
