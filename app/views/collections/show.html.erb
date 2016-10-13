@@ -35,7 +35,18 @@
 			<li><a href="#">Thing</a></li>
 		</ol>
 
+	<!-- If there is no digital metadata available, show this: -->
+		
+		<h6>FINDING THIS AT OXFORD</h6>
+		<p>http://solo.ouls.ox.ac.uk/OXVU1:LSCOP_OX:oxfaleph014792987; http://
+/OXVU1:LSCOP_OX:oxfaleph011185388
+
+The Neubauer catalogue (2 volumes) is the most complete list. This was later updated</p>
+	
 	</div>
+	
+	
+	
 	<div class="three columns stats">
 
 		<div class="pie center">
@@ -47,6 +58,7 @@
 			<li><%= percentage_with_varying_accuracy(@collection.digitized_metadata_size_int.to_f / @collection.size_int) %> have digital metadata</li>
 			<li><%= percentage_with_varying_accuracy(@collection.digitized_size_int.to_f / @collection.size_int) %> have a digitised version</li>
 		</ul>
+		
 	</div>
 </div>
 

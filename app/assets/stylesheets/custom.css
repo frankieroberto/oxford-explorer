@@ -26,9 +26,6 @@ a {
 a:hover {
   color: #268bd2; 
 }
-p {
-	font-size: 1.25em;
-}
 select {
 	color: #002b36;
 }
@@ -52,6 +49,9 @@ select {
 }
 .buffer {
 	margin-top: 20px;
+}
+.blurb p {
+	font-size: 1.25em;
 }
 .pie {
 	margin-bottom: 20px; 
