@@ -1,6 +1,14 @@
 <% content_for :title, "Collections in the " %>
 
-<h1>Collections</h1>
+<div class="row">
+	<div class="six columns">
+		<h1>Collections</h1>
+	</div>
+	<div class="six columns right">
+		<p><a href="doesn't work yet">Top 10</a> / <a href="doesn't work yet">By Size, all</a> / Alphabetical, all
+	</div>
+
+</div>
 
 <% @collections.group_by(&:institution_id).sort.each_slice(3).each do |row| %>
 
