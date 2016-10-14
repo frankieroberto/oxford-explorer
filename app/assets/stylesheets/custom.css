@@ -20,6 +20,9 @@ h1, h2, h3, h4, h5, h6 {
 h6 {
 	margin-bottom: 0;
 }
+ul {
+	list-style-type: none;
+}
 a {
   color: #fdf6e3; 
 }
@@ -34,6 +37,9 @@ select {
 }
 .center {
 	text-align: center;
+}
+.dark {
+	color: #657b83;
 }
 
 /* home */
@@ -61,4 +67,10 @@ select {
 }
 .stats li {
 	line-height: 1.25em;	
+}
+
+/* Person */
+
+.collection-in-list {
+	line-height: 1.25em;
 }

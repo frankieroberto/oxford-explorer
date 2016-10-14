@@ -7,33 +7,42 @@
 
 
   <div class="eight columns">
-    <p>This is a map to the hundreds of <a href="/collections">collections</a> held in the museums, libraries and gardens across Oxford. Each shape represents one collection. Explore by collection size, or choose a filter to find out which collections hold what...</p>
-    <form id='selectors'>
-      <select id="key">
-        <option value="item-type">Type of thing</option>
-        <option value="subjects">Subject</option>
-        <option value="academic_department">Academic Department</option>
-        <option value="division">Department Division</option>
-      </select>
-      <select id="value">
-        <option value="">Choose...</option>
-      </select>
-      &nbsp;
-      <a href="#" class='clear-link'>Clear</a>
-    </form>
-  </div>
-  <div class="four columns key">
-    <h6>KEY</h6>
-    <span class="inst-ash-bg"><a href="">Ashmolean Museum</a></span>
-    <span class="inst-bod-bg"><a href="">Bodleian Libraries</a></span>
-    <span class="inst-mhs-bg"><a href="">Museum of the History of Science</a></span>
-    <span class="inst-mnh-bg"><a href="">Museum of Natural History</a></span>
-    <span class="inst-prm-bg"><a href="">Pitt Rivers Museum</a></span>
-    <span class="inst-hrb-bg"><a href="">Oxford University Herbaria</a></span>
+    <p>This is a map to the hundreds of <a href="/collections">collections</a> held in the museums, libraries and gardens across Oxford. Each shape below represents one collection, but don't be fooled... While the <a href="#">Bodleian Libraries</a> looks after more than 12 million things, the <a href="#">Dyer Collection</a> contains just one.</p>
+    <p>You can just jump in, or choose a filter to spotlight certain collections...</p>
     
-    <p><small>[ <a href="doesn't work yet">Show size</a> ]</small></p>
   </div>
+    <div class="four columns key">
+		<h6>KEY</h6>
+		<span class="inst-ash-bg"><a href="">Ashmolean Museum</a></span>
+		<span class="inst-bod-bg"><a href="">Bodleian Libraries</a></span>
+		<span class="inst-mhs-bg"><a href="">Museum of the History of Science</a></span>
+		<span class="inst-mnh-bg"><a href="">Museum of Natural History</a></span>
+		<span class="inst-prm-bg"><a href="">Pitt Rivers Museum</a></span>
+		<span class="inst-hrb-bg"><a href="">Oxford University Herbaria</a></span>
+   </div>
+</div>  
+
+<div class="row">
+	<div class="nine columns">    
+		<form id='selectors'>
+		  <select id="key">
+			<option value="item-type">Type of thing</option>
+			<option value="subjects">Subject</option>
+			<option value="academic_department">Academic Department</option>
+			<option value="division">Department Division</option>
+		  </select>
+		  <select id="value">
+			<option value="">Choose...</option>
+		  </select>
+		  &nbsp;
+		  <a href="#" class='clear-link'>Clear</a>
+		</form>
+	</div>
+	<div class="three columns right">
+		<a href="doesn't work yet">Show collection size</a>?
+	</div>
 </div>
+
 
 <div id="blobviz"></div>
 
