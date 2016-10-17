@@ -60,7 +60,7 @@ function setup() {
     handleGridMouseMove(d,i);
   })
   .on("mouseout", function() {
-    hideHud();
+    //hideHud();
   });
 
 
@@ -71,6 +71,9 @@ function setup() {
     window.rowCount = Math.floor(window.collectionSize / window.colCount) + 1;
     window.gridSpacing = 50;
     window.defaultRadius = 20;
+    window.hudWidth = 250;
+    window.defaultRadius = 20;
+    window.leftOffset = 250;
     //window.margin = window.defaultRadius;
     window.margin = 100;
 
@@ -279,29 +282,51 @@ function between(x, min, max) {
 }
 
 function calculateBBFor(x,y) {
-  var x1 = Math.floor(x/window.gridSpacing) * gridSpacing;
-  var x2 = Math.ceil(x/window.gridSpacing) * gridSpacing;
-  var y1 = Math.floor(y/window.gridSpacing) * gridSpacing;
-  var y2 = Math.ceil(y/window.gridSpacing) * gridSpacing;
-
+  console.log("caculating BB for ",x,y);
+  //x = x + window.margin;
+  //y = y + window.margin;
+  var x1 = (Math.floor((x+(window.gridSpacing/2))/window.gridSpacing) * window.gridSpacing) - (window.gridSpacing/2); 
+  var x2 = (Math.ceil((x+(window.gridSpacing/2))/window.gridSpacing) * window.gridSpacing) - (window.gridSpacing/2);
+  var y1 = (Math.floor((y+(window.gridSpacing/2))/window.gridSpacing) * window.gridSpacing) - (window.gridSpacing/2);
+  var y2 = (Math.ceil((y+(window.gridSpacing/2))/window.gridSpacing) * window.gridSpacing) - (window.gridSpacing/2);
   if(x1 < 0) return null;
   if(y1 < 0) return null;
-  if(x1 > (window.colCount*gridSpacing)) return null;
-  if(y1 > (window.rowCount*gridSpacing)) return null;
+  if(x1 > ((window.colCount+1)*gridSpacing)) return null;
+  if(y1 > ((window.rowCount+1)*gridSpacing)) return null;
+
+  $("#bb").remove();
+  d3.select('svg').append('rect').attr('id', 'bb').attr('x', x1)
+                                   .attr('y', y1)
+                                   .attr('width', x2-x1)
+                                   .attr('height', y2-y1)
+                                   .attr('fill', 'red')
+                                   .attr('opacity', 0.5);
   return [x1,y1,x2,y2];
 }
 
+function drawMouseBlob() {
+  $("#cursor").remove();
+  d3.select('svg').append('circle').attr('id', 'cursor').attr('cx', relPageX)
+                                   .attr('cy', relPageY)
+                                   .attr('r', 10)
+                                   .attr('fill', 'red')
+                                   .attr('opacity', 0.5);
+}
+
 function handleGridMouseMove(d,event) {
-  relPageX = d3.event.pageX - window.svgElementOffset.left;
-  relPageY = d3.event.pageY - window.svgElementOffset.top;
+  relPageX = d3.event.pageX - $("svg").offset().left;
+  relPageY = d3.event.pageY - $("svg").offset().top;
   var bb = calculateBBFor(relPageX, relPageY);
 
+  //drawMouseBlob();
   //console.log(indexOver);
 
   if(bb != window.currentBB) {
+    console.log("Bounding box has changed to", bb);
     window.currentBB = bb;
 
     var grps = $("g");
+    var noGroups = true;
     for(var i = 0; i < grps.length; i++) {
       var grp = grps[i];
       // get the circle inside it
@@ -310,10 +335,12 @@ function handleGridMouseMove(d,event) {
       var cx = parseInt($c.attr('cx'));
       var cy = parseInt($c.attr('cy'));
 
-      var xBetween = between(relPageX, cx-window.defaultRadius, cx+window.defaultRadius);
-      var yBetween = between(relPageY, cy-window.defaultRadius, cy+window.defaultRadius);
+      var xBetween = between(cx, bb[0], bb[2])
+      var yBetween = between(cy, bb[1], bb[3])
+      //var yBetween = between(relPageY, cy-window.defaultRadius, cy+window.defaultRadius);
       // if cursors is inside it
       if(xBetween && yBetween) {
+        noGroups = false;
         window.currentXY= [cx,cy];
 
         if(!window.isFiltered) {
@@ -321,8 +348,12 @@ function handleGridMouseMove(d,event) {
           d3.select(grp).raise();
         }
         var d= d3.select(grp).data()[0];
-        //updateHudForItem(d,cx-window.svgElementOffset.left,cy-window.svgElementOffset.top);
-        updateHudForItem(d,d3.event.pageX-225,d3.event.pageY);
+
+        var grpOffset = $(grp).offset();
+        var hudX = cx - window.leftOffset - (window.hudWidth/2);
+        var hudY = grpOffset.top - 0;
+
+        updateHudForItem(d,hudX,hudY);
       } else {
         if(!window.isFiltered) {
           if(c.getBoundingClientRect().width > (2*window.defaultRadius) || c.getBoundingClientRect().width < (2*window.defaultRadius)) {
@@ -330,6 +361,10 @@ function handleGridMouseMove(d,event) {
           } 
         }
       }
+    }
+    if(noGroups) {
+      console.log("No groups under cursor");
+      hideHud();
     }
   }
 
@@ -403,17 +438,14 @@ function updateHudForItem(d,x,y) {
 
   $("#blobviz-hud h2").text(d.department);
 
-  $("#blobviz-hud").css({'left': x, 'top': y});
+  $("#blobviz-hud").css({'left': x, 'top': y-200});
 
-  $("#blobviz-hud").fadeIn();
+  $("#blobviz-hud").show();
 }
 
 function hideHud() {
-  window.slideTimeout = window.setTimeout(function() {
-    $("#blobiz-hud").fadeOut(function() {
-      $("#blobiz-hud h1").text("");
-      $("#blobiz-hud h2").text("");
-    });
+  window.setTimeout(function() {
+    $("#blobviz-hud").fadeOut();
   }, 1000);
 }
 
@@ -487,21 +519,6 @@ function removeAllSpotlights() {
   }
 }
 
-$(document).ready(function() {
-  setup();
-
-  handleKeyChanges();
-
-  handleValueChanges();
-
-  $("a.clear-link").click(function() {
-    $("select#value").val("");
-    removeFilter();
-    return false;
-  });
-
-});
-
 function humanNameForInstitution(instId) {
   switch(instId.toLowerCase()) {
     case 'ash':
@@ -518,3 +535,19 @@ function humanNameForInstitution(instId) {
       return "Herbarium";
   }
 }
+
+$(document).ready(function() {
+  setup();
+
+  handleKeyChanges();
+
+  handleValueChanges();
+
+  $("a.clear-link").click(function() {
+    $("select#value").val("");
+    removeFilter();
+    return false;
+  });
+
+});
+
