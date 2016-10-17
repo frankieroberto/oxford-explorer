@@ -375,8 +375,33 @@ function updateHudForItem(d,x,y) {
     // which I couldn't quite do.
     dr_int = 0;
   }
-  $("#blobviz-hud h1").text(d.name + " (" + d.size_int + " things, of which "+dr_int+" have digital records)");
-  $("#blobviz-hud h2").text(d.institution_id + ": " + d.department);
+
+  var instClass = "inst-"+d.institution_id.toLowerCase()+"-bg";
+
+
+  $("#blobviz-hud").hide();
+  $("#blobviz-hud .collection").attr('class', 'collection '+instClass);
+  $("#blobviz-hud").addClass('collection');
+  $("#blobviz-hud").addClass(instClass);
+
+  $("#blobviz-hud "+ ".collection").text(humanNameForInstitution(d.institution_id));
+
+  $("#blobviz-hud h1").text(d.name);
+
+  if(d.size_int) {
+    $("#blobviz-hud .size").html("<span>" + s.numberFormat(d.size_int) + "</span> things");
+  } else {
+    $("#blobviz-hud .size").text('No things we know of');
+  }
+
+  if(dr_int > 0) {
+    var percentage = Math.round(dr_int / d.size_int * 100);
+    $("#blobviz-hud .dig_size").html("<span>" + s.numberFormat(percentage) + "%</span> have digital metadata");
+  } else {
+    $("#blobviz-hud .dig_size").text('No digital metadata');
+  }
+
+  $("#blobviz-hud h2").text(d.department);
 
   $("#blobviz-hud").css({'left': x, 'top': y});
 
@@ -477,3 +502,19 @@ $(document).ready(function() {
 
 });
 
+function humanNameForInstitution(instId) {
+  switch(instId.toLowerCase()) {
+    case 'ash':
+      return "Ashmolean";
+    case 'bod':
+      return "Bodleian";
+    case 'prm':
+      return "Pitt Rivers";
+    case 'mhs':
+      return "History of Science";
+    case 'mnh':
+      return "Natural History";
+    case 'hrb':
+      return "Herbarium";
+  }
+}

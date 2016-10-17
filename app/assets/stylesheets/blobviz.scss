@@ -67,9 +67,36 @@
 #blobviz-hud {
   display: none;
   position: absolute;
-  background-color: $base03;
+  background-color: $base03alpha;
+  background-opacity: 0.5;
   width: 200px;
   z-index: 100;
+  
+  .collection {
+    text-transform: uppercase;
+    padding: 10px;
+    color: white;
+    display: inline-block;
+    font-weight: bold;
+  }
+
+  .size {
+    margin: 5px 10px;
+    color: #888;
+    span {
+      font-weight: bold;
+      color: white;
+    }
+  }
+
+  .dig_size {
+    margin: 5px 10px 0;
+    color: #888;
+    span {
+      font-weight: bold;
+      color: white;
+    }
+  }
 
   h1 {
     font-weight: bold;
