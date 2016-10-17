@@ -64,7 +64,7 @@ function setup() {
   });
 
 
-  d3.json('/latest.json', function(collections) {
+  d3.json('/collections/json', function(collections) {
     window.collectionSize = collections.length;
 
     window.colCount = 26;
@@ -99,7 +99,7 @@ function setup() {
               }
             })
             .attr("style", function(d,i) {
-              if(d.size_int == d.pub_dr_int) {
+              if(d.size_int == d.digitized_metadata_size_int) {
                 return "opacity: 1";
               }
             })
@@ -110,7 +110,7 @@ function setup() {
               return '#063642';
             })
             .attr('class', function(d) {
-              return d.institution;
+              return d.institution_id;
             })
             .attr('data-radius-scale', function(d,i) {
               return radiusForItem(d) / window.defaultRadius;
@@ -138,7 +138,7 @@ function setup() {
               }
             })
             .attr('class', function(d) {
-              return d.institution;
+              return d.institution_id;
             })
 
 
@@ -151,7 +151,7 @@ function setup() {
             return 'rotate(-90,'+xy[0]+','+xy[1]+')';
           })
           .attr('class', function(d) {
-            return d.institution;
+            return d.institution_id;
           })
 
           window.svgElementOffset = $("#blobviz svg").offset(); 
@@ -287,14 +287,14 @@ function polarToCartesian(centerX, centerY, radius, angleInDegrees) {
 }
 
 function piePathStringForItem(d,i) {
-  if(!(d.size_int && d.pub_dr_int)) {
+  if(!(d.size_int && d.digitized_metadata_size_int)) {
     return;
   }
 
   var radius =  window.defaultRadius - strokeWidthForItem(d);
   var originX =  xyForItemInCount(i,window.collectionSize, d)[0];
   var originY =  xyForItemInCount(i,window.collectionSize, d)[1];
-  var ratio = d.pub_dr_int / d.size_int;
+  var ratio = d.digitized_metadata_size_int / d.size_int;
 
   var theta = ratio * 360;
 
@@ -377,7 +377,6 @@ function handleGridMouseMove(d,event) {
         var d= d3.select(grp).data()[0];
         //updateHudForItem(d,cx-window.svgElementOffset.left,cy-window.svgElementOffset.top);
         updateHudForItem(d,d3.event.pageX-225,d3.event.pageY);
-        console.log(d3.event);
       } else {
         if(!window.isFiltered) {
           if(c.getBoundingClientRect().width > (2*window.defaultRadius) || c.getBoundingClientRect().width < (2*window.defaultRadius)) {
@@ -424,14 +423,14 @@ function shrinkElement(el) {
 }
 
 function updateHudForItem(d,x,y) {
-  var dr_int = d.pub_dr_int;
+  var dr_int = d.digitized_metadata_size_int;
   if(!dr_int) {
     // if dr_int is null, set it to 0 - rather than casting null to an integer
     // which I couldn't quite do.
     dr_int = 0;
   }
-  $("#blobviz-hud h1").text(d.collection + " (" + d.size + " things, of which "+dr_int+" have digital records)");
-  $("#blobviz-hud h2").text(d.institution + ": " + d.department);
+  $("#blobviz-hud h1").text(d.name + " (" + d.size_int + " things, of which "+dr_int+" have digital records)");
+  $("#blobviz-hud h2").text(d.institution_id + ": " + d.department);
 
   $("#blobviz-hud").css({'left': x, 'top': y});
 

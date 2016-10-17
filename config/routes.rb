@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
 
   resources :collections, only: [:index, :show] do
+    collection do
+      get :json
+    end
     resources :sub_collections, only: [:show], path: ''
   end
 
