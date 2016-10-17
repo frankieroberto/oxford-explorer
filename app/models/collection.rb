@@ -25,15 +25,16 @@ class Collection
     @metadata[test]
   end
 
-  # TODO: Cache this in memory
   def self.all
+    @data ||= setup_data
+  end
 
-    data = CSV.read("#{File.dirname(__FILE__)}/../../db/collections.csv", headers: true)
+  def self.setup_data
+    data = CSV.read("#{Rails.root.join("db", "collections.csv").to_s}", headers: true)
 
     data[2..-1].collect do |row|
       self.new(row.to_h)
     end
-
   end
 
   def self.find(id)
