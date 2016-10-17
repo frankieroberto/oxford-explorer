@@ -351,6 +351,16 @@ function handleGridMouseMove(d,event) {
 
         var grpOffset = $(grp).offset();
         var hudX = cx - window.leftOffset - (window.hudWidth/2);
+        // handle hud falling off screen
+        console.log(d3.event);
+        if(d3.event.pageX < (window.hudWidth/2) ) {
+          // set the left edge of HUD flush to the left of the gridsquare
+          hudX = cx - window.leftOffset - (window.gridSpacing/2);
+        } else if(d3.event.pageX+(window.hudWidth/2) > $(window).width()) {
+          console.log("Adjust right");
+          // set the right edge of HUD flush to the left of the gridsquare
+          hudX = cx - window.hudWidth - window.leftOffset + (window.gridSpacing/2);
+        }
         var hudY = grpOffset.top - 0;
 
         updateHudForItem(d,hudX,hudY);
