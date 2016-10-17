@@ -4,6 +4,9 @@
 #collection-pie {
   circle {
     opacity: 0.5;
+    &.full {
+      opacity: 1;
+    }
   }
 
   path.slice {
