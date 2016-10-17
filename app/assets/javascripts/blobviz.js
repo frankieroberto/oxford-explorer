@@ -161,14 +161,15 @@ function setup() {
 
 }
 
-function updateOptionsForItemType() {
+function updateOptionsForKey(key) {
   $.get("/collections/json", function(d) {
-    var itemTypes = _.map(d, function(col) {
-      return col.types_of_things;
+    console.log(d);
+    var keys = _.map(d, function(col) {
+      return col[key];
     });
 
-    itemTypes = _.flatten(itemTypes);
-    itemTypes = _.uniq(itemTypes).sort(function(a,b) {
+    keys = _.flatten(keys);
+    keys = _.uniq(keys).sort(function(a,b) {
       var x =  a.toLowerCase();
       var y = b.toLowerCase();
       return x > y ? 1 : (x < y ? -1 : 0);
@@ -183,38 +184,7 @@ function updateOptionsForItemType() {
 
     var valueSelector = $('#value');
 
-    _.each(itemTypes, function(typ) {
-      valueSelector.append($('<option>', {
-        value: typ,
-        text: typ,
-      }));
-    });
-  });
-}
-
-function updateOptionsForSubject() {
-  $.get("/collections/json", function(d) {
-    var subjects = _.map(d, function(col) {
-      return col.subjects;
-    });
-
-    subjects = _.flatten(subjects);
-    subjects = _.uniq(subjects).sort(function(a,b) {
-      var x =  a.toLowerCase();
-      var y = b.toLowerCase();
-      return x > y ? 1 : (x < y ? -1 : 0);
-    });
-
-    $("#value option").remove();
-
-    $('#value').append($('<option>', {
-      value: "",
-      text: " - ",
-    }));
-
-    var valueSelector = $('#value');
-
-    _.each(subjects, function(typ) {
+    _.each(keys, function(typ) {
       valueSelector.append($('<option>', {
         value: typ,
         text: typ,
@@ -425,14 +395,7 @@ function hideHud() {
 function handleKeyChanges() {
   $("select#key").change(function(e) {
     val = $(this).val();
-    switch(val) {
-      case "item-type":
-        updateOptionsForItemType();
-        break;
-      case "subjects":
-        updateOptionsForSubject();
-        break;
-    }
+    updateOptionsForKey(val);
   });
 }
 
@@ -457,23 +420,13 @@ function handleValueChanges() {
       window.isFiltered = true;
       d3.selectAll("g").each(function(d, i) {
         var match = false;
-        if(key == 'subjects') {
-          if(d.subjects) {
-            match = d.subjects.includes(val);
-            console.log(d.subjects, "does it include", val, match);
-          }
-            
+        if(d[key]) {
+          match = d[key].includes(val);
+          //console.log(d[key], "does it include", val, match);
         }
-        if(key == 'item-type') {
-          if(d.types_of_things) {
-            match = d.types_of_things.includes(val);
-            if(match) {
-                console.log(d.types_of_things, "does it include", val, match);
-            }
-          }
-        }
+
         if(match) {
-            console.log(d.types_of_things, "does it include", val, match);
+          console.log(d.types_of_things, "does it include", val, match);
           spotlightGroup(this);
         } else {
           unSpotlightGroup(this);
