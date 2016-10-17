@@ -23,6 +23,13 @@ class ThingQuery
     end
   end
 
+  def things_by_item_type
+
+    result['aggregations']['item_types']['buckets'].collect do |bucket|
+      OpenStruct.new(item_type: bucket['key'], count: bucket['doc_count'])
+    end
+  end
+
   private
 
   def result
@@ -43,6 +50,11 @@ class ThingQuery
             terms: {
               field: 'gfs_collection_id',
               size: 0
+            }
+          }, item_types: {
+            terms: {
+              field: 'gfs_item_type.raw',
+              size: 10
             }
           }
         }

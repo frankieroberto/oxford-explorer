@@ -11,6 +11,7 @@ class SuperfieldsController < ApplicationController
     @things = thing_query.things
 
     @things_in_collections = thing_query.things_in_collections
+    @things_by_item_type = thing_query.things_by_item_type
 
   end
 end

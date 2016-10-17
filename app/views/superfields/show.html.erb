@@ -35,9 +35,18 @@
 		
 		<p>There are about 00,000 <%= @id %> across Oxford, mostly from or about <a href="">Place</a> and <a href="">Place</a>. They relate to <a href="subject">Subject</a>, <a href="subject">Subject</a>, <a href="subject">Subject</a> and <a href="subject">Subject</a>, and it seems like they cover a time period like DATE to DATE.</p>
 		<p>Some 00 people are connected to them, like <a href="/people/show.html">Person</a>, <a href="/people/show.html">Person</a>, and <a href="/people/show.html">Person</a>.</p>
-		
-		<h6>Types of thing</h6>
-		<p><a href="#">Type</a>, <a href="#">Type</a>, <a href="#">Type</a>, <a href="#">Type</a>, <a href="#">Type</a>, <a href="#">Type</a>
+
+
+    <% if @things_by_item_type.size > 0 %>
+
+      <h6>Types of thing</h6>
+		  <p>
+        <%= @things_by_item_type.collect do |thing_by_item_type| %>
+          <% link_to(thing_by_item_type.item_type, item_type_path(thing_by_item_type.item_type)) %>
+        <% end.to_sentence.html_safe %>
+      </p>
+    <% end %>
+
 
 		<h4>In <%= pluralize_with_delimiter(@things_in_collections.size, 'collection') %></h4>
 
