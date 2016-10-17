@@ -17,16 +17,26 @@ class ThingQuery
   end
 
   def things_in_collections
-
     result['aggregations']['collections']['buckets'].collect do |bucket|
       OpenStruct.new(collection: Collection.find(bucket['key']), count: bucket['doc_count'])
     end
   end
 
-  def things_by_item_type
+  def things_by_authors
+    result['aggregations']['authors']['buckets'].collect do |bucket|
+      OpenStruct.new(author: bucket['key'], count: bucket['doc_count'])
+    end
+  end
 
+  def things_by_item_type
     result['aggregations']['item_types']['buckets'].collect do |bucket|
       OpenStruct.new(item_type: bucket['key'], count: bucket['doc_count'])
+    end
+  end
+
+  def things_by_subjects
+    result['aggregations']['subjects']['buckets'].collect do |bucket|
+      OpenStruct.new(subject: bucket['key'], count: bucket['doc_count'])
     end
   end
 
@@ -51,9 +61,22 @@ class ThingQuery
               field: 'gfs_collection_id',
               size: 0
             }
-          }, item_types: {
+          },
+          item_types: {
             terms: {
               field: 'gfs_item_type.raw',
+              size: 10
+            }
+          },
+          authors: {
+            terms: {
+              field: 'gfs_author.raw',
+              size: 10
+            }
+          },
+          subjects: {
+            terms: {
+              field: 'gfs_subject.raw',
               size: 10
             }
           }

@@ -23,19 +23,41 @@
 			<div style="float:left; width:45%;" class="inst-prm-bg">&nbsp;</div>
 		</div>
 		<small class="dark">distribution across institutions</small>
-	</div>	
+	</div>
 </div>
 <div class="row">
 	<div class="nine columns blurb">
-			
+
 		<!--
 		This will be quite complex copy that accounts for which superfield you're looking at, and whether or not the related superfields have any links to show here, or not.
 		For example...
 		-->
 
-		<p>There are about <%= number_with_delimiter(@things_count) %> <%= @id %> across Oxford, mostly from or about <a href="">Place</a> and <a href="">Place</a>. They relate to <a href="subject">Subject</a>, <a href="subject">Subject</a>, <a href="subject">Subject</a> and <a href="subject">Subject</a>, and it seems like they cover a time period like DATE to DATE.</p>
-		<p>Some 00 people are connected to them, like <a href="/people/show.html">Person</a>, <a href="/people/show.html">Person</a>, and <a href="/people/show.html">Person</a>.</p>
+		<p>
+      There are about <%= number_with_delimiter(@things_count) %> <%= @id %> across Oxford.
 
+
+      <% if @things_by_subjects.size > 0 %>
+        They relate to
+        <% subject_links = @things_by_subjects.collect do |things_by_subject| %>
+          <% link_to(things_by_subject.subject, subject_path(things_by_subject.subject)) %>
+        <% end.to_sentence.html_safe %>
+        <%= subject_links %>,
+      <% end %>
+
+      and it seems like they cover a time period like DATE to DATE.
+
+    </p>
+
+    <% if @things_by_authors.size > 0 %>
+
+      <p>
+        Some 00 people are connected to them, like
+        <%= @things_by_authors.collect do |things_by_authors| %>
+          <% link_to(things_by_authors.author, person_path(things_by_authors.author)) %>
+        <% end.to_sentence.html_safe %>
+      </p>
+    <% end %>
 
     <% if @things_by_item_type.size > 0 %>
 
@@ -86,18 +108,18 @@
         <li><%= link_to thing.title, thing_path(thing.id), class: 'thing' %></li>
       <% end %>
 		</ol>
-	
+
 	</div>
 	<div class="three columns">
 		<h6>STATS</h6>
 		<ul>
 			<li>00% of things have digital metadata</li>
 			<!-- There are no digital metadata records, yet -->
-			
+
 			<li>00% have a digitised version</li>
 			<!-- Nothing has a digitised version, yet -->
-			
-		</ul>		
+
+		</ul>
 	</div>
 
 </div>
