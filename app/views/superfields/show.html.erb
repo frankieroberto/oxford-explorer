@@ -32,8 +32,8 @@
 		This will be quite complex copy that accounts for which superfield you're looking at, and whether or not the related superfields have any links to show here, or not.
 		For example...
 		-->
-		
-		<p>There are about 00,000 <%= @id %> across Oxford, mostly from or about <a href="">Place</a> and <a href="">Place</a>. They relate to <a href="subject">Subject</a>, <a href="subject">Subject</a>, <a href="subject">Subject</a> and <a href="subject">Subject</a>, and it seems like they cover a time period like DATE to DATE.</p>
+
+		<p>There are about <%= number_with_delimiter(@things_count) %> <%= @id %> across Oxford, mostly from or about <a href="">Place</a> and <a href="">Place</a>. They relate to <a href="subject">Subject</a>, <a href="subject">Subject</a>, <a href="subject">Subject</a> and <a href="subject">Subject</a>, and it seems like they cover a time period like DATE to DATE.</p>
 		<p>Some 00 people are connected to them, like <a href="/people/show.html">Person</a>, <a href="/people/show.html">Person</a>, and <a href="/people/show.html">Person</a>.</p>
 
 
