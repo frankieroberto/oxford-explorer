@@ -1,8 +1,8 @@
-<% content_for :title, "PERSON NAME, " %>
+<% content_for :title, @id %>
 
 <% content_for :structural_nav do %>
   &rarr; People
-  &rarr; Person's name
+  &rarr; <%= @id %>
 <% end %>
 
 <div class="mapette-container row">
@@ -13,7 +13,7 @@
 
 <div class="row">
 	<div class="nine columns buffer">
-		<h1>Person's Name</h1>
+		<h1><%= @id %></h1>
 	</div>
 	<div class="three columns">
 		<div style="display:block;">
@@ -22,47 +22,88 @@
 			<div style="float:left; width:60%;" class="inst-ash-bg">&nbsp;</div>
 		</div>
 		<small class="dark">distribution across institutions</small>
-	</div>	
+	</div>
 </div>
 
 <div class="row">
 	<div class="eight columns blurb">
 
-		<p>Superfields</p>
+    <p>
+      There are about <%= number_with_delimiter(@things_count) %> <%= @id %> across Oxford.
 
-		<h4>In 7 collections</h4>
-		
-		<div class="row">
-			<div class="six columns">
-				<div class="collection-in-list">
-					<ul>
-						<li><a href="#">Collection Name</a><br /><small>0,000 things at <span class="inst-mnh">MNH</span></small></li>
-						<li><a href="#">Collection Name</a><br /><small>0,000 things at <span class="inst-hrb">HRB</span></small></li>
-						<li><a href="#">Collection Name</a><br /><small>0,000 things at <span class="inst-ash">ASH</span></small></li>
-						<li><a href="#">Collection Name</a><br /><small>0,000 things at <span class="inst-ash">ASH</span></small></li>
-					</ul>
-				</div>
-			</div>
-			<div class="six columns">
-				<div class="collection-in-list">
-					<ul>
-						<li><a href="#">Collection Name</a><br /><small>0,000 things at <span class="inst-hrb">HRB</span></small></li>
-						<li><a href="#">Collection Name</a><br /><small>0,000 things at <span class="inst-ash">ASH</span></small></li>
-						<li><a href="#">Collection Name</a><br /><small>0,000 things at <span class="inst-ash">ASH</span></small></li>
-					</ul>
-				</div>
-			
-			</div>
-		</div>
-		
-		<h4>3 things</h4>
-		
-		<ol>
-			<li><a href="thing">Thing</a></li>
-			<li><a href="thing">Thing</a></li>
-			<li><a href="thing">Thing</a></li>
-		</ol>
-		
+      <% if @things_by_subjects.size > 0 %>
+        They relate to
+        <% subject_links = @things_by_subjects.collect do |things_by_subject| %>
+          <% link_to(things_by_subject.subject, subject_path(things_by_subject.subject)) %>
+        <% end.to_sentence.html_safe %>
+        <%= subject_links %>,
+      <% end %>
+
+      <% if @min_pubyear && @max_pubyear %>
+        and it seems like they cover a time period like <%= @min_pubyear %> to <%= @max_pubyear %>.
+      <% end %>
+
+    </p>
+
+    <% if @things_by_authors.size > 1 %>
+
+      <p>
+        Some 00 people are connected to them, like
+        <%= @things_by_authors[1..-1].collect do |things_by_authors| %>
+          <% link_to(things_by_authors.author, person_path(things_by_authors.author)) %>
+        <% end.to_sentence.html_safe %>
+      </p>
+    <% end %>
+
+    <% if @things_by_item_type.size > 0 %>
+
+      <h6>Types of thing</h6>
+      <p>
+        <%= @things_by_item_type.collect do |thing_by_item_type| %>
+          <% link_to(thing_by_item_type.item_type, item_type_path(thing_by_item_type.item_type)) %>
+        <% end.to_sentence.html_safe %>
+      </p>
+    <% end %>
+
+    <h4>In <%= pluralize_with_delimiter(@things_in_collections.size, 'collection') %></h4>
+
+    <div class="row">
+
+      <% @things_in_collections.each_with_index
+          .partition {|x, i| i.even? }
+          .each do |things_in_collections_group| %>
+
+        <div class="six columns">
+
+
+          <div class="collection-in-list">
+            <ul>
+              <% things_in_collections_group.map {|x| x[0] }.each do |things_in_collection| %>
+
+                <% collection = things_in_collection.collection %>
+                <li>
+                  <%= link_to collection.name, collection_path(collection.id) %>
+
+                  <small><%= number_with_delimiter(things_in_collection.count) %> of <%= pluralize_with_delimiter(collection.size_int, 'thing') %> at <span class="inst-<%= collection.institution_id.downcase %>"><%= collection.institution_id %></span></small>
+                </li>
+              <% end %>
+            </ul>
+          </div>
+
+        </div>
+
+      <% end %>
+    </div>
+
+    <h4><%= pluralize_with_delimiter(@things_count, 'thing') %></h4>
+
+    <ol>
+
+      <% @things.each do |thing| %>
+        <li><%= link_to thing.title, thing_path(thing.id), class: 'thing' %></li>
+      <% end %>
+    </ol>
+
 	</div>
 	<div class="four columns">
 		<h5>Possible Dupes *</h5>

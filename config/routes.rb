@@ -11,7 +11,7 @@ Rails.application.routes.draw do
 
   resources :about, only: [:index]
 
-  resources :people, only: [:show], controller: :superfields, superfield: 'gfs_author.raw'
+  resources :people, only: [:show]
 
   resources :subjects, only: [:show], controller: :superfields, superfield: 'gfs_subject.raw'
   resources :item_types, only: [:show], controller: :superfields, superfield: 'gfs_item_type.raw'
