@@ -70,13 +70,14 @@
 			
 			</div>
 		</div>
-		
-		<h4>00,000 things</h4>
-		
+
+		<h4><%= pluralize_with_delimiter(@things_count, 'thing') %></h4>
+
 		<ol>
-			<li><a href="thing">Thing</a></li>
-			<li><a href="thing">Thing</a></li>
-			<li><a href="thing">Thing</a></li>
+
+      <% @things.each do |thing| %>
+        <li><%= link_to thing.title, thing_path(thing.id), class: 'thing' %></li>
+      <% end %>
 		</ol>
 	
 	</div>
