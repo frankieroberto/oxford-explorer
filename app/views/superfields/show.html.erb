@@ -1,4 +1,9 @@
-<% content_for :title, "NEED TITLE" %>
+<% content_for :title, "#{human_superfield_name(@superfield)}: #{@id} – " %>
+
+<% content_for :structural_nav do %>
+  &rarr; <%= human_superfield_name(@superfield) %>
+  &rarr; <%= @id %>
+<% end %>
 
 <div class="mapette-container row">
 	<div class="twelve columns mapette">

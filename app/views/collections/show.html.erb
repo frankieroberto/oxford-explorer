@@ -1,5 +1,11 @@
 <% content_for :title, "#{@collection.name} - " %>
 
+<% content_for :structural_nav do %>
+  &rarr; <%= link_to "Collections", collections_path %>
+  &rarr; <%= @collection.name %>
+<% end %>
+
+
 <div class="mapette-container row">
 	<div class="twelve columns mapette">
 		mapette for collection (one highlighted location)

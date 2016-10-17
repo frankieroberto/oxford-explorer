@@ -21,4 +21,12 @@ module ApplicationHelper
     number_to_percentage(percentage, precision: decimal_places, strip_insignificant_zeros: true)
   end
 
+  def human_superfield_name(superfield)
+    lookup = {"gfs_subject" => "Subject",
+     "gfs_item_type" => "Item Type",
+     "gfs_pubyear" => "Year"}
+
+    lookup[superfield]
+  end
+
 end
