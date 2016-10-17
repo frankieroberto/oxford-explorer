@@ -27,12 +27,20 @@
 		<p><%= @thing["gfs_description"] %></p>
 		
 	</div>
-	<div class="four columns">
-		<ul>
-			<li>In the <%= @thing["gfs_department"] %> department.</li>
-			<li>It's a <a href="#">[type of thing]</a>.</li>
-			<li>It's about <a href="subject">subject</a>, <a href="subject">subject</a></li>
-		</ul>
+	<div class="four columns stats">
+		
+		<!-- if department -->
+		<h6>Department</h6>
+		<%= @thing["gfs_department"] %>
+
+		<!-- if item type -->
+		<h6>Type of thing</h6>
+		<a href="doesn't work yet"><%= @thing["gfs_item_type"] %></a>
+				
+		<!-- if item type -->
+		<h6>Subjects</h6>
+		<a href="doesn't work yet"><%= @thing["gfs_subject"] %></a>
+		
 	</div>
 </div>
 
