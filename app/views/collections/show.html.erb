@@ -31,7 +31,8 @@
     		<%= @collection.subjects.collect {|subject| link_to(subject, subject_path(subject)) }.to_sentence(last_word_connector: ' and ').html_safe %>
     		
 	<% end %>
-			  from about <%= @collection.dates %>. 
+	
+			  dated about <%= @collection.dates %>. 
 			  Materials are either from or about <%= @collection.places.collect {|places| link_to(places, "#") }.to_sentence(last_word_connector: ' and ').html_safe %>.
 
 			&nbsp; <small>[ <a href="#">Expand</a> ]</small>
