@@ -11,7 +11,8 @@ class Thing
   end
 
   def self.find(id)
-    ES_CLIENT.get index: 'dev', type: 'record', id: id
+    thing = ES_CLIENT.get index: 'dev', type: 'record', id: id
+    thing['_source']
   end
 
 end

@@ -74,3 +74,13 @@ select {
 .collection-in-list {
 	line-height: 1.25em;
 }
+
+/* Thing */
+.metadata-output {
+	font-family: monospace;
+	background-color: #002b36;
+	padding-left: 20px;
+	padding-left: 10px;
+	padding-top: 0;
+	color: #859900;
+}
