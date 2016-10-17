@@ -9,6 +9,9 @@ class CollectionsController < ApplicationController
 
   def show
     @collection = Collection.find(params[:id])
+
+    @things = ThingQuery.new('gfs_collection_id' => @collection.id).things
+
   end
 
   def json

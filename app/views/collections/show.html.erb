@@ -48,8 +48,10 @@
 		<h3><%= pluralize_with_delimiter(@collection.size_int, 'thing') %></h3>
 
 		<ol>
-			<li><a href="#">Thing</a></li>
-			<li><a href="#">Thing</a></li>
+
+      <% @things.each do |thing| %>
+        <li><%= link_to thing.title, thing_path(thing.id) %></li>
+      <% end %>
 		</ol>
 
 	<!-- If there is no digital metadata available, show this: -->
