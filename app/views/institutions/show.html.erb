@@ -23,10 +23,17 @@
 
 		<!-- random sample of top 10 subjects -->
 
-		They're mostly things related to <a href="subject">Subject</a>, <a href="subject">Subject</a>, <a href="subject">Subject</a> and <a href="subject">Subject</a>, but also some lesser known things about
+    <% links = @institution.subjects[0..9].shuffle[0..2].collect do |subject| %>
+      <% link_to(subject, subject_path(subject)) %>
+    <% end.to_sentence.html_safe %>
 
-		<!-- random sample of lesser known subjects -->
-		<a href="subject">Subject</a>, <a href="subject">Subject</a>, <a href="subject">Subject</a> and <a href="subject">Subject</a>.
+		They're mostly things related to <%= links %>, but also some lesser known things about
+
+    <% links = @institution.subjects.reverse[0..9].shuffle[0..2].collect do |subject| %>
+      <% link_to(subject, subject_path(subject)) %>
+    <% end.to_sentence.html_safe %>
+
+    <%= links %>.
 
 		&nbsp; [ <small><a href="#">Show everything</a></small> ]
 
