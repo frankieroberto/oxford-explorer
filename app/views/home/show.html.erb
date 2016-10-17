@@ -22,6 +22,24 @@
   background: #657b83;
   float:left;
 }
+.legend-pie-part {
+  width: 20px; height: 20px;
+  border-radius: 50%;
+  background: rgba(101,123,131,0.5);
+  float:left;
+  background-image:
+  linear-gradient(to right, transparent 50%, #657b83 0);
+}
+.legend-pie-part::before {
+  content: '';
+  display: block;
+  margin-left: 50%;
+  height: 100%;
+  border-radius: 0 100% 100% 0 / 50%;
+  background: #657b83;
+  transform-origin: left;
+  transform: rotate(.1turn);
+}
 .legend-pie-off {
   width: 20px; height: 20px;
   border-radius: 50%;
@@ -64,7 +82,7 @@
         <h6 style="margin-bottom: 10px;margin-top:10px;">LEGEND</h6>
     <!-- please excuse the hacky mess -->
     	<div><div class="legend-pie-off"></div> A collection</div>
-		<div><div class="legend-pie-off"></div> Some digital metadata records</div>
+		<div><div class="legend-pie-part"></div> Some digital metadata records</div>
     	<div><div class="legend-pie-on"></div> 100% digital metadata records</div>
   		<div><div class="legend-square"></div> A collection, but we aren't sure of size</div>
 	</div>
@@ -112,8 +130,6 @@
 	<div class="three columns">
 		<h6>&larr;</h6>
 		<p>If we know how many things in the collection have a digital metadata record, we draw proportion as a piece of pie.</p>
-	</div>
-</div>
 
 <div id="blobviz-hud">
   <div class="collection"></div>
