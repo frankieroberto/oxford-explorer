@@ -1,4 +1,4 @@
-institution_shortcode,institution_name,institution_url,institution_founded,institution_photo_url,institution_photo_credit,,Collection Size,Digital record (metadata),Digital surrogate,Notes,Status
+institution_shortcode,institution_name,institution_url,institution_founded,institution_photo_url,institution_photo_credit,institution_photo_licence,Collection Size,Digital record (metadata),Digital surrogate,Notes,Status
 ,,,,,,,This data came from the original table in the Resource Discovery Collections Overview .docx - ideally would be derived from the Collections data.,,,,
 ASH,Ashmolean Museum,http://www.ashmolean.org,1683,https://www.flickr.com/photos/16801915@N06/6485707549/,Tom Bastin,CC-BY,"1,000,000","330,000","60,000","Good summary data, still need an export of database",
 BOD,Bodleian Libraries,http://www.bodleian.ox.ac.uk,1602,https://www.flickr.com/photos/aehdeschaine/13204068824/,aehdeschaine,CC BY-ND 2.0,"12,000,000","12,000,000","350,000",Gotten lots of data from lots of places; syncing with Google Drive,

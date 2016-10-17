@@ -2,7 +2,7 @@
 
 <% content_for :structural_nav do %>
   &rarr; Institutions
-  &rarr; Institution name
+  &rarr; <%= @institution.name %>
 <% end %>
 
 
@@ -12,48 +12,48 @@
 	</div>
 </div>
 
-<h1 class="buffer inst-AAA-bg">Institution Name</h1>
+<h1 class="buffer inst-<%= @institution.id.downcase %>-bg"><%= @institution.name %></h1>
 
 <div class="row">
 
 	<div class="eight columns blurb">
 		<p>
-		
-		This place looks after about 00,000,000 things. 
-		
+
+		This place looks after about <%= pluralize_with_delimiter(@institution.things_count, 'thing') %>.
+
 		<!-- random sample of top 10 subjects -->
-		
-		They're mostly things related to <a href="subject">Subject</a>, <a href="subject">Subject</a>, <a href="subject">Subject</a> and <a href="subject">Subject</a>, but also some lesser known things about 
-		
+
+		They're mostly things related to <a href="subject">Subject</a>, <a href="subject">Subject</a>, <a href="subject">Subject</a> and <a href="subject">Subject</a>, but also some lesser known things about
+
 		<!-- random sample of lesser known subjects -->
 		<a href="subject">Subject</a>, <a href="subject">Subject</a>, <a href="subject">Subject</a> and <a href="subject">Subject</a>.
-		
+
 		&nbsp; [ <small><a href="#">Show everything</a></small> ]
-		
+
 		<p>If you wandered around in the collections -- and wouldn't that be brilliant -- you'd see things like <a href="type">Type of thing</a>, <a href="type">Type of thing</a>, <a href="type">Type of thing</a>, <a href="type">Type of thing</a> and <a href="type">Type of thing</a>. There are even some <a href="type">Type of thing</a> and <a href="type">Type of thing</a>...</p>
-		 
-		 <h3>0,000 collections</h3>
-		 
-		 <ol>
-		 	<li><a href="#">[Collection Name]</a> <small>0,000 things</small></li>
-		 	<li><a href="#">[Collection Name]</a> <small>0,000 things</small></li>
-		 	<li><a href="#">[Collection Name]</a> <small>0,000 things</small></li>
+
+		<h3><%= pluralize_with_delimiter(@institution.collections.size, 'collection') %></h3>
+
+		<ol>
+      <% @institution.collections.each do |collection| %>
+        <li><%= link_to collection.name, collection_path(collection.id) %> <small><%= pluralize_with_delimiter(collection.size_int, 'thing') %></small></li>
+      <% end %>
 		 </ol>
-		 
+
 	</div>
 
 	<div class="four columns">
-	
+
 		<p>
-			<a data-flickr-embed="true"  href="https://www.flickr.com/photos/16801915@N06/6485707549/in/photolist-aT7WTX-aT7Xjc-8VpT7N-7XYsaq-nyD7wo-4QyTQK-98Twmy-7T2BYn-7T2BnH-8VFXRa-dNkEia-aT7WM6-3gJoQ6-84XEng-851MtA-a5TXcu-7BmTaU-mpiaAq-ej4xHm-eiYnr6-dNrn4u-eghbzc-cPSAt7-7XVdvT-851MHq-7XYmj5-eiYn7T-7T5SMu-rvPzA6-eiYahB-7XYh89-H1AG3E-eisc1C-ej4wqW-eiY9Nc-ej57yd-egs3S6-GtbnUT-8WsWWe-7oNFW2-a5TVZ7-7BmTZ3-7BmThL-oehaMq-7Bi6fR-dNkED2-bBA6o6-dNkDJn-m7MtN2-aHqAQ6" title="The Ashmolean Museum"><img src="https://c6.staticflickr.com/8/7002/6485707549_a8d51d5c2a_m.jpg" width="240" height="180" alt="The Ashmolean Museum"></a>
+			<a data-flickr-embed="true"  href="<%= @institution.photo_url %>" title="The Ashmolean Museum"><img src="<%= @institution.photo_source_url %>" width="240" height="180" alt="The Ashmolean Museum"></a>
 			<br />
-			<small>The Ashmolean Museum by Tom Bastin (CC-BY)</small>
+			<small>The Ashmolean Museum by <%= @institution.photo_credit %> (<%= @institution.photo_licence %>)</small>
 		</p>
-		<p>The [institution name] was founded 00 years ago, in YYYY. </p>
-		
+		<p>The <%= @institution.name %> was founded <%= pluralize_with_delimiter(Time.now.year - @institution.founded, 'year') %> ago, in <%= @institution.founded %>. </p>
+
 		<p>
-			<a href="website">Visit the website</a>?
+      <%= link_to 'Visit the website', @institution.website %>?
 		</p>
-	</div>	
-	
+	</div>
+
 </div>
