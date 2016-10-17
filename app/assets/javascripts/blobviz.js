@@ -117,7 +117,7 @@ function setup() {
             })
             .attr('data-radius-scale', function(d,i) {
               return radiusForItem(d) / window.defaultRadius;
-            })
+            });
 
      groups.append('rect')
             .attr("x", function(d,i) {
@@ -166,7 +166,6 @@ function setup() {
 
 function updateOptionsForKey(key) {
   $.get("/collections/json", function(d) {
-    console.log(d);
     var keys = _.map(d, function(col) {
       return col[key];
     });
@@ -282,7 +281,7 @@ function between(x, min, max) {
 }
 
 function calculateBBFor(x,y) {
-  console.log("caculating BB for ",x,y);
+  //console.log("caculating BB for ",x,y);
   //x = x + window.margin;
   //y = y + window.margin;
   var x1 = (Math.floor((x+(window.gridSpacing/2))/window.gridSpacing) * window.gridSpacing) - (window.gridSpacing/2); 
@@ -294,13 +293,13 @@ function calculateBBFor(x,y) {
   if(x1 > ((window.colCount+1)*gridSpacing)) return null;
   if(y1 > ((window.rowCount+1)*gridSpacing)) return null;
 
-  $("#bb").remove();
-  d3.select('svg').append('rect').attr('id', 'bb').attr('x', x1)
-                                   .attr('y', y1)
-                                   .attr('width', x2-x1)
-                                   .attr('height', y2-y1)
-                                   .attr('fill', 'red')
-                                   .attr('opacity', 0.5);
+  //$("#bb").remove();
+  //d3.select('svg').append('rect').attr('id', 'bb').attr('x', x1)
+                                   //.attr('y', y1)
+                                   //.attr('width', x2-x1)
+                                   //.attr('height', y2-y1)
+                                   //.attr('fill', 'red')
+                                   //.attr('opacity', 0.5);
   return [x1,y1,x2,y2];
 }
 
@@ -322,7 +321,7 @@ function handleGridMouseMove(d,event) {
   //console.log(indexOver);
 
   if(bb != window.currentBB) {
-    console.log("Bounding box has changed to", bb);
+    //console.log("Bounding box has changed to", bb);
     window.currentBB = bb;
 
     var grps = $("g");
@@ -340,8 +339,13 @@ function handleGridMouseMove(d,event) {
       //var yBetween = between(relPageY, cy-window.defaultRadius, cy+window.defaultRadius);
       // if cursors is inside it
       if(xBetween && yBetween) {
+        pointerCursor();
+
+
         noGroups = false;
         window.currentXY= [cx,cy];
+
+        window.underCursor = d3.select(grp).data();
 
         if(!window.isFiltered) {
           growElement(c);
@@ -352,12 +356,11 @@ function handleGridMouseMove(d,event) {
         var grpOffset = $(grp).offset();
         var hudX = cx - window.leftOffset - (window.hudWidth/2);
         // handle hud falling off screen
-        console.log(d3.event);
+        //console.log(d3.event);
         if(d3.event.pageX < (window.hudWidth/2) ) {
           // set the left edge of HUD flush to the left of the gridsquare
           hudX = cx - window.leftOffset - (window.gridSpacing/2);
         } else if(d3.event.pageX+(window.hudWidth/2) > $(window).width()) {
-          console.log("Adjust right");
           // set the right edge of HUD flush to the left of the gridsquare
           hudX = cx - window.hudWidth - window.leftOffset + (window.gridSpacing/2);
         }
@@ -373,13 +376,17 @@ function handleGridMouseMove(d,event) {
       }
     }
     if(noGroups) {
+      defaultCursor();
       console.log("No groups under cursor");
       hideHud();
+      window.underCursor = null;
     }
   }
 
   if(!window.currentBB) {
+    defaultCursor();
     hideHud();
+    window.underCursor = null;
   }
 
 }
@@ -448,9 +455,9 @@ function updateHudForItem(d,x,y) {
 
   $("#blobviz-hud h2").text(d.department);
 
-  $("#blobviz-hud").css({'left': x, 'top': y-200});
 
   $("#blobviz-hud").show();
+  $("#blobviz-hud").css({'left': x, 'top': y-220});
 }
 
 function hideHud() {
@@ -481,7 +488,6 @@ function handleValueChanges() {
   $("select#value").change(function(e) {
     key = $("select#key").val();
     val = $(this).val();
-    console.log(key, "value changed to", val);
     if(val) {
       tidyGroups('desc');
       window.isFiltered = true;
@@ -489,11 +495,9 @@ function handleValueChanges() {
         var match = false;
         if(d[key]) {
           match = d[key].includes(val);
-          //console.log(d[key], "does it include", val, match);
         }
 
         if(match) {
-          console.log(d.types_of_things, "does it include", val, match);
           spotlightGroup(this);
         } else {
           unSpotlightGroup(this);
@@ -546,6 +550,15 @@ function humanNameForInstitution(instId) {
   }
 }
 
+function pointerCursor() {
+  $("body").css('cursor', 'pointer');
+}
+
+
+function defaultCursor() {
+  $("body").css('cursor', 'auto');
+}
+
 $(document).ready(function() {
   setup();
 
@@ -557,6 +570,10 @@ $(document).ready(function() {
     $("select#value").val("");
     removeFilter();
     return false;
+  });
+
+  $(window).on('click', function() {
+    window.location.href = "/collections/" + window.underCursor[0].id;
   });
 
 });
