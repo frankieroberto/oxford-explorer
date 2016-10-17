@@ -74,7 +74,6 @@ function setup() {
     window.hudWidth = 250;
     window.defaultRadius = 20;
     window.leftOffset = 250;
-    //window.margin = window.defaultRadius;
     window.margin = 100;
 
     window.collections = collections.sort;
@@ -282,8 +281,6 @@ function between(x, min, max) {
 
 function calculateBBFor(x,y) {
   //console.log("caculating BB for ",x,y);
-  //x = x + window.margin;
-  //y = y + window.margin;
   var x1 = (Math.floor((x+(window.gridSpacing/2))/window.gridSpacing) * window.gridSpacing) - (window.gridSpacing/2); 
   var x2 = (Math.ceil((x+(window.gridSpacing/2))/window.gridSpacing) * window.gridSpacing) - (window.gridSpacing/2);
   var y1 = (Math.floor((y+(window.gridSpacing/2))/window.gridSpacing) * window.gridSpacing) - (window.gridSpacing/2);
@@ -336,7 +333,7 @@ function handleGridMouseMove(d,event) {
 
       var xBetween = between(cx, bb[0], bb[2])
       var yBetween = between(cy, bb[1], bb[3])
-      //var yBetween = between(relPageY, cy-window.defaultRadius, cy+window.defaultRadius);
+
       // if cursors is inside it
       if(xBetween && yBetween) {
         pointerCursor();
@@ -364,7 +361,7 @@ function handleGridMouseMove(d,event) {
           // set the right edge of HUD flush to the left of the gridsquare
           hudX = cx - window.hudWidth - window.leftOffset + (window.gridSpacing/2);
         }
-        var hudY = grpOffset.top - 0;
+        var hudY = $("svg").offset().top + cy;
 
         updateHudForItem(d,hudX,hudY);
       } else {
@@ -457,7 +454,7 @@ function updateHudForItem(d,x,y) {
 
 
   $("#blobviz-hud").show();
-  $("#blobviz-hud").css({'left': x, 'top': y-220});
+  $("#blobviz-hud").css({'left': x, 'top': y-$("#blobviz-hud").height()-25});
 }
 
 function hideHud() {
