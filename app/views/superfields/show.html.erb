@@ -38,38 +38,36 @@
 		
 		<h6>Types of thing</h6>
 		<p><a href="#">Type</a>, <a href="#">Type</a>, <a href="#">Type</a>, <a href="#">Type</a>, <a href="#">Type</a>, <a href="#">Type</a>
-		
-		<h4>In 0,000 collections</h4>
-		
+
+		<h4>In <%= pluralize_with_delimiter(@things_in_collections.size, 'collection') %></h4>
+
 		<div class="row">
-			<div class="six columns">
-				<div class="collection-in-list">
-					<ul>
-						<li><a href="#">Collection Name</a>  <small>0,000 things at <span class="inst-ash">ASH</span></small></li>
-						<li><a href="#">Collection Name</a>  <small>0,000 things at <span class="inst-hrb">HRB</span></small></li>
-						<li><a href="#">Collection Name</a>  <small>0,000 things at <span class="inst-bod">BOD</span></small></li>
-						<li><a href="#">Collection Name</a>  <small>0,000 things at <span class="inst-bod">BOD</span></small></li>
-						<li><a href="#">Collection Name</a>  <small>0,000 things at <span class="inst-prm">PRM</span></small></li>
-						<li><a href="#">Collection Name</a>  <small>0,000 things at <span class="inst-prm">PRM</span></small></li>
-						<li><a href="#">Collection Name</a>  <small>0,000 things at <span class="inst-prm">PRM</span></small></li>
-					</ul>
-				</div>
-			</div>
-			<div class="six columns">
-				<div class="collection-in-list">
-					<ul>
-						<li><a href="#">Collection Name</a>  <small>0,000 things at <span class="inst-hrb">HRB</span></small></li>
-						<li><a href="#">Collection Name</a>  <small>0,000 things at <span class="inst-bod">BOD</span></small></li>
-						<li><a href="#">Collection Name</a>  <small>0,000 things at <span class="inst-bod">BOD</span></small></li>
-						<li><a href="#">Collection Name</a>  <small>0,000 things at <span class="inst-bod">BOD</span></small></li>
-						<li><a href="#">Collection Name</a>  <small>0,000 things at <span class="inst-prm">PRM</span></small></li>
-						<li><a href="#">Collection Name</a>  <small>0,000 things at <span class="inst-prm">PRM</span></small></li>
-						<li><a href="#">Collection Name</a>  <small>0,000 things at <span class="inst-prm">PRM</span></small></li>
-					</ul>
-				</div>
-			
-			</div>
-		</div>
+
+      <% @things_in_collections.each_with_index
+          .partition {|x, i| i.even? }
+          .each do |things_in_collections_group| %>
+
+  			<div class="six columns">
+
+
+          <div class="collection-in-list">
+            <ul>
+              <% things_in_collections_group.map {|x| x[0] }.each do |things_in_collection| %>
+
+                <% collection = things_in_collection.collection %>
+                <li>
+                  <%= link_to collection.name, collection_path(collection.id) %>
+
+                  <small><%= number_with_delimiter(things_in_collection.count) %> of <%= pluralize_with_delimiter(collection.size_int, 'thing') %> at <span class="inst-<%= collection.institution_id.downcase %>"><%= collection.institution_id %></span></small>
+                </li>
+              <% end %>
+            </ul>
+          </div>
+
+  			</div>
+
+      <% end %>
+    </div>
 
 		<h4><%= pluralize_with_delimiter(@things_count, 'thing') %></h4>
 

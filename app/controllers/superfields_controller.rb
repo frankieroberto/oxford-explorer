@@ -9,5 +9,8 @@ class SuperfieldsController < ApplicationController
 
     @things_count = thing_query.things_count
     @things = thing_query.things
+
+    @things_in_collections = thing_query.things_in_collections
+
   end
 end
