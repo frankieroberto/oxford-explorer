@@ -65,17 +65,11 @@
 	<div class="three columns stats">
 
   <style>
-  .pie {
-    fill: #657b83;
-  }
-  .slice {
-    fill: yellow;
-  }
   </style>
 
 		<div>
 
-      <svg width="150" height="150" viewbox="0 0 150 150">
+      <svg id="collection-pie" class="<%= @collection.institution_id %>" width="150" height="150" viewbox="0 0 150 150">
         <circle cx="75" cy="75" r="75" class="pie" />
         <% end_angle = (@collection.digitized_metadata_size_int.to_f / @collection.size_int * 360).floor %>
         <% # TODO: actual maths %>

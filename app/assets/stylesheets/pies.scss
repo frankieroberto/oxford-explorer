@@ -1,0 +1,38 @@
+@import "colour_variables";
+/* collection pie charts */
+
+#collection-pie {
+  circle {
+    opacity: 0.5;
+  }
+
+  path.slice {
+    opacity: 1;
+  }
+
+  &.ASH {
+    circle, path.slice {
+      fill: $inst_ash;
+    }
+  }
+  &.BOD {
+    circle, path.slice {
+      fill: $inst_bod;
+    }
+  }
+  &.MHS {
+    circle, path.slice {
+      fill: $inst_mhs;
+    }
+  }
+  &.MNH {
+    circle, path.slice {
+      fill: $inst_mnh;
+    }
+  }
+  &.PRM {
+    circle, path.slice {
+      fill: $inst_prm;
+    }
+  }
+}
