@@ -2,16 +2,61 @@
 
 <%= javascript_include_tag('blobviz') %>
 
+<style>
+.legend {
+	font-size: .75em;
+}
+.legend div {
+	margin-bottom: 10px;
+	margin-right: 5px;
+}
+.pie {
+  width: 150px; height: 150px;
+  border-radius: 50%;
+  background: #657b83;
+  opacity: .5;
+}
+.legend-pie-on {
+  width: 20px; height: 20px;
+  border-radius: 50%;
+  background: #657b83;
+  float:left;
+}
+.legend-pie-off {
+  width: 20px; height: 20px;
+  border-radius: 50%;
+  background: #657b83;
+  opacity: .5;
+  float:left;
+}
+.legend-square {
+  width: 15px; height: 15px;
+  background: #657b83;
+  opacity: .25;
+  float:left;
+  margin-left: 2px;
+}
+</style>
+
 <h1>Welcome.</h1>
 <div class="row">
 
 
-  <div class="eight columns">
+  <div class="eight columns blurb">
     <p>This is a map to the hundreds of <a href="/collections">collections</a> held in the museums, libraries and gardens across Oxford. Each shape below represents one collection, but don't be fooled... While the <a href="#">Bodleian Libraries</a> looks after more than 12 million things, the <a href="#">Dyer Collection</a> contains just one.</p>
+    
     <p>You can just jump in, or choose a filter to spotlight certain collections...</p>
     
   </div>
-    <div class="four columns key">
+    <div class="four columns key legend">
+    
+        <h6 style="margin-bottom: 10px;">LEGEND</h6>
+    <!-- please excuse the hacky mess -->
+    	<div><div class="legend-pie-off"></div> A collection</div>
+		<div><div class="legend-pie-off"></div> Some digital records</div>
+    	<div><div class="legend-pie-on"></div> 100% digital records</div>
+  		<div><div class="legend-square"></div> Don't know </div>
+    
 		<h6>KEY</h6>
 		<span class="inst-ash-bg"><a href="">Ashmolean Museum</a></span>
 		<span class="inst-bod-bg"><a href="">Bodleian Libraries</a></span>
@@ -19,6 +64,7 @@
 		<span class="inst-mnh-bg"><a href="">Museum of Natural History</a></span>
 		<span class="inst-prm-bg"><a href="">Pitt Rivers Museum</a></span>
 		<span class="inst-hrb-bg"><a href="">Oxford University Herbaria</a></span>
+		
    </div>
 </div>  
 
@@ -55,16 +101,7 @@
 		<p style="margin-top: 20px; margin-bottom: 0;">Each collection is represented as a circle or a square. A circle means we know how big it is, and a square means we don't.</p>
 		<h6 style="margin-top: 0" title="instructions about the graphic">&rarr;</h6>
 	</div>
-	<div class="offset-by-one three columns center">
-		
-<style>
-.pie {
-  width: 150px; height: 150px;
-  border-radius: 50%;
-  background: #657b83;
-  opacity: .5;
-}
-</style>		
+	<div class="offset-by-one three columns center">		
 	
 	<div class="pie"></div>
 		
