@@ -40,7 +40,7 @@
 
 		<p>
      
-     		There are about <%= number_with_delimiter(@things_count) %> things about <%= @id %> across Oxford.
+     		There are about <%= number_with_delimiter(@things_count) %> things about "<%= @id %>" across Oxford.
 
 
       <% if @things_by_subjects.size > 0 %>
@@ -52,7 +52,7 @@
       <% end %>
 
       <% if @min_pubyear && @max_pubyear %>
-        and it seems like they cover a time period like <%= @min_pubyear %> to <%= @max_pubyear %>.
+        and the data we have makes it seem as if they cover a time period like <%= @min_pubyear %> to <%= @max_pubyear %> (but that may well be wrong).
       <% end %>
 
 
@@ -61,7 +61,7 @@
     <% if @things_by_authors.size > 0 %>
 
       <p>
-        Some 00 people are connected to them, like
+        Some 00 people are connected to "<%= @id %>", like
         <%= @things_by_authors.collect do |things_by_authors| %>
           <% link_to(things_by_authors.author, person_path(things_by_authors.author)) %>
         <% end.to_sentence.html_safe %>
