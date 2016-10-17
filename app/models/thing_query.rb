@@ -17,31 +17,41 @@ class ThingQuery
   end
 
   def things_in_collections
-    result['aggregations']['collections']['buckets'].collect do |bucket|
+    result['aggregations']['collections']['buckets']
+      .reject {|bucket| bucket['key'].blank? }
+      .collect do |bucket|
       OpenStruct.new(collection: Collection.find(bucket['key']), count: bucket['doc_count'])
     end
   end
 
   def things_by_authors
-    result['aggregations']['authors']['buckets'].collect do |bucket|
+    result['aggregations']['authors']['buckets']
+      .reject {|bucket| bucket['key'].blank? }
+      .collect do |bucket|
       OpenStruct.new(author: bucket['key'], count: bucket['doc_count'])
     end
   end
 
   def things_by_item_type
-    result['aggregations']['item_types']['buckets'].collect do |bucket|
+    result['aggregations']['item_types']['buckets']
+      .reject {|bucket| bucket['key'].blank? }
+      .collect do |bucket|
       OpenStruct.new(item_type: bucket['key'], count: bucket['doc_count'])
     end
   end
 
   def things_by_subjects
-    result['aggregations']['subjects']['buckets'].collect do |bucket|
+    result['aggregations']['subjects']['buckets']
+      .reject {|bucket| bucket['key'].blank? }
+      .collect do |bucket|
       OpenStruct.new(subject: bucket['key'], count: bucket['doc_count'])
     end
   end
 
   def things_by_institution
-    result['aggregations']['institutions']['buckets'].collect do |bucket|
+    result['aggregations']['institutions']['buckets']
+      .reject {|bucket| bucket['key'].blank? }
+      .collect do |bucket|
       OpenStruct.new(institution_id: bucket['key'], count: bucket['doc_count'])
     end
   end
