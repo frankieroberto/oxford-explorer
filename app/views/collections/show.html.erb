@@ -22,17 +22,17 @@
 	<div class="offset-by-one eight columns blurb">
 
 		<p>
-			This collection mostly contains 
+			This collection mostly contains
 			<%= @collection.types_of_things.collect {|type_of_thing| link_to(type_of_thing, item_type_path(type_of_thing)) }.to_sentence(last_word_connector: ' and ').html_safe %>
-			  
+
     <% if @collection.subjects.size > 0 %>
-    		
+
     		about
     		<%= @collection.subjects.collect {|subject| link_to(subject, subject_path(subject)) }.to_sentence(last_word_connector: ' and ').html_safe %>
-    		
+
 	<% end %>
-	
-			  dated about <%= @collection.dates %>. 
+
+			  dated about <%= @collection.dates %>.
 			  Materials are either from or about <%= @collection.places.collect {|places| link_to(places, "#") }.to_sentence(last_word_connector: ' and ').html_safe %>.
 
 			&nbsp; <small>[ <a href="#">Expand</a> ]</small>
@@ -55,33 +55,41 @@
 		</ol>
 
 	<!-- If there is no digital metadata available, show this: -->
-		
+
 		<h6>FINDING THIS AT OXFORD</h6>
 		<p>[Placeholder for any content in the 'catalog_comments' field in the Inventory spreadsheet.]</p>
-	
+
 	</div>
-	
-	
-	
+
+
+
 	<div class="three columns stats">
 
-<style>
-.pie {
-  width: 150px; height: 150px;
-  border-radius: 50%;
-  background: #657b83;
-  opacity: .5;
-}
-</style>		
-	
-		<div class="pie"></div>
+  <style>
+  .pie {
+    fill: #657b83;
+  }
+  .slice {
+    fill: yellow;
+  }
+  </style>
+
+		<div>
+
+      <svg width="150" height="150" viewbox="0 0 150 150">
+        <circle cx="75" cy="75" r="75" class="pie" />
+        <% # TODO: actual maths %>
+        <path d="M75,75 L75,0 A 75 75 0 0,0 0,75 Z" class="slice">
+      </svg>
+
+    </div>
 
 		<h6>STATS</h6>
 		<ul>
 			<li><%= percentage_with_varying_accuracy(@collection.digitized_metadata_size_int.to_f / @collection.size_int) %> have digital metadata</li>
 			<li><%= percentage_with_varying_accuracy(@collection.digitized_size_int.to_f / @collection.size_int) %> have a digitised version</li>
 		</ul>
-		
+
 	</div>
 </div>
 
