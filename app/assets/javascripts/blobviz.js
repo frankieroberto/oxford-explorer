@@ -162,17 +162,9 @@ function setup() {
 }
 
 function updateOptionsForItemType() {
-  $.get("/latest.json", function(d) {
-
+  $.get("/collections/json", function(d) {
     var itemTypes = _.map(d, function(col) {
-      var retVal = [];
-      var t = col.type_of_things;
-      _.each(t.split(";"), function(typ) {
-        retVal.push(typ.trim());
-      });
-      if(retVal.length > 0) {
-        return retVal;
-      }
+      return col.types_of_things;
     });
 
     itemTypes = _.flatten(itemTypes);
@@ -180,7 +172,6 @@ function updateOptionsForItemType() {
       var x =  a.toLowerCase();
       var y = b.toLowerCase();
       return x > y ? 1 : (x < y ? -1 : 0);
-      
     });
 
     $("#value option").remove();
@@ -202,24 +193,9 @@ function updateOptionsForItemType() {
 }
 
 function updateOptionsForSubject() {
-  $.get("/latest.json", function(d) {
+  $.get("/collections/json", function(d) {
     var subjects = _.map(d, function(col) {
-      var retVal = [];
-      var t = col.subjects;
-      if(!t) {
-        return;
-      }
-
-      t = t.replace(/\,/g, ";");
-      _.each(t.split(";"), function(typ) {
-        typ = typ.trim();
-        if(typ != "") {
-          retVal.push(typ.trim());
-        }
-      });
-      if(retVal.length > 0) {
-        return retVal;
-      }
+      return col.subjects;
     });
 
     subjects = _.flatten(subjects);
@@ -475,6 +451,7 @@ function handleValueChanges() {
   $("select#value").change(function(e) {
     key = $("select#key").val();
     val = $(this).val();
+    console.log(key, "value changed to", val);
     if(val) {
       tidyGroups('desc');
       window.isFiltered = true;
@@ -482,16 +459,21 @@ function handleValueChanges() {
         var match = false;
         if(key == 'subjects') {
           if(d.subjects) {
-            match = d.subjects.match(val);
+            match = d.subjects.includes(val);
+            console.log(d.subjects, "does it include", val, match);
           }
             
         }
         if(key == 'item-type') {
-          if(d.type_of_things) {
-            match = d.type_of_things.match(val);
+          if(d.types_of_things) {
+            match = d.types_of_things.includes(val);
+            if(match) {
+                console.log(d.types_of_things, "does it include", val, match);
+            }
           }
         }
         if(match) {
+            console.log(d.types_of_things, "does it include", val, match);
           spotlightGroup(this);
         } else {
           unSpotlightGroup(this);
@@ -529,8 +511,6 @@ function removeAllSpotlights() {
 
 $(document).ready(function() {
   setup();
-
-  updateOptionsForItemType();
 
   handleKeyChanges();
 
