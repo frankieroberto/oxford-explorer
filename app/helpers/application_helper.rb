@@ -29,4 +29,30 @@ module ApplicationHelper
     lookup[superfield]
   end
 
+  def polar_to_cartesian(x, y, radius, degrees)
+    radians = (degrees) * Math::PI / 180.0;
+
+    {
+      x: x + (radius * Math.cos(radians)),
+      y: y + (radius * Math.sin(radians))
+    }
+  end
+
+  def describe_pie_slice(x,y,radius,start_angle,end_angle)
+    if end_angle > 360
+      end_angle = 360 
+    end
+
+    end_point = polar_to_cartesian(x, y, radius, end_angle);
+
+    large_arc_flag = end_angle - start_angle <= 180 ? "0" : "1";
+
+    path = [
+      "M", x,y ,
+      "L", x+radius,y ,
+      "A", radius, radius, 0, large_arc_flag, 1, end_point[:x], end_point[:y], "z"
+    ].join(" ");
+  end
+
+
 end
