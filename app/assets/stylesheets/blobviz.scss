@@ -71,10 +71,12 @@
   background-opacity: 0.5;
   width: 250px;
   z-index: 100;
+  line-height: 1em; 
+  padding-bottom: 10px;
   
   .collection {
     text-transform: uppercase;
-    padding: 10px;
+    padding: 5px;
     color: white;
     display: inline-block;
     font-weight: bold;
@@ -82,34 +84,37 @@
 
   .size {
     margin: 5px 10px;
-    color: #888;
+    color: #839496;
+    font-size: 16px;    
     span {
       font-weight: bold;
-      color: white;
+      color: #fdf6e3;
     }
   }
 
   .dig_size {
     margin: 5px 10px 0;
-    color: #888;
+    color: #839496;
+	font-size: 16px;
     span {
       font-weight: bold;
-      color: white;
+      color: #fdf6e3;
     }
   }
 
   h1 {
     font-weight: bold;
-    color: $base3;
-    margin: 10px;
-    font-size: 26px;
+    color: #fdf6e3;
+    margin: 0 10px;
+    font-size: 24px;
   }
 
   h2 {
-    font-size: 18px;
+	font-size: 18px;
     font-weight: normal;
-    color: $base3;
-    margin: 10px;
+    color: #eee8d5;
+    margin: 10px 10px 5px 10px;
+    letter-spacing: 1.1;
   }
 }
 
