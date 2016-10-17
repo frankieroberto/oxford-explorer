@@ -1,0 +1,20 @@
+<% content_for :title, "#{@item.name} - " %>
+
+<% content_for :structural_nav do %>
+  &rarr; <%= link_to "Institutions", institution_path %>
+  &rarr; <%= @item.name %>
+<% end %>
+
+
+<div class="mapette-container row">
+	<div class="twelve columns mapette">
+		mapette for item (one highlighted location) ? (can only draw if item knows its collection)
+	</div>
+</div>
+
+<div class="row">
+	<div class="one column inst-<%= @collection.institution_id.downcase %>-bg center"><%= link_to @collection.institution_id, institution_path(@collection.institution_id) %></div>
+	<div class="eleven columns">
+		<h1 class="buffer">Thing Name</h1>
+	</div>
+</div>
