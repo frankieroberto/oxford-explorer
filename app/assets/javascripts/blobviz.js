@@ -454,7 +454,7 @@ function updateHudForItem(d,x,y) {
 
 
   $("#blobviz-hud").show();
-  $("#blobviz-hud").css({'left': x, 'top': y-$("#blobviz-hud").height()-25});
+  $("#blobviz-hud").css({'left': x, 'top': y-$("#blobviz-hud").height()-35});
 }
 
 function hideHud() {
