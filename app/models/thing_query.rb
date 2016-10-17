@@ -40,6 +40,12 @@ class ThingQuery
     end
   end
 
+  def things_by_institution
+    result['aggregations']['institutions']['buckets'].collect do |bucket|
+      OpenStruct.new(institution_id: bucket['key'], count: bucket['doc_count'])
+    end
+  end
+
   def min_pubyear
     result['aggregations']['min_pubyear']['value']
   end
@@ -86,6 +92,12 @@ class ThingQuery
             terms: {
               field: 'gfs_subject.raw',
               size: 10
+            }
+          },
+          institutions: {
+            terms: {
+              field: 'gfs_institution_id',
+              size: 0
             }
           },
           min_pubyear: {
