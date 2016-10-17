@@ -3,7 +3,7 @@ require 'csv'
 class Collection
 
   attr_accessor :id, :institution_id, :name, :size_int, :types_of_things, :subjects, :places,
-    :people, :dates, :digitized_metadata_size_int, :digitized_size_int, :department
+    :people, :dates, :digitized_metadata_size_int, :digitized_size_int, :department, :academic_departments, :divisions
 
   def initialize(metadata)
     @metadata = metadata
@@ -16,6 +16,8 @@ class Collection
     @digitized_size_int = metadata['how_many_digitized_versions'].to_s.gsub(',', '').to_i
     @types_of_things = metadata['type_of_things'].to_s.split(';').collect(&:strip).reject(&:blank?).collect(&:downcase)
     @subjects = metadata['subjects'].to_s.split(/[\,;]/).collect(&:strip).reject(&:blank?).collect(&:downcase)
+    @academic_departments = metadata['academic department'].to_s.split(/[\,;]/).collect(&:strip).reject(&:blank?)
+    @divisions = metadata['division'].to_s.split(/[\,;]/).collect(&:strip).reject(&:blank?)
     @places = metadata['places'].to_s.split(/[,;]/).collect(&:strip).reject(&:blank?)
     @people = metadata['names'].to_s.split(/[,;]/).collect(&:strip).reject(&:blank?)
     @dates = metadata['dates']
