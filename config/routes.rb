@@ -13,8 +13,8 @@ Rails.application.routes.draw do
 
   resources :people, only: [:show]
 
-  resources :subjects, only: [:show], controller: :superfields, superfield: 'gfs_subject'
-  resources :item_types, only: [:show], controller: :superfields, superfield: 'gfs_item_type'
+  resources :subjects, only: [:show], controller: :superfields, superfield: 'gfs_subject.raw'
+  resources :item_types, only: [:show], controller: :superfields, superfield: 'gfs_item_type.raw'
   resources :years, only: [:show], controller: :superfields, superfield: 'gfs_pubyear'
 
   resources :institutions, only: [:show]

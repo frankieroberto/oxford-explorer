@@ -40,6 +40,14 @@ class ThingQuery
     end
   end
 
+  def min_pubyear
+    result['aggregations']['min_pubyear']['value']
+  end
+
+  def max_pubyear
+    result['aggregations']['max_pubyear']['value']
+  end
+
   private
 
   def result
@@ -78,6 +86,16 @@ class ThingQuery
             terms: {
               field: 'gfs_subject.raw',
               size: 10
+            }
+          },
+          min_pubyear: {
+            min: {
+              field: 'gfs_pubyear_clean'
+            }
+          },
+          max_pubyear: {
+            max: {
+              field: 'gfs_pubyear_clean'
             }
           }
         }

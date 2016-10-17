@@ -45,7 +45,10 @@
         <%= subject_links %>,
       <% end %>
 
-      and it seems like they cover a time period like DATE to DATE.
+      <% if @min_pubyear && @max_pubyear %>
+        and it seems like they cover a time period like <%= @min_pubyear %> to <%= @max_pubyear %>.
+      <% end %>
+
 
     </p>
 

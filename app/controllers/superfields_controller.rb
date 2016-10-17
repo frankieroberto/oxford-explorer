@@ -15,5 +15,8 @@ class SuperfieldsController < ApplicationController
     @things_by_authors = thing_query.things_by_authors
     @things_by_subjects = thing_query.things_by_subjects
 
+    @min_pubyear = thing_query.min_pubyear&.to_i
+    @max_pubyear = thing_query.max_pubyear&.to_i
+
   end
 end
