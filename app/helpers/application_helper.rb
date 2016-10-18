@@ -23,7 +23,9 @@ module ApplicationHelper
 
   def human_superfield_name(superfield)
     lookup = {"gfs_subject" => "Subjects",
+     "gfs_subject.raw" => "Types of thing",
      "gfs_item_type" => "Types of thing",
+     "gfs_item_type.raw" => "Types of thing",
      "gfs_pubyear" => "Dates"}
 
     lookup[superfield]
