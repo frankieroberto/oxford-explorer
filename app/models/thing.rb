@@ -6,7 +6,7 @@ class Thing
 
   def initialize(metadata)
     @metadata = metadata
-    @title = metadata['gfs_title']
+    @title = Array(metadata['gfs_title']).first || '(untitled)'
     @id = metadata['gfs_id']
   end
 
