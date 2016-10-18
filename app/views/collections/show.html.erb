@@ -69,15 +69,17 @@
 
 		<div>
 
-      <svg id="collection-pie" class="<%= @collection.institution_id %>" width="150" height="150" viewbox="0 0 150 150">
-        <% end_angle = (@collection.digitized_metadata_size_int.to_f / @collection.size_int * 360).floor %>
-        <% if end_angle >= 360 %>
-          <circle cx="75" cy="75" r="75" class="pie full" />
-        <% else %>
-          <circle cx="75" cy="75" r="75" class="pie" />
-          <path transform="rotate(-90,75,75)" d="<%= describe_pie_slice(75,75,75,0,end_angle) %>" class="slice">
-        <% end %>
-      </svg>
+      <% if @collection.digitized_metadata_size_int && @collection.size_int && @collection.size_int > 0 %>
+        <svg id="collection-pie" class="<%= @collection.institution_id %>" width="150" height="150" viewbox="0 0 150 150">
+          <% end_angle = (@collection.digitized_metadata_size_int.to_f / @collection.size_int * 360).floor %>
+          <% if end_angle >= 360 %>
+            <circle cx="75" cy="75" r="75" class="pie full" />
+          <% else %>
+            <circle cx="75" cy="75" r="75" class="pie" />
+            <path transform="rotate(-90,75,75)" d="<%= describe_pie_slice(75,75,75,0,end_angle) %>" class="slice">
+          <% end %>
+        </svg>
+      <% end %>
 
     </div>
 
