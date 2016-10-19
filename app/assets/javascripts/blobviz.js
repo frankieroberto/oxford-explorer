@@ -569,8 +569,15 @@ $(document).ready(function() {
     return false;
   });
 
-  $(window).on('click', function() {
-    window.location.href = "/collections/" + window.underCursor[0].id;
+  $(window).on('click', function(e) {
+    // only handle a click inside the visualisation
+    var topOfViz = $("svg").offset().top;
+    var vizHeight = $("svg").height();
+    if((e.pageY > (topOfViz + window.margin - (window.gridSpacing/2))) && 
+       e.pageY < (topOfViz + vizHeight)) {
+      //console.log("Click inside viz");
+      window.location.href = "/collections/" + window.underCursor[0].id;
+    }
   });
 
 });
