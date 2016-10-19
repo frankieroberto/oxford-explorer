@@ -63,7 +63,7 @@
     <% end %>
 
     <% if @collection['catalog_comments'] %>
-      <p><%= h @collection['catalog_comments'] %></p>
+      <p><%= Rinku.auto_link(@collection['catalog_comments']).html_safe %></p>
     <% end %>
 	</div>
 
