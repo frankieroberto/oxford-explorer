@@ -71,30 +71,32 @@
 
 	<div class="three columns stats">
 
-  <style>
-  </style>
-
 		<div>
 
       <% if @collection.digitized_metadata_size_int && @collection.size_int && @collection.size_int > 0 %>
-        <svg id="collection-pie" class="<%= @collection.institution_id %>" width="150" height="150" viewbox="0 0 150 150">
+        <svg id="collection-pie" class="<%= @collection.institution_id %>" width="156" height="156" viewbox="0 0 156 156">
+          <% if @collection.digitized_size_int > 0 %>
+            <% end_angle = (@collection.digitized_size_int.to_f / @collection.size_int * 360).floor %>
+            <path transform="rotate(-90,78,78)" d="<%= describe_pie_slice(78,78,75,0,end_angle, false) %>" class="digitised" />
+          <% end %>
           <% end_angle = (@collection.digitized_metadata_size_int.to_f / @collection.size_int * 360).floor %>
           <% if end_angle >= 360 %>
-            <circle cx="75" cy="75" r="75" class="pie full" />
+            <circle cx="78" cy="78" r="75" class="pie full" />
           <% else %>
-            <circle cx="75" cy="75" r="75" class="pie" />
-            <path transform="rotate(-90,75,75)" d="<%= describe_pie_slice(75,75,75,0,end_angle) %>" class="slice">
+            <circle cx="78" cy="78" r="75" class="pie" />
+            <path transform="rotate(-90,78,78)" d="<%= describe_pie_slice(78,78,75,0,end_angle) %>" class="slice">
           <% end %>
         </svg>
       <% end %>
 
     </div>
 
-		<h6>STATS</h6>
-		<ul>
-			<li><%= percentage_with_varying_accuracy(@collection.digitized_metadata_size_int.to_f / @collection.size_int) %> have digital metadata</li>
-			<li><%= percentage_with_varying_accuracy(@collection.digitized_size_int.to_f / @collection.size_int) %> have a digitised version</li>
-		</ul>
+    <h6>STATS</h6>
+    <ul>
+      <li><span class='<%=@collection.institution_id %>-em total-count'><%= number_with_delimiter(@collection.size_int) %></span> things</li>
+      <li><span class='<%= @collection.institution_id %>-em'><%= (@collection.digitized_metadata_size_int.to_f / @collection.size_int * 100).round %>%</span> have digital metadata</li>
+      <li><span class='digitised-em'><%= (@collection.digitized_size_int.to_f / @collection.size_int * 100).round %>%</span> have a digital surrogate </li>
+    </ul>
 
 	</div>
 </div>

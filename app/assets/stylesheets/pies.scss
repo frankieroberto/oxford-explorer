@@ -12,6 +12,13 @@
   path.slice {
     opacity: 1;
   }
+  
+  path.digitised {
+    fill: none;
+    opacity: 1;
+    stroke: $base3;
+    stroke-width: 6px;
+  }
 
   &.ASH {
     circle, path.slice {
@@ -39,3 +46,30 @@
     }
   }
 }
+
+
+span {
+  &.digitised-em {
+    color: $base3;
+  }
+  &.ASH-em {
+    color: $inst_ash;
+  }
+  &.BOD-em {
+    color: $inst_bod;
+  }
+  &.MHS-em {
+    color: $inst_mhs;
+  }
+  &.MNH-em {
+    color: $inst_mnh;
+  }
+  &.PRM-em {
+    color: $inst_prm;
+  }
+  &.total-count {
+    opacity: 0.6;
+  }
+}
+
+

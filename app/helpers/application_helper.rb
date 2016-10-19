@@ -40,7 +40,7 @@ module ApplicationHelper
     }
   end
 
-  def describe_pie_slice(x,y,radius,start_angle,end_angle)
+  def describe_pie_slice(x,y,radius,start_angle,end_angle, close = true)
     if end_angle > 360
       end_angle = 360 
     end
@@ -49,11 +49,19 @@ module ApplicationHelper
 
     large_arc_flag = end_angle - start_angle <= 180 ? "0" : "1";
 
-    path = [
-      "M", x,y ,
-      "L", x+radius,y ,
-      "A", radius, radius, 0, large_arc_flag, 1, end_point[:x], end_point[:y], "z"
-    ].join(" ");
+    if close
+      path = [
+        "M", x,y ,
+        "L", x+radius,y ,
+        "A", radius, radius, 0, large_arc_flag, 1, end_point[:x], end_point[:y], "z"
+      ].join(" ");
+    else
+      path = [
+        "M", x+radius,y ,
+        "A", radius, radius, 0, large_arc_flag, 1, end_point[:x], end_point[:y]
+      ].join(" ");
+    end
+
   end
 
 
