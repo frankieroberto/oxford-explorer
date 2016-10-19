@@ -39,7 +39,7 @@
 		-->
 
 		<p>
-     
+
      		There are about <%= number_with_delimiter(@things_count) %> things about "<%= @id %>" across Oxford.
 
 
@@ -98,7 +98,7 @@
                 <li>
                   <%= link_to collection.name, collection_path(collection.id) %>
 
-                  <small><%= number_with_delimiter(things_in_collection.count) %> of <%= pluralize_with_delimiter(collection.size_int, 'thing') %> at <span class="inst-<%= collection.institution_id.downcase %>"><%= collection.institution_id %></span></small>
+                  <small><% if things_in_collection.count %><%= number_with_delimiter(things_in_collection.count) %><% else %>some <%end %> of <%= pluralize_with_delimiter(collection.size_int, 'thing') %> at <span class="inst-<%= collection.institution_id.downcase %>"><%= collection.institution_id %></span></small>
                 </li>
               <% end %>
             </ul>
