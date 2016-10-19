@@ -15,6 +15,16 @@ class Thing
     @metadata[key]
   end
 
+  def subjects
+    @subjects ||= @metadata['gfs_subject'].compact.reject(&:blank?)
+  end
+
+  def types_of_things
+    @types_of_things ||= @metadata['gfs_item_type'].compact.reject(&:blank?).collect do |item_type|
+      TypeOfThing.find(item_type)
+    end
+  end
+
   def self.find(id)
     thing = ES_CLIENT.get index: 'dev', type: 'record', id: id
     self.new(thing['_source'])

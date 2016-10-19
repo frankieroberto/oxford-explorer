@@ -37,11 +37,14 @@
 
 		<!-- if item type -->
 		<h6>Type of thing</h6>
-		<a href="doesn't work yet"><%= @thing["gfs_item_type"] %></a>
+    <% links = @thing.types_of_things.collect do |type_of_thing| %>
+      <% link_to type_of_thing.name, item_type_path(type_of_thing.name) %>
+    <% end %>
+    <%= links.to_sentence.html_safe %>
 
 		<!-- if item type -->
 		<h6>Subjects</h6>
-    <% links = @thing['gfs_subject'].collect do |subject| %>
+    <% links = @thing.subjects.collect do |subject| %>
       <% link_to subject, subject_path(subject) %>
     <% end %>
     <%= links.to_sentence.html_safe %>
