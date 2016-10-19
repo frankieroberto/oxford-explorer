@@ -440,7 +440,7 @@ function updateHudForItem(d,x,y) {
   if(d.size_int) {
     $("#blobviz-hud .size").html("<span>" + s.numberFormat(d.size_int) + "</span> things");
   } else {
-    $("#blobviz-hud .size").text('No things we know of');
+    $("#blobviz-hud .size").text('Collection size not known');
   }
 
   if(dr_int > 0) {
