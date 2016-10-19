@@ -12,7 +12,7 @@ class Thing
 
   def self.find(id)
     thing = ES_CLIENT.get index: 'dev', type: 'record', id: id
-    thing['_source']
+    self.new(thing['_source'])
   end
 
 end
