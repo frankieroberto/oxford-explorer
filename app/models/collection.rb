@@ -2,7 +2,7 @@ require 'csv'
 
 class Collection
 
-  attr_accessor :id, :institution_id, :name, :size_int, :types_of_things, :subjects, :places,
+  attr_accessor :id, :institution_id, :name, :size_int, :subjects, :places,
     :people, :dates, :digitized_metadata_size_int, :digitized_size_int, :department, :academic_departments, :divisions
 
   def initialize(metadata)
@@ -14,7 +14,6 @@ class Collection
     @size_int = metadata['size'].to_s.gsub(',', '').to_i
     @digitized_metadata_size_int = metadata['published_digital_records'].to_s.gsub(',', '').to_i
     @digitized_size_int = metadata['how_many_digitized_versions'].to_s.gsub(',', '').to_i
-    @types_of_things = metadata['type_of_things'].to_s.split(';').collect(&:strip).reject(&:blank?).collect(&:downcase)
     @subjects = metadata['subjects'].to_s.split(/[\,;]/).collect(&:strip).reject(&:blank?).collect(&:downcase)
     @academic_departments = metadata['academic_department'].to_s.split(/[\,;]/).collect(&:strip).reject(&:blank?)
     @divisions = metadata['division'].to_s.split(/[\,;]/).collect(&:strip).reject(&:blank?)
@@ -25,6 +24,22 @@ class Collection
 
   def [](test)
     @metadata[test]
+  end
+
+  def types_of_things
+    @types_of_things ||= begin
+
+      type_of_thing_names = @metadata['type_of_things'].to_s
+        .split(';').collect(&:strip).reject(&:blank?)
+        .collect(&:downcase)
+        .collect {|type_of_thing_name| TypeOfThing.find(type_of_thing_name) }
+
+    end
+  end
+
+  def type_of_thing_names
+    "test"
+    #type_of_things.collect(&:name)
   end
 
   def catalog_url
@@ -45,7 +60,6 @@ class Collection
       end
     end
   end
-
 
   def self.find(id)
     all.detect {|c| c.id == id }
