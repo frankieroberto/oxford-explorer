@@ -147,7 +147,6 @@ function setup() {
 
     groups.append('path')
           .attr('d', function(d,i) {
-            console.log(piePathStringForDigitisedObjects(d,i));
             return piePathStringForDigitisedObjects(d,i);
           })
           .attr('transform', function(d,i) {
@@ -183,11 +182,20 @@ function updateOptionsForKey(key) {
     });
 
     keys = _.flatten(keys);
-    keys = _.uniq(keys).sort(function(a,b) {
-      var x =  a.toLowerCase();
-      var y = b.toLowerCase();
+    keys = _.uniq(keys).filter(function(x) {
+      if(x) {
+        return x;
+      }
+    }).sort(function(a,b) {
+      console.log(a,b);
+      var x = a || "";
+      var y = b || "";
+      x = x.toLowerCase();
+      y = y.toLowerCase();
       return x > y ? 1 : (x < y ? -1 : 0);
     });
+
+    console.log(keys);
 
     $("#value option").remove();
 
