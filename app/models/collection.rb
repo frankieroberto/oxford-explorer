@@ -16,7 +16,7 @@ class Collection
     @digitized_size_int = metadata['how_many_digitized_versions'].to_s.gsub(',', '').to_i
     @types_of_things = metadata['type_of_things'].to_s.split(';').collect(&:strip).reject(&:blank?).collect(&:downcase)
     @subjects = metadata['subjects'].to_s.split(/[\,;]/).collect(&:strip).reject(&:blank?).collect(&:downcase)
-    @academic_departments = metadata['academic department'].to_s.split(/[\,;]/).collect(&:strip).reject(&:blank?)
+    @academic_departments = metadata['academic_department'].to_s.split(/[\,;]/).collect(&:strip).reject(&:blank?)
     @divisions = metadata['division'].to_s.split(/[\,;]/).collect(&:strip).reject(&:blank?)
     @places = metadata['places'].to_s.split(/[,;]/).collect(&:strip).reject(&:blank?)
     @people = metadata['names'].to_s.split(/[,;]/).collect(&:strip).reject(&:blank?)
