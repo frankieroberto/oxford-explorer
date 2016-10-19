@@ -10,7 +10,7 @@ class TypeOfThing
   end
 
   def self.find(name)
-    all.detect {|type| type.name == name }
+    all.detect {|type| type.name == name } || new(name, nil)
   end
 
   def self.all
