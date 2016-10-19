@@ -15,7 +15,7 @@
 <div class="row">
 	<div class="one column inst-<%= @thing["gfs_institution_id"].downcase %>-bg center">
 		<a href="LINK HERE"><%= @thing["gfs_institution_id"] %></a></div>
-		
+
 	<div class="eleven columns">
 		<h1 class="buffer"><%= @thing.title %></h1>
 	</div>
@@ -38,7 +38,7 @@
 		<!-- if item type -->
 		<h6>Type of thing</h6>
 		<a href="doesn't work yet"><%= @thing["gfs_item_type"] %></a>
-				
+
 		<!-- if item type -->
 		<h6>Subjects</h6>
     <% links = @thing['gfs_subject'].collect do |subject| %>
