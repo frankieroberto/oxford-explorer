@@ -10,6 +10,10 @@ class Thing
     @id = metadata['gfs_id']
   end
 
+  def [](key)
+    @metadata[key]
+  end
+
   def self.find(id)
     thing = ES_CLIENT.get index: 'dev', type: 'record', id: id
     self.new(thing['_source'])
