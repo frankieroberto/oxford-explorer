@@ -30,7 +30,7 @@ class Collection
   def catalog_url
     @catalog_url ||= begin
 
-      catalog_url = @metadata['catalog_url'].strip
+      catalog_url = @metadata['catalog_url'].to_s.strip
 
       catalog_url.blank? ? nil : catalog_url
     end
