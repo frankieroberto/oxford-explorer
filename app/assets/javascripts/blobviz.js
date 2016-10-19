@@ -694,7 +694,14 @@ function updateHudForItem(d,x,y) {
   $("#blobviz-hud h1").text(d.name);
 
   if(d.size_int) {
-    $("#blobviz-hud .size").html("<span>" + s.numberFormat(d.size_int) + "</span> things");
+    var html = "<span>" + s.numberFormat(d.size_int) + "</span> ";
+    if(d.size_int == 1) {
+      html = html + "thing";
+    } else {
+      html = html + "things";
+    }
+
+    $("#blobviz-hud .size").html(html);
   } else {
     $("#blobviz-hud .size").text('Collection size not known');
   }
