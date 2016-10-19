@@ -20,7 +20,7 @@ class TypeOfThing
 
       data = CSV.read("#{Rails.root.join("db", "types_of_things.csv").to_s}", headers: true)
 
-      data[1..-1].each do |row|
+      data.each do |row|
 
         row.to_h.reject {|key, value| value.blank? }.each_pair do |key, value|
           things << self.new(value, SuperType.new(key))
