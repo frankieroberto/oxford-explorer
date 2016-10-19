@@ -94,8 +94,8 @@
     <h6>STATS</h6>
     <ul>
       <li><span class='<%=@collection.institution_id %>-em total-count'><%= number_with_delimiter(@collection.size_int) %></span> things</li>
-      <li><span class='<%= @collection.institution_id %>-em'><%= (@collection.digitized_metadata_size_int.to_f / @collection.size_int * 100).round %>%</span> have digital metadata</li>
-      <li><span class='digitised-em'><%= (@collection.digitized_size_int.to_f / @collection.size_int * 100).round %>%</span> have a digital surrogate </li>
+      <li><span class='<%= @collection.institution_id %>-em'><%= (@collection.digitized_metadata_size_int.to_f / @collection.size_int * 100).round %>%</span> have <a href="#">digital metadata</a></li>
+      <li><span class='digitised-em'><%= (@collection.digitized_size_int.to_f / @collection.size_int * 100).round %>%</span> of those have a <a href="#">digital surrogate</a> </li>
     </ul>
 
 	</div>
