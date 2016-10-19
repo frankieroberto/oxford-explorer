@@ -23,7 +23,7 @@
 
 		<p>
 			This collection mostly contains
-			<%= @collection.types_of_things.collect {|type_of_thing| link_to(type_of_thing, item_type_path(type_of_thing)) }.to_sentence(last_word_connector: ' and ').html_safe %>
+			<%= @collection.types_of_things.collect(&:name).collect {|type_of_thing| link_to(type_of_thing, item_type_path(type_of_thing)) }.to_sentence(last_word_connector: ' and ').html_safe %>
 
     <% if @collection.subjects.size > 0 %>
 
