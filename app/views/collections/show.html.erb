@@ -57,7 +57,14 @@
 	<!-- If there is no digital metadata available, show this: -->
 
 		<h6>FINDING THIS AT OXFORD</h6>
-    <p><%= h @collection['catalog_comments'] %></p>
+
+    <% if @collection.catalog_url %>
+      <p><%= link_to "Online catalogue", @collection.catalog_url %></p>
+    <% end %>
+
+    <% if @collection['catalog_comments'] %>
+      <p><%= h @collection['catalog_comments'] %></p>
+    <% end %>
 	</div>
 
 

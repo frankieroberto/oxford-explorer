@@ -27,17 +27,25 @@ class Collection
     @metadata[test]
   end
 
-  def self.all
-    @data ||= setup_data
-  end
+  def catalog_url
+    @catalog_url ||= begin
 
-  def self.setup_data
-    data = CSV.read("#{Rails.root.join("db", "collections.csv").to_s}", headers: true)
+      catalog_url = @metadata['catalog_url'].strip
 
-    data[2..-1].collect do |row|
-      self.new(row.to_h)
+      catalog_url.blank? ? nil : catalog_url
     end
   end
+
+  def self.all
+    @all ||= begin
+      data = CSV.read("#{Rails.root.join("db", "collections.csv").to_s}", headers: true)
+
+      data[2..-1].collect do |row|
+        self.new(row.to_h)
+      end
+    end
+  end
+
 
   def self.find(id)
     all.detect {|c| c.id == id }
