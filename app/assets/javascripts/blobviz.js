@@ -64,7 +64,7 @@ function setup() {
   });
 
 
-  d3.json('/collections/json', function(collections) {
+  d3.json('/collections/json?sort=dig_metadata_size', function(collections) {
     window.collectionSize = collections.length;
 
     window.colCount = 26;

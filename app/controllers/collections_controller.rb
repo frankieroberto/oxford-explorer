@@ -16,7 +16,11 @@ class CollectionsController < ApplicationController
 
   def json
     @collection_data = Collection.all
-    @collection_data = @collection_data.sort_by(&:institution_id)
+    if params[:sort] == 'dig_metadata_size'
+      @collection_data = @collection_data.sort_by(&:digitized_metadata_size_int).reverse
+    else
+      @collection_data = @collection_data.sort_by(&:institution_id)
+    end
     render json: @collection_data.collect { |collection|
       {
         id: collection.id,
