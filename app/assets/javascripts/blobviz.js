@@ -708,7 +708,11 @@ function updateHudForItem(d,x,y) {
 
   if(dr_int > 0) {
     var percentage = Math.round(dr_int / d.size_int * 100);
-    $("#blobviz-hud .dig_size").html("<span>" + s.numberFormat(percentage) + "%</span> have digital metadata");
+    if(percentage != Infinity) {
+      $("#blobviz-hud .dig_size").html("<span>" + s.numberFormat(percentage) + "%</span> have digital metadata");
+    } else {
+      $("#blobviz-hud .dig_size").html("");
+    }
   } else {
     $("#blobviz-hud .dig_size").text('No digital metadata');
   }
