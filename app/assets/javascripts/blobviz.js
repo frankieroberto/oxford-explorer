@@ -177,47 +177,254 @@ function setup() {
 
 function updateOptionsForKey(key) {
   $.get("/collections/json", function(d) {
-    var keys = _.map(d, function(col) {
-      return col[key];
-    });
+    if(key == "types_of_things") {
+      updateOptionsForTypesOfThings(d);
+    } else {
+      var keys = _.map(d, function(col) {
+        return col[key];
+      });
 
-    keys = _.flatten(keys);
-    keys = _.uniq(keys).filter(function(x) {
-      if(x) {
-        return x;
-      }
-    }).sort(function(a,b) {
-      console.log(a,b);
-      var x = a || "";
-      var y = b || "";
-      x = x.toLowerCase();
-      y = y.toLowerCase();
-      return x > y ? 1 : (x < y ? -1 : 0);
-    });
+      keys = _.flatten(keys);
+      keys = _.uniq(keys).filter(function(x) {
+        if(x) {
+          return x;
+        }
+      }).sort(function(a,b) {
+        var x = a || "";
+        var y = b || "";
+        x = x.toLowerCase();
+        y = y.toLowerCase();
+        return x > y ? 1 : (x < y ? -1 : 0);
+      });
 
-    console.log(keys);
+      console.log(keys);
 
-    $("#value option").remove();
+      $("#value option").remove();
 
-    $('#value').append($('<option>', {
-      value: "",
-      text: " - ",
-    }));
-
-    var valueSelector = $('#value');
-
-    _.each(keys, function(typ) {
-      valueSelector.append($('<option>', {
-        value: typ,
-        text: typ,
+      $('#value').append($('<option>', {
+        value: "",
+        text: " - ",
       }));
-    });
+
+      var valueSelector = $('#value');
+
+      _.each(keys, function(typ) {
+        valueSelector.append($('<option>', {
+          value: typ,
+          text: typ,
+        }));
+      });
+    }
   });
 }
 
+function updateOptionsForTypesOfThings(data) {
+  var taxonomy = [["text", ["bills",
+    "books",
+    "calendars",
+    "card indexes",
+    "carpet analysis sheets",
+    "cash-books",
+    "catalogues",
+    "codices",
+    "correspondence",
+    "diaries",
+    "dissertations",
+    "documents",
+    "ephemera",
+    "field notes",
+    "genizah fragments",
+    "handlists",
+    "incunabula",
+    "inscriptions",
+    "insurance policies",
+    "inventories",
+    "journals",
+    "lecture notes",
+    "lectures",
+    "manuscripts",
+    "microfilm",
+    "miscellany",
+    "musical scores",
+    "musical transcriptions",
+    "newspaper cuttings",
+    "notebooks",
+    "notes",
+    "official publications",
+    "pamphlets",
+    "papers",
+    "papyri",
+    "personal papers",
+    "playbills",
+    "poems",
+    "printed broadside ballads",
+    "printed ephemera",
+    "printed music",
+    "printed papers",
+    "published materials",
+    "receipts",
+    "registers",
+    "reports",
+    "research notes",
+    "research publications",
+    "rubbings",
+    "scrapbooks",
+    "serials",
+    "telegrams",
+    "theses",
+    "tradecards",
+    "typescripts",
+    "unpublished writings",
+    "wine labels",
+    "working papers"]],
+    ["images",["advertisements",
+      "acetate/nitrate negatives",
+      "albums",
+      "blueprints",
+      "cartoons",
+      "contact prints",
+      "drawings",
+      "etchings",
+      "film",
+      "glass plate negatives",
+      "lantern slides",
+      "miniatures",
+      "negatives",
+      "paintings",
+      "photograph albums",
+      "photographs",
+      "portraits",
+      "posters",
+      "prints",
+      "rubbings",
+      "scrapbooks",
+      "sketchbooks",
+      "slides",
+      "stereoscopic photographs",
+      "tradecards",
+      "visual materials",
+      "watercolors",
+      "wine labels",
+      "woodcuts",
+      "xylographs",]],
+      ["sound & moving images",["audio & video",
+        "films",
+        "musical scores",
+        "printed music",
+        "songs",
+        "sound recordings",]],
+        ["objects",["apparatus",
+          "armillary sphere",
+          "astrolabes",
+          "autochrome filter",
+          "board games",
+          "bronzes",
+          "busts",
+          "cabinets",
+          "cameras",
+          "casts",
+          "ceramics",
+          "clocks",
+          "coins",
+          "crosses",
+          "dials",
+          "electrotypes",
+          "enamels",
+          "fans",
+          "finger rings",
+          "frames",
+          "furniture",
+          "gems",
+          "glass",
+          "gold boxes",
+          "instruments",
+          "ivories",
+          "jewellery",
+          "keys",
+          "materia medica cabinets",
+          "mathematical apparatus",
+          "medals",
+          "microscopes",
+          "miniatures",
+          "netsuke",
+          "objects",
+          "orreries",
+          "personal items",
+          "plaquettes",
+          "plaster casts",
+          "radios",
+          "rings",
+          "scrapbooks",
+          "sculpture",
+          "seals",
+          "silver",
+          "speedometers",
+          "tablets",
+          "telegraph equipment",
+          "telescopes",
+          "terracottas",
+          "terrestrial globes",
+          "textiles",
+          "tiles",
+          "timepieces",
+          "tokens",
+          "vases",]],
+          ["specimens",["arachnids",
+            "birds",
+            "brachiopods",
+            "corals",
+            "damselflies",
+            "diptera",
+            "dragonflies",
+            "early ammonoids",
+            "early vertebrates",
+            "embioptera",
+            "fossils",
+            "herbaria",
+            "human remains",
+            "malecites",
+            "mammals",
+            "minerals",
+            "odonata",
+            "plant specimens",
+            "plecoptera",
+            "rocks",
+            "seeds",
+            "specimens",
+            "stoneflies",
+            "strepsiptera"]],
+            ["data",["research data"]],
+            ["cartographic materials", ["atlases",
+              "cartographic materials",
+              "maps",
+              "terrestrial globes"]]
+  ]
+
+  $("#value option").remove();
+
+  $('#value').append($('<option>', {
+    value: "",
+    text: " - ",
+  }));
+
+  for(var i = 0; i < taxonomy.length; i ++) {
+    $('#value').append($('<option>', {
+      value: "super_"+taxonomy[i][0],
+      text: taxonomy[i][0].toUpperCase()
+    }));
+    for(var j = 0; j < taxonomy[i][1].length; j++) {
+      $('#value').append($('<option>', {
+        value: taxonomy[i][1][j],
+        html: "&nbsp;&nbsp;&nbsp;" + taxonomy[i][1][j],
+      }));
+    }
+  }
+}
+
+
 function tidyGroups(sortDir) {
   var sortDir = (typeof sortDir !== 'undefined') ?  sortDir : 'desc';
-  
+
   d3.selectAll('g').sort(function(a,b) {
     if(sortDir == 'desc') {
       return d3.descending(a.size_int, b.size_int);
@@ -539,7 +746,10 @@ function handleValueChanges() {
       window.isFiltered = true;
       d3.selectAll("g").each(function(d, i) {
         var match = false;
-        if(d[key]) {
+        if(val.match('super_')) {
+          var newVal = val.replace("super_", "");
+          match = d["super_" + key].includes(newVal);
+        } else if(d[key]) {
           match = d[key].includes(val);
         }
 
