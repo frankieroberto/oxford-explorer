@@ -64,7 +64,7 @@ function setup() {
   });
 
 
-  d3.json('/collections/json?sort=dig_metadata_size', function(collections) {
+  d3.json('/collections/json', function(collections) {
     window.collectionSize = collections.length;
 
     window.colCount = 26;
@@ -147,6 +147,7 @@ function setup() {
 
     groups.append('path')
           .attr('d', function(d,i) {
+            console.log(piePathStringForDigitisedObjects(d,i));
             return piePathStringForDigitisedObjects(d,i);
           })
           .attr('transform', function(d,i) {
@@ -220,12 +221,10 @@ function tidyGroups(sortDir) {
 
 
 function describeSlice(x, y, radius, startAngle, endAngle, arcOnly){
-  if(endAngle >= 360) {
-    endAngle = 360;
-  }
   var end = polarToCartesian(x, y, radius, endAngle);
 
   var largeArcFlag = endAngle - startAngle <= 180 ? "0" : "1";
+
 
   if(arcOnly) {
     var d = [
@@ -239,7 +238,7 @@ function describeSlice(x, y, radius, startAngle, endAngle, arcOnly){
       "A", radius, radius, 0, largeArcFlag, 1, end.x, end.y, "z"
     ].join(" ");
   }
-
+  
   return d;       
 }
 

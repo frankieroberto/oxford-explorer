@@ -28,6 +28,7 @@ class CollectionsController < ApplicationController
         department: collection.department,
         size_int: collection.size_int,
         digitized_metadata_size_int: collection.digitized_metadata_size_int,
+        digitized_size_int: collection.digitized_size_int,
         institution_id: collection.institution_id,
         subjects: collection.subjects,
         divisions: collection.divisions,
