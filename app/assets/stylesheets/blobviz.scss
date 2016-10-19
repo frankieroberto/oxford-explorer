@@ -61,6 +61,12 @@
     path {
       opacity: 1;
     }
+
+    path.dig_objects {
+      fill: none;
+      stroke-width: 1px;
+      stroke: $base3;
+    }
   }
 }
 

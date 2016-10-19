@@ -101,7 +101,7 @@ function setup() {
               }
             })
             .attr("style", function(d,i) {
-              if(d.size_int == d.digitized_metadata_size_int) {
+              if(d.size_int <= d.digitized_metadata_size_int) {
                 return "opacity: 1";
               }
             })
@@ -142,11 +142,23 @@ function setup() {
             .attr('class', function(d) {
               return d.institution_id;
             })
+  // now draw a path to indicate how many items are digitised. it should be
+            // white.
+
+    groups.append('path')
+          .attr('d', function(d,i) {
+            return piePathStringForDigitisedObjects(d,i);
+          })
+          .attr('transform', function(d,i) {
+            var xy = xyForItemInCount(i,window.collectionSize, d);
+            return 'rotate(-90,'+xy[0]+','+xy[1]+')';
+          })
+          .attr('class', 'dig_objects');
 
 
     groups.append('path')
           .attr('d', function(d,i) {
-            return piePathStringForItem(d,i);
+            return piePathStringForDigitisedMetadata(d,i);
           })
           .attr('transform', function(d,i) {
             var xy = xyForItemInCount(i,window.collectionSize, d);
@@ -207,19 +219,26 @@ function tidyGroups(sortDir) {
 }
 
 
-function describeSlice(x, y, radius, startAngle, endAngle){
-  if(endAngle > 360) {
+function describeSlice(x, y, radius, startAngle, endAngle, arcOnly){
+  if(endAngle >= 360) {
     endAngle = 360;
   }
   var end = polarToCartesian(x, y, radius, endAngle);
 
   var largeArcFlag = endAngle - startAngle <= 180 ? "0" : "1";
 
-  var d = [
-    "M", x,y ,
-    "L", x+radius,y ,
-    "A", radius, radius, 0, largeArcFlag, 1, end.x, end.y, "z"
-  ].join(" ");
+  if(arcOnly) {
+    var d = [
+      "M", x+radius,y ,
+      "A", radius, radius, 0, largeArcFlag, 1, end.x, end.y
+    ].join(" ");
+  } else {
+    var d = [
+      "M", x,y ,
+      "L", x+radius,y ,
+      "A", radius, radius, 0, largeArcFlag, 1, end.x, end.y, "z"
+    ].join(" ");
+  }
 
   return d;       
 }
@@ -233,7 +252,7 @@ function polarToCartesian(centerX, centerY, radius, angleInDegrees) {
   };
 }
 
-function piePathStringForItem(d,i) {
+function piePathStringForDigitisedMetadata(d,i) {
   if(!(d.size_int && d.digitized_metadata_size_int)) {
     return;
   }
@@ -245,8 +264,28 @@ function piePathStringForItem(d,i) {
 
   var theta = ratio * 360;
 
-  return describeSlice(originX, originY, radius, 0, theta);
+  if(theta > 360) {
+    theta = 360;
+  }
+
+  return describeSlice(originX, originY, radius, 0, theta, false);
 }
+
+function piePathStringForDigitisedObjects(d,i) {
+  if(!(d.size_int && d.digitized_size_int)) {
+    return;
+  }
+
+  var radius =  window.defaultRadius - strokeWidthForItem(d) + 1;
+  var originX =  xyForItemInCount(i,window.collectionSize, d)[0];
+  var originY =  xyForItemInCount(i,window.collectionSize, d)[1];
+  var ratio = d.digitized_size_int / d.size_int;
+
+  var theta = ratio * 360;
+
+  return describeSlice(originX, originY, radius, 0, theta, true);
+}
+
 
 function sweepFlagForAngle(radians) {
   if (radians < Math.PI) {
@@ -338,7 +377,6 @@ function handleGridMouseMove(d,event) {
       if(xBetween && yBetween) {
         pointerCursor();
 
-
         noGroups = false;
         window.currentXY= [cx,cy];
 
@@ -374,7 +412,7 @@ function handleGridMouseMove(d,event) {
     }
     if(noGroups) {
       defaultCursor();
-      console.log("No groups under cursor");
+      //console.log("No groups under cursor");
       hideHud();
       window.underCursor = null;
     }
@@ -390,7 +428,7 @@ function handleGridMouseMove(d,event) {
 
 function growElement(el) {
   var group = $(el).parents("g")[0];
-  var path = $(el).siblings("path")[0];
+  var paths = $(el).siblings("path");
   var scale = $(el).data().radiusScale;
 
   var cx = $(el).attr('cx');
@@ -401,19 +439,23 @@ function growElement(el) {
   var translatestr=tx+','+ty;
 
   d3.select(el).transition().attr('transform','translate('+translatestr+') scale('+saclestr+')')
-  d3.select(path).transition().attr('transform','rotate(-90,'+cx+','+cy+') translate('+translatestr+') scale('+saclestr+')')
+  for(var i = 0; i < paths.length; i ++) {
+    d3.select(paths[i]).transition().attr('transform','rotate(-90,'+cx+','+cy+') translate('+translatestr+') scale('+saclestr+')')
+  }
 }
 
 function shrinkElement(el) {
   d3.select(el).transition().attr('transform', 'scale(1)');
 
   var group = $(el).parents("g")[0];
-  var path = $(el).siblings("path")[0];
+  var paths = $(el).siblings("path");
   var cx = $(el).attr('cx');
   var cy = $(el).attr('cy');
   var scale = 1;
   d3.select(group).transition().attr('transform', "scale("+scale+")");
-  d3.select(path).transition().attr('transform', 'rotate(-90,'+cx+','+cy+')');
+  for(var i = 0; i < paths.length; i ++) {
+    d3.select(paths[i]).transition().attr('transform', 'rotate(-90,'+cx+','+cy+')');
+  }
 
 }
 
