@@ -30,6 +30,11 @@
       fill: $inst_bod;
     }
   }
+  &.HRB {
+    circle, path.slice {
+      fill: $inst_hrb;
+    }
+  }
   &.MHS {
     circle, path.slice {
       fill: $inst_mhs;
@@ -66,6 +71,9 @@ span {
   }
   &.PRM-em {
     color: $inst_prm;
+  }
+  &.HRB-em {
+    color: $inst_hrb;
   }
   &.total-count {
     opacity: 0.8;
