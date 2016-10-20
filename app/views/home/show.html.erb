@@ -70,7 +70,7 @@
   </div>
     <div class="four columns key">
         
-		<h6>KEY</h6>
+		<h6 style="margin-bottom: 10px;">Each institution has a colour...</h6>
 		<span class="inst-ash-bg"><a href="/institutions/ASH">Ashmolean Museum</a></span>
 		<span class="inst-bod-bg"><a href="/institutions/BOD">Bodleian Libraries</a></span>
 		<span class="inst-mhs-bg"><a href="/institutions/MHS">Museum of the History of Science</a></span>
@@ -79,7 +79,7 @@
 		<span class="inst-hrb-bg"><a href="/institutions/HRB">Oxford University Herbaria</a></span>
 
 	<div class="legend">
-        <h6 style="margin-bottom: 10px;margin-top:10px;">LEGEND</h6>
+        <h6 style="margin-bottom: 10px;margin-top:10px;">And each collection is a shape...</h6>
     <!-- please excuse the hacky mess -->
     	<div><div class="legend-pie-off"></div> A collection</div>
 		<div><div class="legend-pie-part"></div> Some digital metadata records</div>
@@ -114,22 +114,26 @@
 
 <div id="blobviz"></div>
 
+<br clear="all" />
+<br clear="all" />
+<br clear="all" />
+
 <h5>What am I looking at?</h5>
 
 <div class="row">
-	
 	<div class="offset-by-one three columns right">
 		<p style="margin-top: 20px; margin-bottom: 0;">Each collection is represented as a circle or a square. A circle means we know how big it is, and a square means we don't.</p>
 		<h6 style="margin-top: 0" title="instructions about the graphic">&rarr;</h6>
 	</div>
-	<div class="offset-by-one three columns center">		
-	
-	<div class="pie"></div>
-		
+	<div class="offset-by-one three columns center">			
+		<div class="pie"></div>	
 	</div>
 	<div class="three columns">
 		<h6>&larr;</h6>
 		<p>If we know how many things in the collection have a digital metadata record, we draw proportion as a piece of pie.</p>
+	</div>
+
+</div>
 
 <div id="blobviz-hud">
   <div class="collection"></div>
@@ -138,3 +142,5 @@
   <div class='size'></div>
   <div class='dig_size'></div>
 </div>
+
+
