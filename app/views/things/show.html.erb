@@ -18,21 +18,22 @@
 
 	<div class="eleven columns">
 		<h1 class="buffer"><%= @thing.title %></h1>
+
+		<!-- if people -->
+		<h5>By <a href="#" style="color:red;"><%= @thing["gfs_author"] %></a></h5>
+
 	</div>
 </div>
 
 <div class="row">
 	<div class="offset-by-one seven columns blurb">
-
-				<!-- if people -->
-		<h5>By <a href="#" style="color:red;"><%= @thing["gfs_author"] %></a></h5>
 		
     <% if @thing.description %>
 		  <p><%= @thing.description %></p>
     <% end %>
 
 	</div>
-	<div class="four columns stats">
+	<div class="four columns stats" style="margin-top:-24px">
 		
 		<!-- if pubyear clean -->
 		<h6>Published in</h6>
