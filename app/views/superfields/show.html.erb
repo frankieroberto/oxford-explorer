@@ -60,8 +60,8 @@
 
     <% if @things_by_authors.size > 0 %>
 
+      <h6>Related people</h6>
       <p>
-        Some 00 people are connected to "<%= @id %>", like
         <%= @things_by_authors.collect do |things_by_authors| %>
           <% link_to(things_by_authors.author, person_path(things_by_authors.author)) %>
         <% end.to_sentence.html_safe %>
@@ -122,10 +122,10 @@
 	<div class="three columns">
 		<h6>STATS</h6>
 		<ul>
-			<li>00% of things have digital metadata</li>
+			<li><span style="color:red;">00</span>% of things have digital metadata</li>
 			<!-- There are no digital metadata records, yet -->
 
-			<li>00% have a digitised version</li>
+			<li><span style="color:red;">00</span>% have a digitised version</li>
 			<!-- Nothing has a digitised version, yet -->
 
 		</ul>

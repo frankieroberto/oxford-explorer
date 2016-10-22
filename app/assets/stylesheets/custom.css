@@ -32,7 +32,8 @@ ul {
 	list-style-type: none;
 }
 a {
-  color: #fdf6e3; 
+  color: #eee8d5; 
+  text-decoration: none;
 }
 a:hover {
   color: #268bd2; 

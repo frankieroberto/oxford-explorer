@@ -34,7 +34,7 @@
 	<div class="eight columns blurb">
 
     <p>
-      There are about <%= number_with_delimiter(@things_count) %> <%= @id %> across Oxford.
+      There are about <%= number_with_delimiter(@things_count) %> things by <%= @id %> across Oxford.
 
       <% if @things_by_subjects.size > 0 %>
         They relate to
@@ -52,8 +52,8 @@
 
     <% if @things_by_authors.size > 1 %>
 
+      <h6>Related people</h6>
       <p>
-        Some 00 people are connected to them, like
         <%= @things_by_authors[1..-1].collect do |things_by_authors| %>
           <% link_to(things_by_authors.author, person_path(things_by_authors.author)) %>
         <% end.to_sentence.html_safe %>
@@ -114,10 +114,10 @@
 		<h5>Possible Dupes *</h5>
 
 		<ol>
-			<li><a href="/people/show.html">Persona Name</a></li>
-			<li><a href="/people/show.html">Name, P.</a></li>
-			<li><a href="/people/show.html">Person Name.</a></li>
-			<li><a href="/people/show.html">NAME, Person (1894-1956)</a></li>
+			<li><a href="/people/show.html" style="color:red;">Persona Name</a></li>
+			<li><a href="/people/show.html" style="color:red;">Name, P.</a></li>
+			<li><a href="/people/show.html" style="color:red;">Person Name.</a></li>
+			<li><a href="/people/show.html" style="color:red;">NAME, Person (1894-1956)</a></li>
 		</ol>
 
 	</div>

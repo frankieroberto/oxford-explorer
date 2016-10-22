@@ -1,8 +1,7 @@
 <% content_for :title, @thing.title + " - " %>
 
 <% content_for :structural_nav do %>
-  &rarr; ?
-  &rarr;
+ 
 <% end %>
 
 <div class="mapette-container row">
@@ -33,7 +32,12 @@
     <% end %>
 
 	</div>
-	<div class="four columns stats" style="margin-top:-24px">
+	<div class="offset-by-one three columns stats" style="margin-top:-24px">
+	
+	<ul style="list-style: circle;">
+		<li style="color:red">Has <a href="#">digital metadata</a>!</li>
+		<li style="color:red">No digitised version :-(</li>
+	</ul>
 		
 		<!-- if pubyear clean -->
 		<h6>Published in</h6>
