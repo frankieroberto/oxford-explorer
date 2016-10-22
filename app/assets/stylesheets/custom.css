@@ -55,6 +55,20 @@ select {
 .key span { 
 	padding: 3px;
 }
+.toolbar {
+	border-top: 2px solid #002b36;
+	border-bottom: 2px solid #002b36;
+	padding: 10px 0;
+	margin-top: 20px;
+	margin-bottom: 20px;	
+}
+
+
+.toolbar form {
+	margin-bottom:0;
+	padding-bottom:0;
+}
+
 
 /* collection */
 .mapette-container {

@@ -33,15 +33,21 @@
 	<% end %>
 
 			  dated about <%= @collection.dates %>.
-			  Materials are either from or about <%= @collection.places.collect {|places| link_to(places, "#") }.to_sentence(last_word_connector: ' and ').html_safe %>.
+			  <span style="color:red">Materials are either from or about <%= @collection.places.collect {|places| link_to(places, "#") }.to_sentence(last_word_connector: ' and ').html_safe %>.</span>
 
-			&nbsp; <small>[ <a href="#" style="color:red;">Expand</a> ]</small>
+  			<br />
+			<small>[ <a href="#" style="color:red;">Expand</a> ]</small>
+			
 		</p>
 
     <% if @collection.people.size > 0 %>
+  		<h6>Related people</h6>
   		<p>
-        <%= @collection.people.collect {|person| link_to(person, "#") }.to_sentence(last_word_connector: ' and ').html_safe %> figure quite prominently. There are 0,000 other characters.
-  			&nbsp; <small>[ <a href="#" style="color:red;">Reveal</a> ]</small>
+        <%= @collection.people.collect {|person| link_to(person, person_path(person)) }.to_sentence(last_word_connector: ' and ').html_safe %>
+        
+  			<br />
+  			<small>[ <a href="#" style="color:red;">Reveal</a> ]</small>
+  		
   		</p>
     <% end %>
 
@@ -97,7 +103,7 @@
 
       <% if @collection.size_int && @collection.size_int > 0 %>
         <li><span class='<%= @collection.institution_id %>-em'><%= (@collection.digitized_metadata_size_int.to_f / @collection.size_int * 100).round %>%</span> have <a href="#" style="color:red;">digital metadata</a></li>
-        <li><span class='digitised-em'><%= (@collection.digitized_size_int.to_f / @collection.size_int * 100).round %>%</span> of those have a <a href="#" style="color:red;">digital surrogate</a> </li>
+        <li><span class='digitised-em'><%= (@collection.digitized_size_int.to_f / @collection.size_int * 100).round %>%</span> of those have a <a href="#" style="color:red;">digitised version</a> </li>
 
       <% else %>
 
