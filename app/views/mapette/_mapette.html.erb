@@ -1,0 +1,16 @@
+<svg id="mapette" width="265" height="165">
+  <% @collection_data = Collection.all.sort_by(&:institution_id).each_with_index do |collection, i| %>
+    <% if collection.size_int > 0 %>
+      <circle cx="<%= xy_for_index(i)[:x] %>" 
+              cy="<%= xy_for_index(i)[:y] %>" 
+              r="3" 
+              class='<%= collection.institution_id %><%= " selected" if collection == selected_collection %>' />
+    <% else %>
+      <rect x="<%= xy_for_index(i)[:x] - radius_inside_square(3) %>" 
+            y="<%= xy_for_index(i)[:y] - radius_inside_square(3) %>" 
+            width="<%= 2*radius_inside_square(3) %>"
+            height="<%= 2*radius_inside_square(3) %>"
+            class='<%= collection.institution_id %><%= " selected" if collection == selected_collection %>' />
+    <% end %>
+  <% end %>
+</svg>

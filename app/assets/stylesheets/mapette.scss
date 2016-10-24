@@ -1,0 +1,51 @@
+@import "colour_variables";
+svg#mapette {
+  circle, rect {
+    opacity: 0.3;
+    &.selected {
+      opacity: 1;
+    }
+
+    &.ASH {
+      background: $inst_ash;
+      color: $inst_ash;
+      fill: $inst_ash;
+    }
+
+    &.BOD {
+      background: $inst_bod;
+      color: $inst_bod;
+      fill: $inst_bod;
+    }
+
+    &.BODSP{
+      background: $inst_bod_sp;
+      color: $inst_bod_sp;
+      fill: $inst_bod_sp;
+    }
+
+    &.HRB {
+      background-color: $inst_hrb;
+      color: $inst_hrb;
+      fill: $inst_hrb;
+    }
+
+    &.MHS {
+      background-color: $inst_mhs;
+      color: $inst_mhs;
+      fill: $inst_mhs;
+    }
+
+    &.MNH {
+      background-color: $inst_mnh;
+      color: $inst_mnh;
+      fill: $inst_mnh;
+    }
+
+    &.PRM {
+      background-color: $inst_prm;
+      color: $inst_prm;
+      fill: $inst_prm;
+    }
+  }
+}

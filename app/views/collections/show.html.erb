@@ -8,7 +8,10 @@
 
 <div class="mapette-container row">
 	<div class="twelve columns mapette">
-		mapette for collection (one highlighted location)
+    <%= render partial: 'mapette/mapette',
+      locals: {selected_collection: @collection }
+  
+    %>
 	</div>
 </div>
 
