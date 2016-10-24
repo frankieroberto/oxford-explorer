@@ -34,6 +34,22 @@ module ApplicationHelper
     lookup[superfield]
   end
 
+  def gfs_field_to_superfield(gfs_field)
+    lookup = {"gfs_subject" => "subjects",
+     "gfs_subject.raw" => "subjects",
+     "gfs_item_type" => "types_of_things",
+     "gfs_item_type.raw" => "types_of_things"}
+
+    lookup[gfs_field]
+  end
+
+
+  def superfield_path_to_superfield(superfield_path)
+    lookup = {"item_types" => "type_of_things",
+              "subjects" => "subjects"}
+    lookup[superfield_path]
+  end
+
   def superfield_index_path(superfield)
 
     case superfield

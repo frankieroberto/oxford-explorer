@@ -7,7 +7,10 @@
 
 <div class="mapette-container row">
 	<div class="twelve columns mapette">
-		<a href="/" title="this is fake"><%= image_tag("mapette-placeholder.png", :alt => "this is fake") %></a> (this is fake, and a bit small)
+    <%= render partial: 'mapette/mapette',
+      locals: {superfield_name: @superfield,
+               superfield_value: @id}
+    %>
 	</div>
 </div>
 
