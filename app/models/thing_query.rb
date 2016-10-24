@@ -4,8 +4,10 @@ class ThingQuery
 
   ES_CLIENT = Elasticsearch::Client.new url: ENV.fetch('ELASTICSEARCH_URL'), log: false
 
-  def initialize(query)
+  def initialize(field, query, match_type = 'search')
+    @field = field
     @query = query
+    @match_type = match_type
   end
 
   def things_count
@@ -69,14 +71,31 @@ class ThingQuery
   def result
     @result ||= begin
 
+    if @match_type == 'exact'
+      filter = {
+        term: {
+          @field => @query
+        }
+      }
+
+    else
+      filter = {
+        match: {
+          @field => {
+            query: @query,
+            operator: 'and'
+          }
+        }
+      }
+    end
+
+
     ES_CLIENT.search index: 'dev',
       size: 50,
       body: {
         query: {
           filtered: {
-            filter: {
-             term: @query
-            }
+            filter: filter
           }
         },
         aggs: {

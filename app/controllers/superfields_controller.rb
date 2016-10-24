@@ -5,7 +5,7 @@ class SuperfieldsController < ApplicationController
     @superfield = params[:superfield]
 
 
-    thing_query = ThingQuery.new({@superfield => @id})
+    thing_query = ThingQuery.new(@superfield, @id)
 
     @things_count = thing_query.things_count
     @things = thing_query.things

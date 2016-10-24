@@ -4,7 +4,7 @@ class PeopleController < ApplicationController
     @id = params[:id]
     @superfield = params[:superfield]
 
-    thing_query = ThingQuery.new({'gfs_author.raw' => @id})
+    thing_query = ThingQuery.new('gfs_author', @id)
 
     @things_count = thing_query.things_count
     @things = thing_query.things
