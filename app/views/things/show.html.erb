@@ -1,7 +1,7 @@
 <% content_for :title, @thing.title + " - " %>
 
 <% content_for :structural_nav do %>
- 
+
 <% end %>
 
 <div class="mapette-container row">
@@ -13,24 +13,30 @@
 
 <div class="row">
 	<div class="one column inst-<%= @thing["gfs_institution_id"].downcase %>-bg center">
-		<a href="LINK HERE" style="color:red"><%= @thing["gfs_institution_id"] %></a></div>
+    <%= link_to @thing["gfs_institution_id"], institution_path(@thing["gfs_institution_id"]) %></div>
 
 	<div class="eleven columns">
 		<h1 class="buffer"><%= @thing.title %></h1>
 
 		<!-- if people -->
-		<h5>By <a href="#" style="color:red;"><%= @thing["gfs_author"] %></a></h5>
-	
+    <% if @thing.authors.size > 0 %>
+
+      <h5>By
+        <%= @thing.authors.collect {|author| link_to(author, person_path(author))}.join('; ').html_safe %>
+      </h5>
+
+    <% end %>
+
 	</div>
 </div>
 
 <div class="row">
 	<div class="offset-by-one seven columns blurb">
-		
+
     <% if @thing.description %>
 		  <p><%= @thing.description %></p>
     <% end %>
-    
+
     <h6>Subjects</h6>
 		<p>
 		<% links = @thing.subjects.collect do |subject| %>
@@ -41,17 +47,17 @@
 
 	</div>
 	<div class="offset-by-one three columns stats" style="margin-top:-24px">
-	
+
 		<ul style="list-style: circle;">
 			<li style="color:red">Has <a href="#">digital metadata</a>!</li>
 			<li style="color:red">No digitised version :-(</li>
 		</ul>
-	
+
 	</div>
 </div>
 
 <div class="row" style="margin-top: 20px; margin-bottom: 60px;">
-				
+
 	<!-- if pubyear clean -->
 	<div class="offset-by-one three columns">
 		<h6>Published in</h6>
@@ -73,7 +79,7 @@
 		<%= links.to_sentence.html_safe %>
 	</div>
 
-</div>    
+</div>
 
 
 <h3>Debugging code-splat</h3>

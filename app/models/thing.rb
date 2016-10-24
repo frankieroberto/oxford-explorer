@@ -15,6 +15,15 @@ class Thing
     @metadata[key]
   end
 
+  def authors
+    return [] unless @metadata['gfs_author']
+
+    return Array(@metadata['gfs_author']) if @metadata['gfs_author'].is_a?(String)
+
+    @authors ||= @metadata['gfs_author'].compact.reject(&:blank?)
+
+  end
+
   def subjects
     return [] unless @metadata['gfs_subject']
 
@@ -27,7 +36,7 @@ class Thing
     return [] unless @metadata['gfs_item_type']
 
     return Array(TypeOfThing.find(@metadata['gfs_item_type'])) if @metadata['gfs_item_type'].is_a?(String)
-      
+
     @types_of_things ||= @metadata['gfs_item_type'].compact.reject(&:blank?).collect do |item_type|
       TypeOfThing.find(item_type)
     end
