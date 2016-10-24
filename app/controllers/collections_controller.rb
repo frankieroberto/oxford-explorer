@@ -31,7 +31,8 @@ class CollectionsController < ApplicationController
         digitized_size_int: collection.digitized_size_int,
         institution_id: collection.institution_id,
         subjects: collection.subjects,
-        divisions: collection.divisions,
+        super_academic_departments: collection.divisions,
+        academic_departments: collection.academic_departments,
         types_of_things: collection.types_of_things.collect {|c| c&.name },
         super_types_of_things: collection.types_of_things.collect {|c| c&.super_type&.name }.flatten.uniq
 
