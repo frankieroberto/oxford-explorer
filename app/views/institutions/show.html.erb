@@ -35,9 +35,40 @@
 
     <%= links %>.
 
-		&nbsp; [ <small><a href="#" style="color:red;">Show everything</a></small> ]
+    <% top_item_type_links = @institution.types_of_things[0..9].shuffle[0..4].collect do |type_of_thing| %>
+      <% link_to(type_of_thing.name, item_type_path(type_of_thing.name)) %>
+    <% end.to_sentence.html_safe %>
 
-		<p>If you wandered around in the collections -- and wouldn't that be brilliant -- you'd see things like <a href="type" style="color:red;">Type of thing</a>, <a href="type" style="color:red;">Type of thing</a>, <a href="type" style="color:red;"> and <a href="type" style="color:red;">Type of thing</a>. There are even some <a href="type" style="color:red;">Type of thing</a> and <a href="type" style="color:red;">Type of thing</a>...</p>
+    <% lesser_known_item_type_links = @institution.types_of_things.reverse[0..9].shuffle[0..2].collect do |type_of_thing| %>
+      <% link_to(type_of_thing.name, item_type_path(type_of_thing)) %>
+    <% end.to_sentence.html_safe %>
+
+
+		<p>If you wandered around in the collections -- and wouldn't that be brilliant -- you'd see things like <%= top_item_type_links %>. There are even some <%= lesser_known_item_type_links %>...</p>
+
+    <div class="js-show-details">
+      &nbsp; [ <small><span class="js-show">Show everything</span></small> ]
+
+      <div class="row js-details">
+        <div class="six columns">
+          <h4>SUBJECTS</h4>
+
+          <%= @institution.subjects.sort.collect do |subject| %>
+            <% link_to subject, subject_path(subject) %>
+          <% end.join('; ').html_safe %>
+
+        </div>
+        <div class="six columns">
+          <h4>TYPES OF THINGS</h4>
+
+          <%= @institution.types_of_things.sort_by(&:name).collect do |type_of_thing| %>
+            <% link_to type_of_thing.name, item_type_path(type_of_thing) %>
+          <% end.join('; ').html_safe %>
+
+        </div>
+      </div>
+    </div>
+
 
 		<h3><%= pluralize_with_delimiter(@institution.collections.size, 'collection') %></h3>
 

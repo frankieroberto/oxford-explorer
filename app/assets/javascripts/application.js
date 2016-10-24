@@ -15,5 +15,6 @@
 //= require d3.v4.min
 //= require underscore-min
 //= require underscore.string.min
-//= require_tree "." 
-//= stub "blobviz" 
+//= require show_details
+//= require_tree "."
+//= stub "blobviz"

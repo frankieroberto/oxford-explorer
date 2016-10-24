@@ -1,0 +1,15 @@
+
+
+.js-show-details .js-show {
+  color: #eee8d5;
+  cursor: pointer;
+}
+
+.js-show-details .js-details {
+  display: none;
+}
+
+.js-show-details .js-details.shown {
+  display: block;
+}
+

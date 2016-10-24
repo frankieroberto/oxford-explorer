@@ -36,6 +36,18 @@ class Institution
       .collect {|x| x[0] }
   end
 
+  # Return all types_of_things from collections, ordered by frequency
+  # of occurance (descending).
+  def types_of_things
+    collections
+      .collect {|c| c.types_of_things }
+      .flatten
+      .group_by(&:itself)
+      .sort_by {|x| x[1].size }
+      .reverse
+      .collect {|x| x[0] }
+  end
+
   def collections
     @collections ||= Collection.all.select {|c| c.institution_id == id }
   end
