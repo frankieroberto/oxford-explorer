@@ -70,6 +70,11 @@ select {
 	padding-bottom:0;
 }
 
+/* list page */
+
+.top-list a {
+	font-size: 1.5em;
+}
 
 /* collection */
 .mapette-container {

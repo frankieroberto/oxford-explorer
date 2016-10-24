@@ -1,6 +1,8 @@
-<h1>Top 100 <%= human_superfield_name(@superfield).downcase %></h1>
+<h1>Top <%= human_superfield_name(@superfield).downcase %></h1>
 
-<ol>
+<p>Please excuse this rather blunt list. It's coming from item-level data, from the search engine.</p>
+
+<ol class="top-list">
   <% @aggregations.each do |agg| %>
     <li>
       <% url = case @superfield
