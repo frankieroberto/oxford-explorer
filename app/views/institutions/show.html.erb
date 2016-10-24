@@ -8,7 +8,10 @@
 
 <div class="mapette-container row">
 	<div class="twelve columns mapette">
-		mapette vis
+    <%= render partial: 'mapette/mapette',
+      locals: {selected_institution: @institution.id }
+  
+    %>
 	</div>
 </div>
 

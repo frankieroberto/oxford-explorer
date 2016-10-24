@@ -7,7 +7,10 @@
 
 <div class="mapette-container row">
 	<div class="twelve columns mapette">
-		mapette for person (any highlighted locations)
+    <%= render partial: 'mapette/mapette',
+      locals: {superfield_name: @superfield,
+               superfield_value: @id}
+    %>
 	</div>
 </div>
 
