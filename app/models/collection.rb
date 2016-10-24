@@ -15,8 +15,8 @@ class Collection
     @digitized_metadata_size_int = metadata['published_digital_records'].to_s.gsub(',', '').to_i
     @digitized_size_int = metadata['how_many_digitized_versions'].to_s.gsub(',', '').to_i
     @subjects = metadata['subjects'].to_s.split(/[\,;]/).collect(&:strip).reject(&:blank?).collect(&:downcase)
-    @academic_departments = metadata['academic_department'].to_s.split(/[\,;]/).collect(&:strip).reject(&:blank?)
-    @divisions = metadata['division'].to_s.split(/[\,;]/).collect(&:strip).reject(&:blank?)
+    @academic_departments = metadata['academic_department'].to_s.split(/[\;]/).collect(&:strip).reject(&:blank?)
+    @divisions = metadata['division'].to_s.split(/[\,;]/).collect(&:strip).collect {|c| c.gsub("MPLS", "Mathematical, Physical & Life Sciences")}.reject(&:blank?)
     @places = metadata['places'].to_s.split(/[,;]/).collect(&:strip).reject(&:blank?)
     @people = metadata['names'].to_s.split(/[,;]/).collect(&:strip).reject(&:blank?)
     @dates = metadata['dates']
