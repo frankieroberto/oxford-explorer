@@ -32,11 +32,12 @@
     <% end %>
     
     <h6>Subjects</h6>
+		<p>
 		<% links = @thing.subjects.collect do |subject| %>
 		  <% link_to subject, subject_path(subject) %>
 		<% end %>
 		<%= links.to_sentence.html_safe %>
-
+		</p>
 
 	</div>
 	<div class="offset-by-one three columns stats" style="margin-top:-24px">

@@ -34,7 +34,7 @@
 	<div class="eight columns blurb">
 
     <p>
-      There are about <%= number_with_delimiter(@things_count) %> things by <%= @id %> across Oxford.
+      There are about <%= pluralize_with_delimiter(@things_count, 'thing') %> by <%= @id %> across Oxford.
 
       <% if @things_by_subjects.size > 0 %>
         They relate to
