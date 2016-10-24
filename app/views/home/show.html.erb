@@ -58,19 +58,21 @@
 
 <h1>Welcome.</h1>
 <div class="row">
-
-
-  <div class="eight columns blurb">
-    <p>This is a map to the hundreds of <a href="/collections">collections</a> held in the museums, libraries and gardens across Oxford. It's designed to illustrate how large each collection is, and mainly if there are digital metadata records available, or not.
-
-    Each shape below represents one collection, from the very large <a href="/collections/bod-main">Bodleian Libraries</a>, which looks after more than 12 million things, to the <a href="/collections/mhs-dyer">Dyer Collection</a> which contains just one.</p>
-
-    <h3>Explore Oxford's collections...</h3>
+	<div class="six columns blurb">
+    	<p>This is a map to the hundreds of <a href="/collections">collections</a> held in the museums, libraries and gardens across Oxford. Each shape below represents one collection, from the very large <a href="/collections/bod-main">Bodleian Libraries</a>, which looks after more than 12 million things, to the <a href="/collections/mhs-dyer">Dyer Collection</a> which contains just one.</p>
     
-  </div>
-    <div class="four columns key">
-        
-		<h6 class="home">Each institution has a colour...</h6>
+	</div>
+    <div class="three columns key">
+		<div class="legend">
+			<h6 class="home">Each collection is a shape:</h6>
+			<div><div class="legend-pie-off"></div> A collection</div>
+			<div><div class="legend-pie-part"></div> Some digital metadata records</div>
+			<div><div class="legend-pie-on"></div> 100% digital metadata records</div>
+			<div><div class="legend-square"></div> A collection, but we aren't sure of size</div>
+		</div>
+   </div>	
+    <div class="three columns key">
+		<h6 class="home">Institutions listed:</h6>
 		<span class="inst-ash-bg"><a href="/institutions/ASH">Ashmolean Museum</a></span>
 		<span class="inst-bod-bg"><a href="/institutions/BOD">Bodleian Libraries</a></span>
 		<span class="inst-mhs-bg"><a href="/institutions/MHS">Museum of the History of Science</a></span>
@@ -78,16 +80,10 @@
 		<span class="inst-prm-bg"><a href="/institutions/PRM">Pitt Rivers Museum</a></span>
 		<span class="inst-hrb-bg"><a href="/institutions/HRB">Oxford University Herbaria</a></span>
 
-	<div class="legend">
-        <h6 class="home" style="margin-top:10px;">And each collection is a shape...</h6>
-    <!-- please excuse the hacky mess -->
-    	<div><div class="legend-pie-off"></div> A collection</div>
-		<div><div class="legend-pie-part"></div> Some digital metadata records</div>
-    	<div><div class="legend-pie-on"></div> 100% digital metadata records</div>
-  		<div><div class="legend-square"></div> A collection, but we aren't sure of size</div>
 	</div>
-   </div>
 </div>  
+
+	    <h3>Explore Oxford's collections...</h3>
 
 <div class="row toolbar">
 	<div class="nine columns">    
@@ -106,7 +102,7 @@
 		</form>
 	</div>
 	<div class="three columns right">
-		<a href="doesn't work yet">Show collection size</a>?
+		<a href="doesn't work yet" class="pretend">Show collection size</a>?
 	</div>
 </div>
 
