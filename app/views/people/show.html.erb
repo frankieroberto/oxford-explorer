@@ -56,7 +56,7 @@
       <p>
         <%= @things_by_authors[1..-1].collect do |things_by_authors| %>
           <% link_to(things_by_authors.author, person_path(things_by_authors.author)) %>
-        <% end.to_sentence.html_safe %>
+        <% end.to_sentence(words_connector: '; ',last_word_connector: '; ').html_safe %>
       </p>
     <% end %>
 
