@@ -32,6 +32,23 @@ module ApplicationHelper
     lookup[superfield]
   end
 
+  def superfield_index_path(superfield)
+
+    case superfield
+    when 'gfs_item_type', 'gfs_item_type.raw'
+      item_types_path
+    when 'gfs_author', 'gfs_author.raw'
+      people_path
+    when 'gfs_subject', 'gfs_subject.raw'
+      subjects_path
+    when 'gfs_institution_id',
+      institutions_path
+    else
+      "#"
+    end
+
+  end
+
   def polar_to_cartesian(x, y, radius, degrees)
     radians = (degrees) * Math::PI / 180.0;
 

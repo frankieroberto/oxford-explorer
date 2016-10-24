@@ -1,7 +1,7 @@
 <% content_for :title, "#{human_superfield_name(@superfield)}: #{@id} – " %>
 
 <% content_for :structural_nav do %>
-  &rarr; <%= human_superfield_name(@superfield) %>
+  &rarr; <%= link_to human_superfield_name(@superfield), superfield_index_path(@superfield) %>
   &rarr; <%= @id %>
 <% end %>
 
