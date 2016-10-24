@@ -50,19 +50,25 @@
 
 		<h3><%= pluralize_with_delimiter(@collection.size_int, 'thing') %></h3>
 
-		<ol>
-      <% @things.each do |thing| %>
-        <li><%= link_to thing.title, thing_path(thing.id) %></li>
-      <% end %>
-		</ol>
+    <% if @things.size > 0 %>
+  		<ol>
+        <% @things.each do |thing| %>
+          <li><%= link_to thing.title, thing_path(thing.id) %></li>
+        <% end %>
+  		</ol>
+    <% else %>
 
-    <!-- If there is no digital metadata available, show this: -->
+      <p>We don’t have item level data for this collection. Sorry about that.</p>
+    <% end %>
+
+
+
+    <% if @collection['catalog_comments'] %>
 
       <h6>COMMENTS ABOUT THIS COLLECTION</h6>
 
-      <% if @collection['catalog_comments'] %>
-        <p><%= Rinku.auto_link(@collection['catalog_comments']).html_safe %></p>
-      <% end %>
+      <p><%= Rinku.auto_link(@collection['catalog_comments']).html_safe %></p>
+    <% end %>
 	</div>
 
 
@@ -91,30 +97,38 @@
 
     <h6>STATS</h6>
     <ul>
-      <li><span class='<%=@collection.institution_id %>-em total-count'><%= number_with_delimiter(@collection.size_int) %></span> things</li>
+      <li><span class='<%=@collection.institution_id %>-em total-count'><%= pluralize_with_delimiter(@collection.size_int, 'thing') %></span></li>
 
       <% if @collection.size_int && @collection.size_int > 0 %>
 
         <% if @collection.digitized_metadata_size_int == 0 %>
 
-          <li>None of these things have
+
+          <li>
+            <% if @collection.size_int == 1 %>
+              This thing has
+            <% else %>
+              None of these things have
+            <% end %>
 
             <% if @collection.catalog_url %>
-              <a href="<%= @collection.catalog_url %>">digital metadata online</a>
+              <a href="<%= @collection.catalog_url %>">metadata online</a>
             <% else %>
-              digital metadata online
+              metadata online
             <% end %>
 
           </li>
 
         <% else %>
 
-          <li><span class='<%= @collection.institution_id %>-em'><%= (@collection.digitized_metadata_size_int.to_f / @collection.size_int * 100).round %>%</span> have
+          <li>
+
+            <span class='<%= @collection.institution_id %>-em'><%= (@collection.digitized_metadata_size_int.to_f / @collection.size_int * 100).round %>%</span> have
 
             <% if @collection.catalog_url %>
               <a href="<%= @collection.catalog_url %>">metadata online</a>
             <% else %>
-              digital metadata, but we can't link to it
+              metadata online, but we can't link to it
             <% end %>
 
           </li>
