@@ -2,6 +2,9 @@
   <% @collection_data = Collection.all.sort_by(&:institution_id).each_with_index do |collection, i| %>
     <% if defined?(selected_collection) && (collection == selected_collection)
         selected = true
+    elsif defined?(selected_institution) && (selected_institution == collection.institution_id)
+      selected = true
+
        elsif defined?(superfield_name) 
          if @things_in_collections.select {|t| t.collection}.map{|t| t.collection.id }.include? collection.id
            selected = true
