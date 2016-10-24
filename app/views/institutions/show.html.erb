@@ -52,9 +52,9 @@
 	<div class="four columns">
 
 		<p>
-			<a data-flickr-embed="true"  href="<%= @institution.photo_url %>" title="The Ashmolean Museum"><img src="<%= @institution.photo_source_url %>" width="240" height="180" alt="The Ashmolean Museum"></a>
+			<a data-flickr-embed="true"  href="<%= @institution.photo_url %>" title="<%= @institution.name %>"><img src="<%= @institution.photo_source_url %>" width="240" height="180" alt="<%= @institution.name %>"></a>
 			<br />
-			<small>The Ashmolean Museum by <%= @institution.photo_credit %> (<%= @institution.photo_licence %>)</small>
+			<small><%= @institution.name %> by <%= @institution.photo_credit %> (<%= @institution.photo_licence %>)</small>
 		</p>
 		<p>The <%= @institution.name %> was founded <%= pluralize_with_delimiter(Time.now.year - @institution.founded, 'year') %> ago, in <%= @institution.founded %>. </p>
 
