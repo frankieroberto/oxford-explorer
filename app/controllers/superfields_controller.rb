@@ -5,7 +5,9 @@ class SuperfieldsController < ApplicationController
 
     @superfield = params[:superfield]
 
-    @aggregations = ThingAggregation.new("#{@superfield}.raw", 100).aggregation
+    @superfield = "#{@superfield}.raw" if ['gfs_author', 'gfs_item_type', 'gfs_subject'].include?(@superfield)
+
+    @aggregations = ThingAggregation.new(@superfield, 100).aggregation
 
   end
 

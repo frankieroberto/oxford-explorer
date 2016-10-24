@@ -23,9 +23,10 @@ module ApplicationHelper
 
   def human_superfield_name(superfield)
     lookup = {"gfs_subject" => "Subjects",
-     "gfs_subject.raw" => "Types of thing",
+     "gfs_subject.raw" => "Subjects",
      "gfs_item_type" => "Types of thing",
      "gfs_item_type.raw" => "Types of thing",
+     "gfs_institution_id" => "Institutions",
      "gfs_pubyear" => "Dates"}
 
     lookup[superfield]
@@ -42,7 +43,7 @@ module ApplicationHelper
 
   def describe_pie_slice(x,y,radius,start_angle,end_angle, close = true)
     if end_angle > 360
-      end_angle = 360 
+      end_angle = 360
     end
 
     end_point = polar_to_cartesian(x, y, radius, end_angle);

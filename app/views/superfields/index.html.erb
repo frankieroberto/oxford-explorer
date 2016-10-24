@@ -1,16 +1,18 @@
-<h1>Top 100 values for <%= @superfield %></h1>
+<h1>Top 100 <%= human_superfield_name(@superfield) %></h1>
 
 
 <ol>
   <% @aggregations.each do |agg| %>
     <li>
       <% url = case @superfield
-      when "gfs_item_type"
+      when "gfs_item_type.raw"
         item_type_path(agg['key'])
-      when 'gfs_subject'
+      when 'gfs_subject.raw'
         subject_path(agg['key'])
-      when 'gfs_author'
+      when 'gfs_author.raw'
         person_path(agg['key'])
+      when 'gfs_institution_id'
+        institution_path(agg['key'])
       else
         "#"
       end
