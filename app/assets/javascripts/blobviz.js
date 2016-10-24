@@ -727,7 +727,7 @@ function updateHudForItem(d,x,y) {
 function hideHud() {
   window.setTimeout(function() {
     $("#blobviz-hud").fadeOut();
-  }, 1000);
+  }, 500);
 }
 
 function handleKeyChanges() {
@@ -828,6 +828,17 @@ function defaultCursor() {
 
 $(document).ready(function() {
   setup();
+
+  $("body").on('mousemove', function(e) {
+    var svgTop = $("svg").offset().top;
+    if(e.pageY < (svgTop)) {
+      hideHud();
+    }
+
+    if(e.pageY > (svgTop + $("svg").height())) {
+      hideHud();
+    }
+  });
 
   handleKeyChanges();
 
