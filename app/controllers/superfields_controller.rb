@@ -31,15 +31,15 @@ class SuperfieldsController < ApplicationController
 
     additional_collections = []
 
-    if @superfield == 'gfs_subject.raw'
+    if @superfield == 'gfs_subject'
 
       additional_collections += additional_collections =  Collection.all.select {|collection| collection.subjects.include?(@id) }
 
-    elsif @superfield == 'gfs_item_type.raw'
+    elsif @superfield == 'gfs_item_type'
 
       additional_collections += Collection.all.select {|collection| collection.types_of_things.collect(&:name).include?(@id) }
 
-    elsif @superfield == 'gfs_author.raw'
+    elsif @superfield == 'gfs_author'
 
       additional_collections += Collection.all.select {|collection| collection.people.include?(@id) }
 
