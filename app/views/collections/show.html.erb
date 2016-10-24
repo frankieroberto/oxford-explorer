@@ -56,17 +56,13 @@
       <% end %>
 		</ol>
 
-	<!-- If there is no digital metadata available, show this: -->
+    <!-- If there is no digital metadata available, show this: -->
 
-		<h6>FINDING THIS AT OXFORD</h6>
+      <h6>COMMENTS ABOUT THIS COLLECTION</h6>
 
-    <% if @collection.catalog_url %>
-      <p><%= link_to "Online catalogue", @collection.catalog_url %></p>
-    <% end %>
-
-    <% if @collection['catalog_comments'] %>
-      <p><%= Rinku.auto_link(@collection['catalog_comments']).html_safe %></p>
-    <% end %>
+      <% if @collection['catalog_comments'] %>
+        <p><%= Rinku.auto_link(@collection['catalog_comments']).html_safe %></p>
+      <% end %>
 	</div>
 
 
@@ -98,8 +94,41 @@
       <li><span class='<%=@collection.institution_id %>-em total-count'><%= number_with_delimiter(@collection.size_int) %></span> things</li>
 
       <% if @collection.size_int && @collection.size_int > 0 %>
-        <li><span class='<%= @collection.institution_id %>-em'><%= (@collection.digitized_metadata_size_int.to_f / @collection.size_int * 100).round %>%</span> have <a href="#" style="color:red;">digital metadata</a></li>
-        <li><span class='digitised-em'><%= (@collection.digitized_size_int.to_f / @collection.size_int * 100).round %>%</span> of those have a <a href="#" style="color:red;">digitised version</a> </li>
+
+        <% if @collection.digitized_metadata_size_int == 0 %>
+
+          <li>None of these things have
+
+            <% if @collection.catalog_url %>
+              <a href="<%= @collection.catalog_url %>">digital metadata online</a>
+            <% else %>
+              digital metadata online
+            <% end %>
+
+          </li>
+
+        <% else %>
+
+          <li><span class='<%= @collection.institution_id %>-em'><%= (@collection.digitized_metadata_size_int.to_f / @collection.size_int * 100).round %>%</span> have
+
+            <% if @collection.catalog_url %>
+              <a href="<%= @collection.catalog_url %>">metadata online</a>
+            <% else %>
+              digital metadata, but we can't link to it
+            <% end %>
+
+          </li>
+
+        <% end %>
+
+          <li>
+            <% if @collection.digitized_size_int == 0 %>
+              None
+            <% else %>
+              <span class='digitised-em'><%= (@collection.digitized_size_int.to_f / @collection.size_int * 100).round %>%</span>
+            <% end %>
+              of those have a <a href="#" class="pretend" title="Not possible yet">digitised version</a> </li>
+
 
       <% else %>
 
@@ -108,6 +137,7 @@
       <% end %>
 
     </ul>
+
 
 	</div>
 </div>

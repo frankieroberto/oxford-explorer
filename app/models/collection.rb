@@ -51,6 +51,13 @@ class Collection
     end
   end
 
+  def catalog_comments
+    @catalog_comments ||= begin
+      catalog_comments = @metadata['catalog_comments'].to_s.strip
+      catalog_comments.blank? ? nil : catalog_comments
+    end
+  end
+
   def self.all
     @all ||= begin
       data = CSV.read("#{Rails.root.join("db", "collections.csv").to_s}", headers: true)
