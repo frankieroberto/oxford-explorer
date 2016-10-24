@@ -51,32 +51,23 @@
 			<li style="color:red">No digitised version :-(</li>
 		</ul>
 
-	</div>
-</div>
-
-<div class="row" style="margin-top: 20px; margin-bottom: 60px;">
-
 	<!-- if pubyear clean -->
-	<div class="offset-by-one three columns">
+
 		<h6>Published in</h6>
 		<%= @thing["gfs_pubyear_clean"] %>
-	</div>
 
 	<!-- if department -->
-	<div class="three columns">
 		<h6>Department</h6>
 		<%= @thing["gfs_department"] %>
-	</div>
 
 	<!-- if item type -->
-	<div class="three columns">
 		<h6>Type of thing</h6>
 		<% links = @thing.types_of_things.collect do |type_of_thing| %>
 		  <% link_to type_of_thing.name, item_type_path(type_of_thing.name) %>
 		<% end %>
 		<%= links.to_sentence.html_safe %>
-	</div>
 
+	</div>
 </div>
 
 
