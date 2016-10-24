@@ -179,6 +179,8 @@ function updateOptionsForKey(key) {
   $.get("/collections/json", function(d) {
     if(key == "types_of_things") {
       updateOptionsForTypesOfThings(d);
+    } else if(key == "academic_departments") {
+      updateOptionsForDepartments(d);
     } else {
       var keys = _.map(d, function(col) {
         return col[key];
@@ -400,6 +402,70 @@ function updateOptionsForTypesOfThings(data) {
               "terrestrial globes"]]
   ]
 
+  generateOptionsForNestedTaxonomy(taxonomy);
+}
+
+function updateOptionsForDepartments(data) {
+  var taxonomy = [["Social Sciences",
+    ["Anthropology and Museum Ethnography",
+      "Archaeology",
+      "Saïd Business School",
+      "Economics",
+      "Education",
+      "Geography and the Environment",
+      "Blavatnik School of Government",
+      "Interdisciplinary Area Studies",
+      "International Development",
+      "Law",
+      "Politics and International Relations",
+      "Social Policy and Intervention",
+      "Sociology"]],
+      ["Humanities",
+        ["Art",
+          "Classics",
+          "English Language and Literature",
+          "History",
+          "History of Art",
+          "Linguistics, Philology & Phonetics",
+          "Medieval and Modern Languages",
+          "Music",
+          "Oriental Studies",
+          "Philosophy",
+          "Theology and Religion"]],
+          ["Mathematical, Physical & Life Sciences",
+            ["Chemistry",
+              "Computer Science",
+              "Earth Sciences",
+              "Engineering Science",
+              "Materials",
+              "Mathematical Institute",
+              "Physics",
+              "Plant Sciences",
+              "Statistics",
+              "Zoology"]],
+              ["Medical Sciences",
+                ["Biochemistry",
+                  "Clinical Medicine",
+                  "Clinical Neurosciences",
+                  "Experimental Psychology",
+                  "Medicine",
+                  "Obstetrics and Gynaecology",
+                  "Oncology",
+                  "Orthopaedics, Rheumatology and Musculoskeletal Sciences",
+                  "Paediatrics",
+                  "Pathology",
+                  "Pharmacology",
+                  "Physiology, Anatomy & Genetics",
+                  "Population Health",
+                  "Primary Care Health Sciences",
+                  "Psychiatry",
+                  "Surgical Sciences"]]];
+
+                  generateOptionsForNestedTaxonomy(taxonomy);
+
+}
+
+function generateOptionsForNestedTaxonomy(taxonomy) {
   $("#value option").remove();
 
   $('#value').append($('<option>', {
@@ -760,8 +826,12 @@ function handleValueChanges() {
         if(val.match('super_')) {
           var newVal = val.replace("super_", "");
           match = d["super_" + key].includes(newVal);
+          console.log("Looking to see if super_"+key+" includes " + newVal);
         } else if(d[key]) {
           match = d[key].includes(val);
+          console.log("Looking to see if "+key+" includes " + val);
+        } else if(val == "[all]") {
+          match = true;
         }
 
         if(match) {
