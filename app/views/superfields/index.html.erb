@@ -1,5 +1,4 @@
-<h1>Top 100 <%= human_superfield_name(@superfield) %></h1>
-
+<h1>Top 100 <%= human_superfield_name(@superfield).downcase %></h1>
 
 <ol>
   <% @aggregations.each do |agg| %>

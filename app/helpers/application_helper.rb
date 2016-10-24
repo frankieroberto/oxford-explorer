@@ -27,6 +27,8 @@ module ApplicationHelper
      "gfs_item_type" => "Types of thing",
      "gfs_item_type.raw" => "Types of thing",
      "gfs_institution_id" => "Institutions",
+     "gfs_author.raw" => "People",
+     "gfs_author" => "People",
      "gfs_pubyear" => "Dates"}
 
     lookup[superfield]

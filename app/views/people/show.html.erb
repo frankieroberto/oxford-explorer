@@ -1,7 +1,7 @@
 <% content_for :title, @id %>
 
 <% content_for :structural_nav do %>
-  &rarr; People
+  &rarr; <%= link_to 'People', people_path %>
   &rarr; <%= @id %>
 <% end %>
 
