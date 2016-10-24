@@ -1,0 +1,21 @@
+<h1>Top 100 values for <%= @superfield %></h1>
+
+
+<ol>
+  <% @aggregations.each do |agg| %>
+    <li>
+      <% url = case @superfield
+      when "gfs_item_type"
+        item_type_path(agg['key'])
+      when 'gfs_subject'
+        subject_path(agg['key'])
+      when 'gfs_author'
+        person_path(agg['key'])
+      else
+        "#"
+      end
+      %>
+
+      <%= link_to agg['key'], url %> <%= pluralize_with_delimiter(agg['doc_count'], 'thing') %></li>
+  <% end %>
+</ol>

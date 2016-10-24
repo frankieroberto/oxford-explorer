@@ -13,9 +13,11 @@ Rails.application.routes.draw do
 
   resources :people, only: [:show], :constraints => {:id => /.*/}
 
-  resources :subjects, only: [:show], controller: :superfields, superfield: 'gfs_subject', :constraints => {:id => /.*/}
-  resources :item_types, only: [:show], controller: :superfields, superfield: 'gfs_item_type', :constraints => {:id => /.*/}
-  resources :years, only: [:show], controller: :superfields, superfield: 'gfs_pubyear', :constraints => {:id => /.*/}
+  resource :people, only: [:show], controller: :superfields, action: 'index', superfield: 'gfs_author'
+
+  resources :subjects, only: [:show, :index], controller: :superfields, superfield: 'gfs_subject', :constraints => {:id => /.*/}
+  resources :item_types, only: [:show, :index], controller: :superfields, superfield: 'gfs_item_type', :constraints => {:id => /.*/}
+  resources :years, only: [:show, :index], controller: :superfields, superfield: 'gfs_pubyear', :constraints => {:id => /.*/}
 
   resources :institutions, only: [:show]
 

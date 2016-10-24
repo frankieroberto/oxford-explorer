@@ -1,5 +1,15 @@
 class SuperfieldsController < ApplicationController
 
+
+  def index
+
+    @superfield = params[:superfield]
+
+    @aggregations = ThingAggregation.new("#{@superfield}.raw", 100).aggregation
+
+  end
+
+
   def show
     @id = params[:id]
     @superfield = params[:superfield]
