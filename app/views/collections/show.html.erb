@@ -32,29 +32,25 @@
 
 	<% end %>
 
-			  dated about <%= @collection.dates %>.
-			  <span style="color:red">Materials are either from or about <%= @collection.places.collect {|places| link_to(places, "#") }.to_sentence(last_word_connector: ' and ').html_safe %>.</span>
+			  dated about <a href="#" class="pretend" title="Not possible yet"><%= @collection.dates %></a>.
 
-  			<br />
-			<small>[ <a href="#" style="color:red;">Expand</a> ]</small>
-			
+        <% if @collection.places.size > 0 %>
+			  Materials are either from or about <%= @collection.places.collect {|places| link_to(places, "#", class: 'pretend', title: "Not possible yet") }.to_sentence(last_word_connector: ' and ').html_safe %>.
+        <% end %>
+
 		</p>
+
 
     <% if @collection.people.size > 0 %>
   		<h6>Related people</h6>
   		<p>
         <%= @collection.people.collect {|person| link_to(person, person_path(person)) }.to_sentence(last_word_connector: ' and ').html_safe %>
-        
-  			<br />
-  			<small>[ <a href="#" style="color:red;">Reveal</a> ]</small>
-  		
   		</p>
     <% end %>
 
 		<h3><%= pluralize_with_delimiter(@collection.size_int, 'thing') %></h3>
 
 		<ol>
-
       <% @things.each do |thing| %>
         <li><%= link_to thing.title, thing_path(thing.id) %></li>
       <% end %>
