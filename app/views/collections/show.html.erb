@@ -56,7 +56,13 @@
     <% if @things.size > 0 %>
   		<ol>
         <% @things.each do |thing| %>
-          <li><%= link_to thing.title, thing_path(thing.id) %></li>
+          <li>
+          	<%= link_to thing.title, thing_path(thing.id) %>
+        	<% thing.types_of_things.each do |type_of_thing| %>
+	        	&nbsp;&nbsp;<%= type_of_thing.name %>
+	        <% end %>
+			</li>
+
         <% end %>
   		</ol>
     <% else %>

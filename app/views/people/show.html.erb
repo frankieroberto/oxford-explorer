@@ -27,7 +27,7 @@
           <div style="float:left; width: <%= 100 * (things_by_institution.count.to_f / total.to_f) %>%;" class="inst-<%= things_by_institution.institution_id.downcase %>-bg">&nbsp;</div>
         <% end %>
       </div>
-      <small class="dark">distribution across institutions</small>
+      <small class="dark">things across institutions</small>
     <% end %>
   </div>
 
@@ -108,7 +108,12 @@
     <ol>
 
       <% @things.each do |thing| %>
-        <li><%= link_to thing.title, thing_path(thing.id), class: 'thing' %></li>
+        <li>
+        <%= link_to thing.title, thing_path(thing.id), class: 'thing' %>
+        	<% thing.types_of_things.each do |type_of_thing| %>
+	        	&nbsp;&nbsp;<%= type_of_thing.name %>
+	        <% end %>        
+        </li>
       <% end %>
     </ol>
 
