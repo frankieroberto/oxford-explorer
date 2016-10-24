@@ -20,8 +20,12 @@ class Thing
   end
 
   def types_of_things
-    @types_of_things ||= @metadata['gfs_item_type'].compact.reject(&:blank?).collect do |item_type|
-      TypeOfThing.find(item_type)
+    if @metadata['gfs_item_type'].is_a?(String)
+      Array(TypeOfThing.find(@metadata['gfs_item_type']))
+    else
+      @types_of_things ||= @metadata['gfs_item_type'].compact.reject(&:blank?).collect do |item_type|
+        TypeOfThing.find(item_type)
+      end
     end
   end
 
