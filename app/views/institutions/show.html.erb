@@ -43,7 +43,7 @@
     <% end.to_sentence.html_safe %>
 
     <% lesser_known_item_type_links = @institution.types_of_things.reverse[0..9].shuffle[0..2].collect do |type_of_thing| %>
-      <% link_to(type_of_thing.name, item_type_path(type_of_thing)) %>
+      <% link_to(type_of_thing.name, item_type_path(type_of_thing.name)) %>
     <% end.to_sentence.html_safe %>
 
 
