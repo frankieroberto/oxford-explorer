@@ -182,7 +182,7 @@ function setup() {
             return d.institution_id;
           })
 
-          window.svgElementOffset = $("#blobviz svg").offset(); 
+          window.svgElementOffset = $("#svg").offset(); 
 
     tidyGroups();
   });
@@ -664,7 +664,7 @@ function calculateBBFor(x,y) {
 
 function drawMouseBlob() {
   $("#cursor").remove();
-  d3.select('svg').append('circle').attr('id', 'cursor').attr('cx', relPageX)
+  d3.select('#svg').append('circle').attr('id', 'cursor').attr('cx', relPageX)
                                    .attr('cy', relPageY)
                                    .attr('r', 10)
                                    .attr('fill', 'red')
@@ -672,8 +672,8 @@ function drawMouseBlob() {
 }
 
 function handleGridMouseMove(d,event) {
-  relPageX = d3.event.pageX - $("svg").offset().left;
-  relPageY = d3.event.pageY - $("svg").offset().top;
+  relPageX = d3.event.pageX - $("#svg").offset().left;
+  relPageY = d3.event.pageY - $("#svg").offset().top;
   var bb = calculateBBFor(relPageX, relPageY);
 
   //drawMouseBlob();
@@ -722,7 +722,7 @@ function handleGridMouseMove(d,event) {
           // set the right edge of HUD flush to the left of the gridsquare
           hudX = cx - window.hudWidth - window.leftOffset + (window.gridSpacing/2);
         }
-        var hudY = $("svg").offset().top + cy;
+        var hudY = $("#svg").offset().top + cy;
 
         updateHudForItem(d,hudX,hudY);
       } else {
@@ -960,12 +960,12 @@ $(document).ready(function() {
   setup();
 
   $("body").on('mousemove', function(e) {
-    var svgTop = $("svg").offset().top;
+    var svgTop = $("#svg").offset().top;
     if(e.pageY < (svgTop)) {
       hideHud();
     }
 
-    if(e.pageY > (svgTop + $("svg").height())) {
+    if(e.pageY > (svgTop + $("#svg").height())) {
       hideHud();
     }
   });
@@ -993,8 +993,8 @@ $(document).ready(function() {
 
   $(window).on('click', function(e) {
     // only handle a click inside the visualisation
-    var topOfViz = $("svg").offset().top;
-    var vizHeight = $("svg").height();
+    var topOfViz = $("#svg").offset().top;
+    var vizHeight = $("#svg").height();
     if((e.pageY > (topOfViz + window.margin - (window.gridSpacing/2))) && 
        e.pageY < (topOfViz + vizHeight)) {
       //console.log("Click inside viz");
