@@ -29,6 +29,8 @@ Some of the summary level data about institutions and collections are cached fro
 
 These tasks assume that the URL to the CSV of the relevant Google Spreadsheet is available as an environment variable.
 
+In addition, there's a CSV file called `collections_computed.csv` which summarises the collection counts from the elasticsearch database. This needs to be updated manually by copying and pasting the CSV into place from the `oxford-collections` repository.
+
 Once updated, the changed files should be committed into source control and deployed in the normal way.
 
 [dotenv]:https://github.com/bkeepers/dotenv
