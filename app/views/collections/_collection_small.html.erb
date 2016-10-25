@@ -7,7 +7,7 @@
     <h4><%= collection.department %></h4>
     <h3><%= link_to collection.name, collection_path(collection.id) %></h3>
     <div class='size'><span><%= number_with_delimiter(collection.size_int) %></span> <%= collection.size_int.eql?(1) ? "thing" : "things" %></div>
-    <% if collection.digitized_metadata_size_int && collection.digitized_metadata_size_int > 0 %>
+    <% if collection.percentage_digitized %>
       <div class='dig_size'><span><%= collection.percentage_digitized.round %>%</span> have metadata online</div>
     <% end %>
   </div>
