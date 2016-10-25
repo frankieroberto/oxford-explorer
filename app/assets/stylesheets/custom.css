@@ -69,11 +69,11 @@ select {
 	border-top: 2px solid #002b36;
 	border-bottom: 2px solid #002b36;
 	padding: 10px 0;
-	margin-top: 20px;
 	margin-bottom: 20px;
 }
 
 .toolbar form {
+	padding-top: 15px;
 	margin-bottom:0;
 	padding-bottom:0;
 }
@@ -91,8 +91,13 @@ select {
 	padding: 10px;
 }
 .buffer {
-	margin-top: 20px;
+	padding-top: 20px;
 }
+.welcome {
+	margin-top: 30px;
+	margin-bottom: 30px;
+}
+
 .blurb p {
 	font-size: 1.25em;
 }

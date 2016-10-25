@@ -4,11 +4,11 @@
 
 <style>
 .legend {
-	font-size: .75em;
+	background-color: #002b36;
 }
 .legend div {
-	margin-bottom: 10px;
-	margin-right: 5px;
+	padding: 5px;
+	text-align:center;
 }
 .pie {
   width: 150px; height: 150px;
@@ -17,16 +17,14 @@
   opacity: .5;
 }
 .legend-pie-on {
-  width: 20px; height: 20px;
+  width: 40px; height: 40px;
   border-radius: 50%;
   background: #657b83;
-  float:left;
 }
 .legend-pie-part {
-  width: 20px; height: 20px;
+  width: 40px; height: 40px;
   border-radius: 50%;
   background: rgba(101,123,131,0.5);
-  float:left;
   background-image:
   linear-gradient(to right, transparent 50%, #657b83 0);
 }
@@ -41,58 +39,61 @@
   transform: rotate(.1turn);
 }
 .legend-pie-off {
-  width: 20px; height: 20px;
+  width: 40px; height: 40px;
   border-radius: 50%;
   background: #657b83;
   opacity: .5;
-  float:left;
 }
 .legend-square {
-  width: 15px; height: 15px;
+  width: 25px; height: 25px;
   background: #657b83;
   opacity: .25;
-  float:left;
-  margin-left: 2px;
 }
 </style>
 
-<h1>Welcome.</h1>
+<h1 class="center welcome">Welcome to the Oxford Collection Map</h1>
 <div class="row">
-	<div class="six columns blurb">
-    	<p>This is a map to the hundreds of <a href="/collections">collections</a> held in the museums, libraries and gardens across Oxford. Each shape below represents one collection, from the very large <a href="/collections/bod-main">Bodleian Libraries</a>, which looks after more than 12 million things, to the <a href="/collections/mhs-dyer">Dyer Collection</a> which contains just one.</p>
-    
+	<div class="eight columns blurb">
+    	<p>Below you'll see a map of the hundreds of <a href="/collections">collections</a> held in the various institutional collections across Oxford. Try filtering the map by <em>Type of Thing</em>, <em>University Department</em>, or <em>Subject</em>. If you prefer, you can also simply noodle around by <a href="/subjects">subject</a>, <a href="/item_types">type of thing</a> or <a href="/institutions">institution</a>, if you like.</p>
+
+    <h5>Legend</h5>
+
 	</div>
-    <div class="three columns key">
-		<div class="legend">
-			<h6 class="home">Each collection is a shape:</h6>
-			<div><div class="legend-pie-off"></div> A collection</div>
-			<div><div class="legend-pie-part"></div> Some digital metadata records</div>
-			<div><div class="legend-pie-on"></div> 100% digital metadata records</div>
-      <div>
-        <div class="legend-pie-on">
-          <svg width='50' height='50'>
-            <path transform="rotate(-90,10,20)" d="<%= describe_pie_slice(20,20,10,0,120, false) %>" stroke-width='2' stroke='white' fill='none' class="slice">
-          </svg>
-        </div> 
-        ...some of which have digital surrogates.
-      </div>
-        <div><div class="legend-square"></div> A collection, but we aren't sure of size</div>
-		</div>
-   </div>	
-    <div class="three columns key">
-		<h6 class="home">Institutions listed:</h6>
+	
+	<div class="four columns center key">
+		<h6>Libraries, Museums & Gardens</h6>
 		<span class="inst-ash-bg"><a href="/institutions/ASH">Ashmolean Museum</a></span>
 		<span class="inst-bod-bg"><a href="/institutions/BOD">Bodleian Libraries</a></span>
 		<span class="inst-mhs-bg"><a href="/institutions/MHS">Museum of the History of Science</a></span>
 		<span class="inst-mnh-bg"><a href="/institutions/MNH">Museum of Natural History</a></span>
 		<span class="inst-prm-bg"><a href="/institutions/PRM">Pitt Rivers Museum</a></span>
 		<span class="inst-hrb-bg"><a href="/institutions/HRB">Oxford University Herbaria</a></span>
-
 	</div>
-</div>  
+</div>
 
-	    <h3>Explore Oxford's collections...</h3>
-
+<div class="row legend">
+	<div class="three columns">
+		<div class="legend-pie-off"></div>
+		A collection
+	</div>
+	<div class="three columns">
+		<div class="legend-pie-part"></div>
+		Some metadata is online
+	</div>
+	<div class="three columns">
+		<div class="legend-pie-on">
+		  <svg width='40' height='40'>
+			<path transform="rotate(-90,10,20)" d="<%= describe_pie_slice(20,20,10,0,120, false) %>" stroke-width='2' stroke='#fdf6e3' fill='none' class="slice">
+		  </svg>
+		</div> 
+		Some digitised materials
+	</div>
+	<div class="three columns">
+		<div class="legend-square"></div>
+		A collection, but we aren't sure of size
+	</div>		
+</div>
+	
 <div class="row toolbar">
 	<div class="nine columns">    
 		<form id='selectors'>
