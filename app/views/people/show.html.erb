@@ -89,11 +89,8 @@
               <% things_in_collections_group.map {|x| x[0] }.each do |things_in_collection| %>
 
                 <% collection = things_in_collection.collection %>
-                <li>
-                  <%= link_to collection.name, collection_path(collection.id) %>
-
-                  <small><% if things_in_collection.count %><%= number_with_delimiter(things_in_collection.count) %><% else %>some <% end %> of <%= pluralize_with_delimiter(collection.size_int, 'thing') %> at <span class="inst-<%= collection.institution_id.downcase %>"><%= collection.institution_id %></span></small>
-                </li>
+                <%= render partial: 'collections/collection_small',
+                           locals: {collection: collection} %>
               <% end %>
             </ul>
           </div>
