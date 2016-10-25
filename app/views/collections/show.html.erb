@@ -84,29 +84,11 @@
 
 	<div class="three columns stats">
 
-		<div>
 
-      <% if @collection.digitized_metadata_size_int && @collection.size_int && @collection.size_int > 0 %>
-        <svg id="collection-pie" class="<%= @collection.institution_id %>" width="156" height="156" viewbox="0 0 156 156">
-          <% if @collection.digitized_size_int > 0 %>
-            <% end_angle = (@collection.digitized_size_int.to_f / @collection.size_int * 360).floor %>
-            <path transform="rotate(-90,78,78)" d="<%= describe_pie_slice(78,78,75,0,end_angle, false) %>" class="digitised" />
-          <% end %>
-          <% end_angle = (@collection.digitized_metadata_size_int.to_f / @collection.size_int * 360).floor %>
-          <% if end_angle >= 360 %>
-            <circle cx="78" cy="78" r="75" class="pie full" />
-          <% else %>
-            <circle cx="78" cy="78" r="75" class="pie" />
-            <path transform="rotate(-90,78,78)" d="<%= describe_pie_slice(78,78,75,0,end_angle) %>" class="slice">
-          <% end %>
-        </svg>
-      <% else %>
-        <svg id="collection-pie" class="<%= @collection.institution_id %>" width="156" height="156" viewbox="0 0 156 156">
-            <rect x="0" y="0" width="150" height="150" />
-        </svg>
-      <% end %>
+    <%= render partial: 'collections/collection_pie',
+      locals: {collection: @collection} %>
 
-    </div>
+
 
     <h6>STATS</h6>
     <ul>
