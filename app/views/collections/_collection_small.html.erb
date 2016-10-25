@@ -1,0 +1,14 @@
+<li>
+  <div class='pie-bullet'>
+    <%= render partial: 'collections/collection_pie_bullet',
+      locals: {collection: collection} %>
+  </div>
+  <div class='coll-description'>
+    <h4><%= collection.department %></h4>
+    <h3><%= link_to collection.name, collection_path(collection.id) %></h3>
+    <div class='size'><span><%= number_with_delimiter(collection.size_int) %></span> <%= collection.size_int.eql?(1) ? "thing" : "things" %></div>
+    <% if collection.digitized_metadata_size_int && collection.digitized_metadata_size_int > 0 %>
+      <div class='dig_size'><span><%= collection.percentage_digitized.round %>%</span> have metadata online</div>
+    <% end %>
+  </div>
+</li>
