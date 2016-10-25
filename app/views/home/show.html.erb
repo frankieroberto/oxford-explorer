@@ -6,9 +6,17 @@
 .legend {
 	background-color: #002b36;
 }
-.legend div {
+.legend > div {
 	padding: 5px;
 	text-align:center;
+}
+
+.legend .upper {
+  height: 50px;
+    margin-left: 40%;
+}
+
+.legend .lower {
 }
 .pie {
   width: 150px; height: 150px;
@@ -22,7 +30,8 @@
   background: #657b83;
 }
 .legend-pie-part {
-  width: 40px; height: 40px;
+  width: 40px; 
+  height: 40px;
   border-radius: 50%;
   background: rgba(101,123,131,0.5);
   background-image:
@@ -45,7 +54,9 @@
   opacity: .5;
 }
 .legend-square {
-  width: 25px; height: 25px;
+  margin-left: 10px;
+    margin-top: 10px;
+  width: 30px; height: 30px;
   background: #657b83;
   opacity: .25;
 }
@@ -72,32 +83,36 @@
 </div>
 
 <div class="row legend">
-	<div class="three columns">
-		<div class="legend-pie-off"></div>
-		A collection
-	</div>
-	<div class="three columns">
-		<div class="legend-pie-part"></div>
-		Some metadata is online
-	</div>
-	<div class="three columns">
-		<div class="legend-pie-on">
-		  <svg width='40' height='40'>
-			<path transform="rotate(-90,10,20)" d="<%= describe_pie_slice(20,20,10,0,120, false) %>" stroke-width='2' stroke='#fdf6e3' fill='none' class="slice">
-		  </svg>
-		</div> 
-		Some digitised materials
-	</div>
-	<div class="three columns">
-		<div class="legend-square"></div>
-		A collection, but we aren't sure of size
-	</div>		
+  <div class="three columns">
+    <div class='upper'>
+      <div class="legend-pie-off"></div>
+    </div>
+    <div class='lower'>A collection</div>
+  </div>
+  <div class="three columns">
+    <div class='upper'><div class="legend-pie-part"></div></div>
+    <div class='lower'>Some metadata is online</div>
+  </div>
+  <div class="three columns">
+    <div class='upper'>
+      <div class="legend-pie-on">
+        <svg width='50' height='40'>
+          <path transform="rotate(-90,20,20)" d="<%= describe_pie_slice(20,20,20,0,120, false) %>" stroke-width='2' stroke='#fdf6e3' fill='none' class="slice">
+        </svg>
+      </div> 
+    </div>
+    <div class='lower'>Some digitised materials</div>
+  </div>
+  <div class="three columns">
+    <div class='upper'><div class="legend-square"></div></div>
+    <div class='lower'>A collection, but we aren't sure of size</div>
+  </div>		
 </div>
-	
+
 <div class="row toolbar">
-	<div class="nine columns">    
-		<form id='selectors'>
-		  <select id="key">
+  <div class="nine columns">    
+    <form id='selectors'>
+      <select id="key">
 		  	<option selected>Choose a filter...</option>
         <option value="types_of_things">Type of thing</option>
         <option value="academic_departments">Division & Academic Department</option>
