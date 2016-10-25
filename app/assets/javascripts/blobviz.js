@@ -4,8 +4,12 @@ $.urlParam = function(name){
        return null;
     }
     else{
-       return results[1] || 0;
+       return $.urlDecode(results[1]) || 0;
     }
+}
+
+$.urlDecode = function(str) {
+   return decodeURIComponent((str+'').replace(/\+/g, '%20'));
 }
 
 function opacityForItem(item) {
@@ -185,12 +189,12 @@ function setup() {
 
 }
 
-function updateOptionsForKey(key) {
+function updateOptionsForKey(key, callback) {
   $.get("/collections/json", function(d) {
     if(key == "types_of_things") {
-      updateOptionsForTypesOfThings(d);
+      updateOptionsForTypesOfThings(d, callback);
     } else if(key == "academic_departments") {
-      updateOptionsForDepartments(d);
+      updateOptionsForDepartments(d, callback);
     } else {
       var keys = _.map(d, function(col) {
         return col[key];
@@ -226,11 +230,15 @@ function updateOptionsForKey(key) {
           text: typ,
         }));
       });
+      if(callback) {
+        console.log('firing callback');
+        callback();
+      }
     }
   });
 }
 
-function updateOptionsForTypesOfThings(data) {
+function updateOptionsForTypesOfThings(data,callback) {
   var taxonomy = [
     ['text',["advertisements",
       "almanacs",
@@ -430,9 +438,13 @@ function updateOptionsForTypesOfThings(data) {
                     ]
   ];
                     generateOptionsForNestedTaxonomy(taxonomy);
+      if(callback) {
+        console.log('firing callback');
+        callback();
+      }
 }
 
-function updateOptionsForDepartments(data) {
+function updateOptionsForDepartments(data, callback) {
   var taxonomy = [["Social Sciences",
     ["Anthropology and Museum Ethnography",
       "Archaeology",
@@ -489,6 +501,10 @@ function updateOptionsForDepartments(data) {
                   "Surgical Sciences"]]];
 
                   generateOptionsForNestedTaxonomy(taxonomy);
+      if(callback) {
+        console.log('firing callback');
+        callback();
+      }
 
 }
 
@@ -847,46 +863,51 @@ function removeFilter() {
 function handleValueChanges() {
     // handle dropdowns changing
   $("select#value").change(function(e) {
-    key = $("select#key").val();
-    val = $(this).val();
-    if(val) {
-      tidyGroups('desc');
-      window.isFiltered = true;
-      d3.selectAll("g").each(function(d, i) {
-        var match = false;
-        if(val.match('super_')) {
-          var newVal = val.replace("super_", "");
-          match = d["super_" + key].includes(newVal);
-          console.log("Looking to see if super_"+key+" includes " + newVal);
-        } else if(d[key]) {
-          match = d[key].includes(val);
-          console.log("Looking to see if "+key+" includes " + val);
-        } else if(val == "[all]") {
-          match = true;
-        }
+    performValueChangesFor(this, e);
+  });
+}
 
-        if(match) {
-          spotlightGroup(this);
-        } else {
-          unSpotlightGroup(this);
-          d3.select(this).lower();
-        }
-      });
+function performValueChangesFor(el, event) {
+  var e = event;
+  key = $("select#key").val();
+  val = $(el).val();
+  if(val) {
+    tidyGroups('desc');
+    window.isFiltered = true;
+    d3.selectAll("g").each(function(d, i) {
+      var match = false;
+      if(val == "[all]") {
+        match = true;
+      } else if(val.match('super_')) {
+        var newVal = val.replace("super_", "");
+        match = d["super_" + key].includes(newVal);
+      } else if(d[key]) {
+        match = d[key].includes(val);
+        console.log("Looking to see if "+key+" includes " + val);
+      } else if(val == "[all]") {
+        match = true;
+      }
 
-      var params = {key: key,
-                    value: val}
+      if(match) {
+        spotlightGroup(this);
+      } else {
+        unSpotlightGroup(this);
+        d3.select(this).lower();
+      }
+    });
+
+    var params = {key: key,
+      value: val}
       var baseUrl = window.location.href.split("?")[0];
       var newUrl = baseUrl + "?" +  $.param(params);
       window.history.replaceState(null, document.title, newUrl);
-      
+
       // update querystring
-    } else {
-      // remove filter
-      removeFilter();
-      tidyGroups();
-      
-    }
-  });
+  } else {
+    // remove filter
+    removeFilter();
+    tidyGroups();
+  }
 }
 
 function spotlightGroup(groupElement) {
@@ -954,6 +975,18 @@ $(document).ready(function() {
 
   handleValueChanges();
 
+  // IF params are set
+  if($.urlParam('key') && $.urlParam('value')) {
+    var k = $.urlParam('key');
+    var v = $.urlParam('value');
+    console.log(v);
+    $("select#key").val(k);
+    updateOptionsForKey(k, function() {
+      $("select#value").val(v);
+      performValueChangesFor($("select#value")[0], null);
+    });
+  }
+
   $("a.clear-link").click(function() {
     $("select#value").val("");
     removeFilter();
@@ -970,14 +1003,6 @@ $(document).ready(function() {
       window.location.href = "/collections/" + window.underCursor[0].id;
     }
   });
-
-  if($.urlParam('key')) {
-    var k = $.urlParam('key');
-    if(['types_of_things', 'academic_departments', 'subjects'].includes(k)) {
-      $("select#key").val(k);
-      $("select#value").val($.urlParam('value'));
-    }
-  }
 
 });
 
