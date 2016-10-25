@@ -100,5 +100,22 @@ module ApplicationHelper
 
   end
 
+  def human_name_for_institution(inst_id)
+    case inst_id.downcase
+    when 'ash'
+      "Ashmolean"
+    when 'bod'
+      "Bodleian"
+    when 'prm'
+      "Pitt Rivers"
+    when 'mhs'
+      "History of Science"
+    when 'mnh'
+      "Natural History"
+    when 'hrb'
+      "Herbarium"
+    end
+  end
+
 
 end

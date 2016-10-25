@@ -1,0 +1,70 @@
+@import "colour_variables";
+/* Person */
+
+.collection-in-list {
+  line-height: 1.25em;
+
+  ul {
+    li {
+      margin-bottom: 1.5em;
+
+      .pie-bullet {
+        float: left;
+        margin: 3px 10px 0 0;
+      }
+      .coll-description {
+        padding-left: 85px;
+
+        .institution {
+          text-transform: uppercase;
+          padding: 5px;
+          color: white;
+          display: inline-block;
+          font-weight: bold;
+          &.ASH {
+            background: $inst_ash;
+          }
+          &.BOD {
+            background: $inst_bod;
+          }
+          &.MHS {
+            background: $inst_mhs;
+          }
+          &.MNH {
+            background: $inst_mnh;
+          }
+          &.PRM {
+            background: $inst_prm;
+          }
+          &.HRB {
+            background: $inst_hrb;
+          }
+        }
+
+        h3 {
+          font-weight: bold;
+          color: #fdf6e3;
+          margin: 0;
+          font-size: 24px;
+        }
+
+        h4 {
+          font-size: 18px;
+          font-weight: normal;
+          color: #eee8d5;
+          margin: 10px 0 5px;
+          letter-spacing: 1.1;
+        }
+        .size, .dig_size {
+          margin: 5px 0px;
+          color: #839496;
+          font-size: 16px;    
+          span {
+            font-weight: bold;
+            color: #fdf6e3;
+          }
+        }
+      }
+    }
+  }
+}

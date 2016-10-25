@@ -67,6 +67,12 @@ class Collection
     end
   end
 
+  def percentage_digitized
+    if size_int && digitized_metadata_size_int && size_int > 0 && digitized_metadata_size_int > 0
+      digitized_metadata_size_int.to_f / size_int * 100
+    end
+  end
+
   def self.subjects
     all.map(&:subjects).flatten.uniq.compact.sort
   end
