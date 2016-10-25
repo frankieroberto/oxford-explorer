@@ -1,4 +1,4 @@
-<%# content_for :title, "#{@institution['institution']} - " %>
+<% content_for :title, "#{@institution.name} - " %>
 
 <% content_for :structural_nav do %>
   &rarr; <%= link_to 'Institutions', institutions_path %>
