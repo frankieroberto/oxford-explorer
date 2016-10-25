@@ -74,12 +74,14 @@
 
 
 		<h3><%= pluralize_with_delimiter(@institution.collections.size, 'collection') %></h3>
-
-		<ol>
-      <% @institution.collections.each do |collection| %>
-        <li><%= link_to collection.name, collection_path(collection.id) %> <small><%= pluralize_with_delimiter(collection.size_int, 'thing') %></small></li>
-      <% end %>
-		 </ol>
+    <div class="collection-in-list">
+      <ul>
+        <% @institution.collections.each do |collection| %>
+          <%= render partial: 'collections/collection_small',
+            locals: {collection: collection} %>
+        <% end %>
+      </ul>
+    </div>
 
 	</div>
 
