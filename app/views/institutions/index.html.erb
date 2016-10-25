@@ -1,0 +1,18 @@
+<% @institutions.each_slice(3).each do |group| %>
+
+  <div class="row">
+    <% group.each do |institution| %>
+      <div class="four columns">
+
+        <%= link_to institution_path(institution.id) do %>
+          <img src="<%= institution.photo_source_url %>" width="240" height="180" alt="<%= institution.name %>">
+          <h5><%= institution.name %></h5>
+
+          <div><%= pluralize_with_delimiter(institution.collections.size, 'collection') %></div>
+
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+
+<% end %>
