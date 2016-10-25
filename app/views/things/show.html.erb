@@ -14,7 +14,7 @@
 	<div class="one column inst-<%= @thing["gfs_institution_id"].downcase %>-bg center">
     <%= link_to @thing["gfs_institution_id"], institution_path(@thing["gfs_institution_id"]) %></div>
 
-	<div class="eleven columns buffer">
+	<div class="eleven columns blurb">
 		<h1><%= @thing.title %></h1>
 
     <% if @thing.authors.size > 0 %>
@@ -29,7 +29,7 @@
 </div>
 
 <div class="row">
-	<div class="offset-by-one seven columns blurb">
+	<div class="offset-by-one seven columns homeblurb">
 
     <% if @thing.description %>
 		  <p><%= @thing.description %></p>
