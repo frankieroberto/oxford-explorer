@@ -68,7 +68,15 @@
 			<div><div class="legend-pie-off"></div> A collection</div>
 			<div><div class="legend-pie-part"></div> Some digital metadata records</div>
 			<div><div class="legend-pie-on"></div> 100% digital metadata records</div>
-			<div><div class="legend-square"></div> A collection, but we aren't sure of size</div>
+      <div>
+        <div class="legend-pie-on">
+          <svg width='50' height='50'>
+            <path transform="rotate(-90,10,20)" d="<%= describe_pie_slice(20,20,10,0,120, false) %>" stroke-width='2' stroke='white' fill='none' class="slice">
+          </svg>
+        </div> 
+        ...some of which have digital surrogates.
+      </div>
+        <div><div class="legend-square"></div> A collection, but we aren't sure of size</div>
 		</div>
    </div>	
     <div class="three columns key">
