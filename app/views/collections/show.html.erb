@@ -100,6 +100,10 @@
             <path transform="rotate(-90,78,78)" d="<%= describe_pie_slice(78,78,75,0,end_angle) %>" class="slice">
           <% end %>
         </svg>
+      <% else %>
+        <svg id="collection-pie" class="<%= @collection.institution_id %>" width="156" height="156" viewbox="0 0 156 156">
+            <rect x="0" y="0" width="150" height="150" />
+        </svg>
       <% end %>
 
     </div>

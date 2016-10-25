@@ -9,6 +9,10 @@
     }
   }
 
+  rect {
+    opacity: 0.5;
+  }
+
   path.slice {
     opacity: 1;
   }
@@ -21,32 +25,32 @@
   }
 
   &.ASH {
-    circle, path.slice {
+    circle,rect, path.slice {
       fill: $inst_ash;
     }
   }
   &.BOD {
-    circle, path.slice {
+    circle,rect, path.slice {
       fill: $inst_bod;
     }
   }
   &.HRB {
-    circle, path.slice {
+    circle,rect, path.slice {
       fill: $inst_hrb;
     }
   }
   &.MHS {
-    circle, path.slice {
+    circle,rect, path.slice {
       fill: $inst_mhs;
     }
   }
   &.MNH {
-    circle, path.slice {
+    circle,rect, path.slice {
       fill: $inst_mnh;
     }
   }
   &.PRM {
-    circle, path.slice {
+    circle,rect, path.slice {
       fill: $inst_prm;
     }
   }

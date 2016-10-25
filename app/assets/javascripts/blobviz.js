@@ -1,3 +1,13 @@
+$.urlParam = function(name){
+    var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
+    if (results==null){
+       return null;
+    }
+    else{
+       return results[1] || 0;
+    }
+}
+
 function opacityForItem(item) {
   if(item.size_int) {
     return 1;
@@ -930,6 +940,14 @@ $(document).ready(function() {
       window.location.href = "/collections/" + window.underCursor[0].id;
     }
   });
+
+  if($.urlParam('key')) {
+    var k = $.urlParam('key');
+    if(['types_of_things', 'academic_departments', 'subjects'].includes(k)) {
+      $("select#key").val(k);
+      $("select#value").val($.urlParam('value'));
+    }
+  }
 
 });
 
