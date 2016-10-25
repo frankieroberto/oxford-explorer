@@ -2,92 +2,34 @@
 
 <% content_for :structural_nav do %>
   &rarr; <%= link_to "Collections", collections_path %>
-  &rarr; <%= @collection.name %>
+  &rarr; 
 <% end %>
 
 
-<div class="mapette-container row">
-	<div class="twelve columns mapette">
-    <%= render partial: 'mapette/mapette',
-      locals: {selected_collection: @collection }
-
-    %>
-	</div>
-</div>
-
-<div class="row">
+<div class="row" style="margin-top: -20px;">
 	<div class="one column inst-<%= @collection.institution_id.downcase %>-bg center"><%= link_to @collection.institution_id, institution_path(@collection.institution_id) %></div>
 	<div class="eleven columns">
 		<h1 class="buffer"><%= @collection.name %></h1>
 	</div>
 </div>
+
+
 <div class="row">
-	<div class="offset-by-one eight columns blurb">
 
-		<p>
-			This collection mostly contains
-			<%= @collection.types_of_things.collect(&:name).collect {|type_of_thing| link_to(type_of_thing, item_type_path(type_of_thing)) }.to_sentence(last_word_connector: ' and ').html_safe %>
-
-    <% if @collection.subjects.size > 0 %>
-
-    		about
-    		<%= @collection.subjects.collect {|subject| link_to(subject, subject_path(subject)) }.to_sentence(last_word_connector: ' and ').html_safe %>
-
-	<% end %>
-
-			  dated about <a href="#" class="pretend" title="Not possible yet" data-reason="We’re not able to parse dates yet."><%= @collection.dates %></a>.
-
-        <% if @collection.places.size > 0 %>
-			  Materials are either from or about <%= @collection.places.collect {|places| link_to(places, "#", class: 'pretend', title: "Not possible yet", 'data-reason': "We don’t have the data for this yet.") }.to_sentence(last_word_connector: ' and ').html_safe %>.
-        <% end %>
-
-		</p>
+	<div class="four columns stats">
 
 
-    <% if @collection.people.size > 0 %>
-  		<h6>Related people</h6>
-  		<p>
-        <%= @collection.people.collect {|person| link_to(person, person_path(person)) }.to_sentence(last_word_connector: ' and ').html_safe %>
-  		</p>
-    <% end %>
+    <%= render partial: 'mapette/mapette',
+      locals: {selected_collection: @collection }
 
-		<h3><%= pluralize_with_delimiter(@collection.size_int, 'thing') %></h3>
-
-    <% if @things.size > 0 %>
-  		<ol>
-        <% @things.each do |thing| %>
-          <li>
-          	<%= link_to thing.title, thing_path(thing.id) %>
-        	<% thing.types_of_things.each do |type_of_thing| %>
-	        	&nbsp;&nbsp;<%= type_of_thing.name %>
-	        <% end %>
-			</li>
-
-        <% end %>
-  		</ol>
-    <% else %>
-
-      <p>We don’t have item level data for this collection. Sorry about that.</p>
-    <% end %>
+    %>
 
 
-
-    <% if @collection['catalog_comments'] %>
-
-      <h6>COMMENTS ABOUT THIS COLLECTION</h6>
-
-      <p><%= Rinku.auto_link(@collection['catalog_comments']).html_safe %></p>
-    <% end %>
-	</div>
-
-
-
-	<div class="three columns stats">
+	<br /><br /><br />
 
 
     <%= render partial: 'collections/collection_pie',
       locals: {collection: @collection} %>
-
 
 
     <h6>STATS</h6>
@@ -149,6 +91,68 @@
 
 
 	</div>
+
+
+
+
+	<div class="eight columns blurb">
+
+		<p>
+			This collection mostly contains
+			<%= @collection.types_of_things.collect(&:name).collect {|type_of_thing| link_to(type_of_thing, item_type_path(type_of_thing)) }.to_sentence(last_word_connector: ' and ').html_safe %>
+
+    <% if @collection.subjects.size > 0 %>
+
+    		about
+    		<%= @collection.subjects.collect {|subject| link_to(subject, subject_path(subject)) }.to_sentence(last_word_connector: ' and ').html_safe %>
+
+	<% end %>
+
+			  dated about <a href="#" class="pretend" title="Not possible yet" data-reason="We’re not able to parse dates yet."><%= @collection.dates %></a>.
+
+        <% if @collection.places.size > 0 %>
+			  Materials are either from or about <%= @collection.places.collect {|places| link_to(places, "#", class: 'pretend', title: "Not possible yet", 'data-reason': "We don’t have the data for this yet.") }.to_sentence(last_word_connector: ' and ').html_safe %>.
+        <% end %>
+
+		</p>
+
+
+    <% if @collection.people.size > 0 %>
+  		<h6>Related authors</h6>
+  		<p>
+        <%= @collection.people.collect {|person| link_to(person, person_path(person)) }.to_sentence(last_word_connector: ' and ').html_safe %>
+  		</p>
+    <% end %>
+
+		<h3><%= pluralize_with_delimiter(@collection.size_int, 'thing') %></h3>
+
+    <% if @things.size > 0 %>
+  		<ol>
+        <% @things.each do |thing| %>
+          <li>
+          	<%= link_to thing.title, thing_path(thing.id) %>
+        	<% thing.types_of_things.each do |type_of_thing| %>
+	        	&nbsp;&nbsp;<%= type_of_thing.name %>
+	        <% end %>
+			</li>
+
+        <% end %>
+  		</ol>
+    <% else %>
+
+      <p>We don’t have item level data for this collection. Sorry about that.</p>
+    <% end %>
+
+
+
+    <% if @collection['catalog_comments'] %>
+
+      <h6>Staff comments on this collection</h6>
+
+      <p><%= Rinku.auto_link(@collection['catalog_comments']).html_safe %></p>
+    <% end %>
+	</div>
+
 </div>
 
 

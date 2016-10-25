@@ -33,7 +33,7 @@
 
 <% if defined?(superfield_name) && !superfield_name.blank? %>
   <% if homepage_link_for_superfield(@superfield, @id)  %>
-    <%= link_to "View this collection in the map", homepage_link_for_superfield(@superfield, @id) %>
+    <%= link_to "View in the larger map", homepage_link_for_superfield(@superfield, @id) %>
   <% else %>
     <br /><small>We can't provide a link to a visualisation of these collections. 
     <%= raw reason_for_no_homepage_link_for_superfield(@superfield,@id) %></small>
