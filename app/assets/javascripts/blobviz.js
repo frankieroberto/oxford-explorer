@@ -883,7 +883,6 @@ function performValueChangesFor(el, event) {
         match = d["super_" + key].includes(newVal);
       } else if(d[key]) {
         match = d[key].includes(val);
-        console.log("Looking to see if "+key+" includes " + val);
       } else if(val == "[all]") {
         match = true;
       }
@@ -979,7 +978,6 @@ $(document).ready(function() {
   if($.urlParam('key') && $.urlParam('value')) {
     var k = $.urlParam('key');
     var v = $.urlParam('value');
-    console.log(v);
     $("select#key").val(k);
     updateOptionsForKey(k, function() {
       $("select#value").val(v);
