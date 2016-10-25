@@ -90,7 +90,7 @@
 			<br />
 			<small><%= @institution.name %> by <%= @institution.photo_credit %> (<%= @institution.photo_licence %>)</small>
 		</p>
-		<p>The <%= @institution.name %> was founded <%= pluralize_with_delimiter(Time.now.year - @institution.founded, 'year') %> ago, in <%= @institution.founded %>. </p>
+		<p><%= @institution.name %> was founded <%= pluralize_with_delimiter(Time.now.year - @institution.founded, 'year') %> ago, in <%= @institution.founded %>. </p>
 
 		<p>
       <%= link_to 'Visit the website', @institution.website %>?
