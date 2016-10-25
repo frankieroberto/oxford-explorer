@@ -1,24 +1,35 @@
 # oxford-explorer
 
-The culmination of our previous R&amp;D into the Oxford work. Now we have a Thing.
+The culmination of our previous R&amp;D into the Oxford work. Now we have a Thing. It can be viewed online at http://gfs-oxford-explorer.herokuapp.com
 
 ## Requirements
 
-`oxford-explorer` is a Rails 5 application, written against Ruby 2.3.1. It _may_ work with earlier Rubies; Rails 5 requires Ruby 2.2.2 as a minimum. However, it's not been tested with earlier rubies.
+`oxford-explorer` is a web application written in the programming language Ruby, using the Rails framework.
 
-Dependencies are all in its `Gemfile`, as you'd expect.
+Running a copy of the website requires having Ruby installed (version 2.3.1).
 
-As a 12-Factor application, it's ready to deploy to Heroku, although you'll need to configure a number of environment variable in `.env` to run it locally, notably:
+Dependencies are all in its `Gemfile`, as you'd expect. You can install them by running `bundle install` once you’ve installed the `bundler` gem (which you can install using `gem install bundler`).
 
-	DATABASE_URL
-	ELASTICSEARCH_URL
-	AWS_ACCESS_KEY_ID
-	AWS_SECRET_ACCESS_KEY
-	COLLECTIONS_CSV_URL
+The website uses Postgres (a database) and Elasticsearch (a search engine) as storage backends. The locations of these services (and their passwords) are specified via environment variables (`DATABASE_URL` and `ELASTICSEARCH_URL`).
 
-It uses Postgres and Elasticsearch as storage backends. Because it's read-only, we're just working against the development databases.
+Because the website read-only, we're just working against the remote development databases.
 
-So: set up your `.env` file, and then run the server either with [`dotenv`][dotenv] or [`foreman`][foreman].
+The website is currently deployed using the 'Platform as a Service' provider Heroku. It should be just as easy to install elsewhere.
+
+
+To start the website locally, you just need to run `bundle exec rails server`. Environment variables can be specified before this command, but to save typing, it's best to store then in a file named simply `.env`, and then you can start the server using either [`dotenv`][dotenv] or [`foreman`][foreman].
+
+## Caching data from the Spreadsheet
+
+Some of the summary level data about institutions and collections are cached from a Google Spreadsheet. These cached copies can be updated using these commands:
+
+`bundle exec rake update:collections`
+`bundle exec rake update:institutions`
+`bundle exec rake update:types_of_thing`
+
+These tasks assume that the URL to the CSV of the relevant Google Spreadsheet is available as an environment variable.
+
+Once updated, the changed files should be committed into source control and deployed in the normal way.
 
 [dotenv]:https://github.com/bkeepers/dotenv
 [foreman]:https://github.com/ddollar/foreman
