@@ -47,7 +47,7 @@ class SuperfieldsController < ApplicationController
 
     additional_collections.each do |collection|
 
-      if !@things_in_collections.collect(&:id).include?(collection.id)
+      if !@things_in_collections.collect {|i| i.collection.id}.include?(collection.id)
         @things_in_collections << OpenStruct.new(collection: collection, count: nil)
       end
 
