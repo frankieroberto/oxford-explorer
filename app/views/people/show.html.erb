@@ -2,42 +2,60 @@
 
 <% content_for :structural_nav do %>
   &rarr; <%= link_to 'People', people_path %>
-  &rarr; <%= @id %>
+  &rarr;
 <% end %>
 
-<div class="mapette-container row">
-	<div class="twelve columns mapette">
-    <%= render partial: 'mapette/mapette',
-      locals: {superfield_name: @superfield,
-               superfield_value: @id}
-    %>
+<div class="row">
+	<div class="twelve columns buffer">
+		<h1><%= @id %></h1>
 	</div>
 </div>
 
 <div class="row">
-	<div class="nine columns buffer">
-		<h1><%= @id %></h1>
-	</div>
-
-  <div class="three columns">
+  <div class="four columns stats">
+  
+    <%= render partial: 'mapette/mapette',
+      locals: {superfield_name: @superfield,
+               superfield_value: @id}
+    %>
+    
+    
+    <h6>Stats</h6>
+    
+    <ul>
+    	<li><%= pluralize_with_delimiter(@things_count, 'thing') %></li>
+    </ul>
+    
+    
+    <h6>Where are these things?</h6>  
     <% if @things_by_institution.size > 0 %>
-      <div style="display:block;">
+      <div style="display:block; margin-bottom: 30px;">
         <% total = @things_by_institution.map {|x| x.count}.sum %>
         <% @things_by_institution.each do |things_by_institution| %>
           <div style="float:left; width: <%= 100 * (things_by_institution.count.to_f / total.to_f) %>%;" class="inst-<%= things_by_institution.institution_id.downcase %>-bg">&nbsp;</div>
         <% end %>
       </div>
-      <small class="dark right">where are the things?</small>
     <% end %>
+    
+    
+    <!-- 
+		<h6>Possible Dupes *</h6>
+
+		<ol>
+			<li><a href="/people/show.html" style="color:red;">Persona Name</a></li>
+			<li><a href="/people/show.html" style="color:red;">Name, P.</a></li>
+			<li><a href="/people/show.html" style="color:red;">Person Name.</a></li>
+			<li><a href="/people/show.html" style="color:red;">NAME, Person (1894-1956)</a></li>
+		</ol>    
+    -->
+    
   </div>
 
-</div>
-
-<div class="row">
 	<div class="eight columns blurb">
 
-    <p>
-      There are about <%= pluralize_with_delimiter(@things_count, 'thing') %> by <%= @id %> across Oxford.
+ 	   <p>
+ 	   
+ 	   	There are about <%= pluralize_with_delimiter(@things_count, 'thing') %> by <%= @id %> across Oxford.
 
       <% if @things_by_subjects.size > 0 %>
         They relate to
@@ -55,7 +73,7 @@
 
     <% if @things_by_authors.size > 1 %>
 
-      <h6>Related people</h6>
+      <h6>Related authors</h6>
       <p>
         <%= @things_by_authors[1..-1].collect do |things_by_authors| %>
           <% link_to(things_by_authors.author, person_path(things_by_authors.author)) %>
@@ -81,9 +99,6 @@
           .partition {|x, i| i.even? }
           .each do |things_in_collections_group| %>
 
-        <div class="six columns">
-
-
           <div class="collection-in-list">
             <ul>
               <% things_in_collections_group.map {|x| x[0] }.each do |things_in_collection| %>
@@ -94,8 +109,6 @@
               <% end %>
             </ul>
           </div>
-
-        </div>
 
       <% end %>
     </div>
@@ -113,17 +126,6 @@
         </li>
       <% end %>
     </ol>
-
-	</div>
-	<div class="four columns">
-		<h5>Possible Dupes *</h5>
-
-		<ol>
-			<li><a href="/people/show.html" style="color:red;">Persona Name</a></li>
-			<li><a href="/people/show.html" style="color:red;">Name, P.</a></li>
-			<li><a href="/people/show.html" style="color:red;">Person Name.</a></li>
-			<li><a href="/people/show.html" style="color:red;">NAME, Person (1894-1956)</a></li>
-		</ol>
 
 	</div>
 </div>

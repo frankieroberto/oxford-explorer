@@ -33,17 +33,13 @@
 
 <% if defined?(superfield_name) && !superfield_name.blank? %>
   <% if homepage_link_for_superfield(@superfield, @id)  %>
-    <br />
     <%= link_to "View this collection in the map", homepage_link_for_superfield(@superfield, @id) %>
   <% else %>
-    <br />
-    We can't provide a link to a visualisation of these collections. 
-    <%= raw reason_for_no_homepage_link_for_superfield(@superfield,@id) %>
+    <br /><small>We can't provide a link to a visualisation of these collections. 
+    <%= raw reason_for_no_homepage_link_for_superfield(@superfield,@id) %></small>
   <% end %>
 <% elsif params[:controller] == 'people' %>
-    <br />
-    We can't provide a link to a visualisation of these collections. 
-  We don't have person data in the summary data used to generate the homepage visualisation.
+    <br /><small>Sorry, we can't give you a link back to the map showing these collections. (The data for people isn't part of the map.)</small>
 <% end %>
 
 
