@@ -31,18 +31,22 @@ h6.home {
 ul {
 	list-style-type: none;
 }
+
 a {
-  color: #eee8d5;
-  text-decoration: none;
+	color: #eee8d5;
+	text-decoration: none;
+	border-bottom: 1px dotted #eee8d5;
 }
 
 a.selected {
   color: #839496;
 }
-
 a:hover {
-  color: #268bd2;
+	color: #268bd2;
+	text-decoration: none;
+	border-bottom: 1px solid #268bd2;
 }
+
 select {
 	color: #002b36;
 }
@@ -68,7 +72,6 @@ select {
 	margin-top: 20px;
 	margin-bottom: 20px;
 }
-
 
 .toolbar form {
 	margin-bottom:0;
