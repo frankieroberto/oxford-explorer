@@ -836,6 +836,10 @@ function removeFilter() {
     return opacityForItem(d);
   });
 
+  // remove querystring
+  var baseUrl = window.location.href.split("?")[0];
+  window.history.replaceState(null, document.title, baseUrl);
+
   removeAllSpotlights();
   tidyGroups();
 }
@@ -868,10 +872,19 @@ function handleValueChanges() {
           d3.select(this).lower();
         }
       });
+
+      var params = {key: key,
+                    value: val}
+      var baseUrl = window.location.href.split("?")[0];
+      var newUrl = baseUrl + "?" +  $.param(params);
+      window.history.replaceState(null, document.title, newUrl);
+      
+      // update querystring
     } else {
       // remove filter
       removeFilter();
       tidyGroups();
+      
     }
   });
 }
