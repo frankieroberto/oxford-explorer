@@ -184,6 +184,8 @@ function setup() {
 
           window.svgElementOffset = $("#svg").offset(); 
 
+    growAllGroups();
+    window.isFiltered = true;
     tidyGroups();
   });
 
@@ -988,6 +990,8 @@ $(document).ready(function() {
   $("a.clear-link").click(function() {
     $("select#value").val("");
     removeFilter();
+    growAllGroups();
+    window.isFiltered = true;
     return false;
   });
 
@@ -1002,5 +1006,37 @@ $(document).ready(function() {
     }
   });
 
+  $(".show-size").on('click', function(e) {
+    growAllGroups();
+    return false;
+  });
+
 });
 
+
+function growAllGroups() {
+  var grps = $("g");
+  for(var i = 0; i < grps.length; i++) {
+    var grp = grps[i];
+    // get the circle inside it
+    var c = $(grp).children("circle")[0];
+    growElement(c);
+  }
+  $(".show-size").text('Show collections at same size');
+  $(".show-size").addClass('hide-size').removeClass('show-size');
+  $(".hide-size").on('click', shrinkAllGroups);
+  return false;
+}
+
+function shrinkAllGroups() {
+  var grps = $("g");
+  for(var i = 0; i < grps.length; i++) {
+    var grp = grps[i];
+    // get the circle inside it
+    var c = $(grp).children("circle")[0];
+    shrinkElement(c);
+  }
+  $(".hide-size").text('Show collection size');
+  $(".hide-size").addClass('show-size').removeClass('hide-size');
+  $(".show-size").on('click', growAllGroups);
+}
