@@ -6,23 +6,31 @@
 <% end %>
 
 
-<div class="mapette-container row">
-	<div class="twelve columns mapette">
+<h1 class="center inst-<%= @institution.id.downcase %>-bg"><%= @institution.name %></h1>
+
+<div class="row">
+
+	<div class="four columns">
+
     <%= render partial: 'mapette/mapette',
       locals: {selected_institution: @institution.id }
   
     %>
+    
+    
+		<p style="padding-top: 40px;">
+			<a data-flickr-embed="true"  href="<%= @institution.photo_url %>" title="<%= @institution.name %>"><img src="<%= @institution.photo_source_url %>" width="240" height="180" alt="<%= @institution.name %>"></a>
+			<br />
+			<small><%= @institution.name %> by <%= @institution.photo_credit %> (<%= @institution.photo_licence %>)</small>
+		</p>
+		<p>
+			<%= link_to 'Visit the website', @institution.website %>?
+		</p>
 	</div>
-</div>
-
-<h1 class="buffer inst-<%= @institution.id.downcase %>-bg"><%= @institution.name %></h1>
-
-<div class="row">
-
+	
 	<div class="eight columns blurb">
 		<p>
-
-		This place looks after about <%= pluralize_with_delimiter(@institution.things_count, 'thing') %>.
+			<%= @institution.name %> was founded <%= pluralize_with_delimiter(Time.now.year - @institution.founded, 'year') %> ago (in <%= @institution.founded %>) and looks after about <%= pluralize_with_delimiter(@institution.things_count, 'thing') %>.
 
 		<!-- random sample of top 10 subjects -->
 
@@ -50,11 +58,12 @@
 		<p>If you wandered around in the collections -- and wouldn't that be brilliant -- you'd see things like <%= top_item_type_links %>. There are even some <%= lesser_known_item_type_links %>...</p>
 
     <div class="js-show-details">
-      &nbsp; [ <small><span class="js-show">Show everything</span></small> ]
+      [ <span class="js-show">Show everything</span> ]
+    
 
       <div class="row js-details">
         <div class="six columns">
-          <h4>SUBJECTS</h4>
+          <h5>Subjects</h5>
 
           <%= @institution.subjects.sort.collect do |subject| %>
             <% link_to subject, subject_path(subject) %>
@@ -62,7 +71,7 @@
 
         </div>
         <div class="six columns">
-          <h4>TYPES OF THINGS</h4>
+          <h5>Types of things</h5>
 
           <%= @institution.types_of_things.sort_by(&:name).collect do |type_of_thing| %>
             <% link_to type_of_thing.name, item_type_path(type_of_thing) %>
@@ -72,31 +81,22 @@
       </div>
     </div>
 
+<br /><br />
 
-		<h3><%= pluralize_with_delimiter(@institution.collections.size, 'collection') %></h3>
-    <div class="collection-in-list">
-      <ul>
-        <% @institution.collections.each do |collection| %>
-          <%= render partial: 'collections/collection_small',
-            locals: {collection: collection} %>
-        <% end %>
-      </ul>
-    </div>
-
+	<div class="row">
+		<div class="twelve columns">
+		
+			<h3><%= pluralize_with_delimiter(@institution.collections.size, 'collection') %></h3>
+			<div class="collection-in-list">
+			  <ul>
+				<% @institution.collections.each do |collection| %>
+				  <%= render partial: 'collections/collection_small',
+					locals: {collection: collection} %>
+				<% end %>
+			  </ul>
+			</div>
+		</div>
 	</div>
-
-	<div class="four columns">
-
-		<p>
-			<a data-flickr-embed="true"  href="<%= @institution.photo_url %>" title="<%= @institution.name %>"><img src="<%= @institution.photo_source_url %>" width="240" height="180" alt="<%= @institution.name %>"></a>
-			<br />
-			<small><%= @institution.name %> by <%= @institution.photo_credit %> (<%= @institution.photo_licence %>)</small>
-		</p>
-		<p><%= @institution.name %> was founded <%= pluralize_with_delimiter(Time.now.year - @institution.founded, 'year') %> ago, in <%= @institution.founded %>. </p>
-
-		<p>
-      <%= link_to 'Visit the website', @institution.website %>?
-		</p>
 	</div>
 
 </div>
