@@ -98,6 +98,9 @@ select {
 	padding-bottom: 20px;
 }
 
+.blurb {
+	padding-top: 30px;
+}
 .blurb p {
 	font-size: 1.25em;
 }
