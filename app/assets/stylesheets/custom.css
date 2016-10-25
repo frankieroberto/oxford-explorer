@@ -25,6 +25,9 @@ h6 {
 h6.home {
 	text-transform:none;
 }
+img {
+	border:0;
+}
 .stats h6 {
 	margin-bottom: 0; margin-top: 20px;
 }

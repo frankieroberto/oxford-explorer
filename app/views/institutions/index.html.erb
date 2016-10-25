@@ -1,12 +1,14 @@
+<h1 class="center welcome">Libraries, Museums & Gardens of Oxford</h1>
+
 <% @institutions.each_slice(3).each do |group| %>
 
   <div class="row">
     <% group.each do |institution| %>
-      <div class="four columns">
+      <div class="four columns center" style="padding-bottom: 40px;">
 
         <%= link_to institution_path(institution.id) do %>
           <img src="<%= institution.photo_source_url %>" width="240" height="180" alt="<%= institution.name %>">
-          <h5><%= institution.name %></h5>
+          <h5 style="padding:5px; margin-bottom: 0;" class="inst-<%= institution.id.downcase %>-bg"><%= institution.name %></h5>
 
           <div><%= pluralize_with_delimiter(institution.collections.size, 'collection') %></div>
 
