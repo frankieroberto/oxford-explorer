@@ -1,4 +1,4 @@
-.container { 
+.container {
 }
 
 header {
@@ -11,11 +11,11 @@ footer {
 	border-top: 2px solid #002b36;
 	padding: 10px 0;
 	margin-top: 20px;
-	margin-bottom: 50px;	
+	margin-bottom: 50px;
 }
 
 h1, h2, h3, h4, h5, h6 {
-  color: #eee8d5; 
+  color: #eee8d5;
 }
 h6 {
 	margin-top: 5px;
@@ -32,11 +32,16 @@ ul {
 	list-style-type: none;
 }
 a {
-  color: #eee8d5; 
+  color: #eee8d5;
   text-decoration: none;
 }
+
+a.selected {
+  color: #839496;
+}
+
 a:hover {
-  color: #268bd2; 
+  color: #268bd2;
 }
 select {
 	color: #002b36;
@@ -53,7 +58,7 @@ select {
 .pretend { color: red; }
 
 /* home */
-.key span { 
+.key span {
 	padding: 3px;
 }
 .toolbar {
@@ -61,7 +66,7 @@ select {
 	border-bottom: 2px solid #002b36;
 	padding: 10px 0;
 	margin-top: 20px;
-	margin-bottom: 20px;	
+	margin-bottom: 20px;
 }
 
 
@@ -89,13 +94,13 @@ select {
 	font-size: 1.25em;
 }
 .pie {
-	margin-bottom: 20px; 
+	margin-bottom: 20px;
 }
 .stats {
-	padding-top:10px; 
+	padding-top:10px;
 }
 .stats li {
-	line-height: 1.25em;	
+	line-height: 1.25em;
 }
 
 /* Person */

@@ -9,7 +9,7 @@
 		<h1>Collections</h1>
 	</div>
 	<div class="six columns right">
-		<p><a href="doesn't work yet" style="color:red">Top 10</a> / <a href="doesn't work yet" style="color:red">By Size, all</a> / Alphabetical, all
+		<p><a href="?show=top10" <%= 'class="selected"'.html_safe if @show == 'top10' || @show.blank? %>>Top 10</a> / <a href="?show=by-size" <%= 'class="selected"'.html_safe if @show == 'by-size' %>>By Size, all</a> / <a href="?show=alphabetical" <%= 'class="selected"'.html_safe if @show == 'alphabetical' %>>Alphabetical, all</a>
 	</div>
 
 </div>
@@ -23,7 +23,19 @@
 
       <div class="three columns">
         <ul>
-          <% group[1].sort_by(&:name).each do |collection| %>
+
+          <% if @show == 'alphabetical' %>
+            <% group[1].sort_by!(&:name) %>
+          <% else %>
+            <% group[1].sort_by!(&:size_int).reverse! %>
+          <% end %>
+
+          <% if @show == 'top10' || @show.to_s.blank? %>
+            <% group[1] = group[1].first(10) %>
+          <% end %>
+
+
+          <% group[1].each do |collection| %>
             <li><%= link_to collection.name, collection_path(collection.id) %> <small><%= pluralize_with_delimiter(collection.size_int, 'thing') %></small></li>
           <% end %>
         </ul>

@@ -3,6 +3,7 @@ require 'csv'
 class CollectionsController < ApplicationController
 
   def index
+    @show = params[:show]
     @collections = Collection.all
   end
 
