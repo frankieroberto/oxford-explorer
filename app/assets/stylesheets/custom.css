@@ -98,6 +98,12 @@ select {
 	padding-bottom: 20px;
 }
 
+.homeblurb {
+}
+.homeblurb p {
+	font-size: 1.25em;
+}
+
 .blurb {
 	padding-top: 30px;
 }

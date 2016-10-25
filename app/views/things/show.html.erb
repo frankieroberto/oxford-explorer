@@ -14,8 +14,8 @@
 	<div class="one column inst-<%= @thing["gfs_institution_id"].downcase %>-bg center">
     <%= link_to @thing["gfs_institution_id"], institution_path(@thing["gfs_institution_id"]) %></div>
 
-	<div class="eleven columns">
-		<h1 class="buffer"><%= @thing.title %></h1>
+	<div class="eleven columns buffer">
+		<h1><%= @thing.title %></h1>
 
     <% if @thing.authors.size > 0 %>
 
