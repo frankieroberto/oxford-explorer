@@ -10,7 +10,7 @@
 	<div class="twelve columns mapette">
     <%= render partial: 'mapette/mapette',
       locals: {selected_collection: @collection }
-  
+
     %>
 	</div>
 </div>
@@ -35,10 +35,10 @@
 
 	<% end %>
 
-			  dated about <a href="#" class="pretend" title="Not possible yet"><%= @collection.dates %></a>.
+			  dated about <a href="#" class="pretend" title="Not possible yet" data-reason="We’re not able to parse dates yet."><%= @collection.dates %></a>.
 
         <% if @collection.places.size > 0 %>
-			  Materials are either from or about <%= @collection.places.collect {|places| link_to(places, "#", class: 'pretend', title: "Not possible yet") }.to_sentence(last_word_connector: ' and ').html_safe %>.
+			  Materials are either from or about <%= @collection.places.collect {|places| link_to(places, "#", class: 'pretend', title: "Not possible yet", 'data-reason': "We don’t have the data for this yet.") }.to_sentence(last_word_connector: ' and ').html_safe %>.
         <% end %>
 
 		</p>
@@ -154,7 +154,7 @@
             <% else %>
               <span class='digitised-em'><%= (@collection.digitized_size_int.to_f / @collection.size_int * 100).round %>%</span>
             <% end %>
-              of those have a <a href="#" class="pretend" title="Not possible yet">digitised version</a> </li>
+              of those have a <a href="#" class="pretend" title="Not possible yet" data-reason="We don't know how to detect digitised things yet.">digitised version</a> </li>
 
 
       <% else %>

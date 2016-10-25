@@ -16,5 +16,6 @@
 //= require underscore-min
 //= require underscore.string.min
 //= require show_details
+//= require pretend_popup
 //= require_tree "."
 //= stub "blobviz"
