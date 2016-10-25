@@ -67,6 +67,14 @@ class Collection
     end
   end
 
+  def self.subjects
+    all.map(&:subjects).flatten.uniq.compact.sort
+  end
+
+  def self.types_of_things
+    all.map(&:types_of_things).flatten.uniq.compact.map(&:name).sort
+  end
+
   private
 
   def computed_data
