@@ -1,3 +1,5 @@
+window.hasLoaded = false;
+
 $.urlParam = function(name){
     var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
     if (results==null){
@@ -984,7 +986,12 @@ $(document).ready(function() {
     updateOptionsForKey(k, function() {
       $("select#value").val(v);
       performValueChangesFor($("select#value")[0], null);
+      if(!window.hasLoaded) {
+        $('body').scrollTop($("#selectors").offset().top);
+        window.hasLoaded = true;
+      }
     });
+
   }
 
   $("a.clear-link").click(function() {
