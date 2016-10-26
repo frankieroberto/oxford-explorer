@@ -5,7 +5,7 @@ class InstitutionsController < ApplicationController
   end
 
   def index
-    @institutions = Institution.all
+    @institutions = Institution.all.select {|i| i.collections.size > 0}
   end
 
 end
