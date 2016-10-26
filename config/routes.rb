@@ -9,7 +9,7 @@ Rails.application.routes.draw do
 
   resources :institutions, only: [:show, :index]
 
-  resources :things, only: [:show]
+  resources :things, only: [:show], :constraints => {:id => /.*/}
 
   resources :about, only: [:index]
 
