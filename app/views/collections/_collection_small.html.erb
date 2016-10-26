@@ -6,7 +6,11 @@
   <div class='coll-description'>
     <h3><%= link_to collection.name, collection_path(collection.id) %></h3>
     <div class='size'>
-    	<span><%= number_with_delimiter(collection.size_int) %></span> 
+      <% if collection.size_int > 0 %>
+        <span><%= number_with_delimiter(collection.size_int) %></span> 
+      <% else %>
+        ?
+      <% end %>
     	<%= collection.size_int.eql?(1) ? "thing" : "things" %>
 
 	    <% if collection.percentage_digitized %>

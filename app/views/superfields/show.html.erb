@@ -23,7 +23,13 @@
 		<br /><br />
 		<h6>STATS</h6>
 		<ul>
-			<li><%= pluralize_with_delimiter(@things_count, 'thing') %></li>
+      <li>
+        <% if @things_count > 0 %>
+          <%= pluralize_with_delimiter(@things_count, 'thing') %>
+        <% else %>
+              We aren't sure of size
+        <% end %>
+      </li>
 			<li><span class="pretend" title="not possible yet">00</span>% of things have metadata online</li>
 
 			<li><span class="pretend" title="not possible yet">00</span>% have a digitised version</li>
@@ -50,7 +56,11 @@
 
 		<p>
 
-    There <%= pluralize_without_count(@things_count, "is", "are") %> about <%= pluralize_with_delimiter(@things_count, 'thing') %> about "<%= @id %>" across Oxford.
+    <% if @things_count > 0 %>
+      There <%= pluralize_without_count(@things_count, "is", "are") %> about <%= pluralize_with_delimiter(@things_count, 'thing') %> about "<%= @id %>" across Oxford.
+    <% else %>
+      It's hard to know how many things there are about '<%= @id %>' across Oxford, because we don't have digital metadata for everything.
+    <% end %>
 
 
       <% if (@things_by_subjects.size > 0) && (@superfield != 'gfs_subject') %>
@@ -114,7 +124,9 @@
       <% end %>
     </div>
 
-		<h4><%= pluralize_with_delimiter(@things_count, 'thing') %></h4>
+    <% if @things_count > 0 %>
+      <h4><%= pluralize_with_delimiter(@things_count, 'thing') %></h4>
+    <% end %>
 
 
     <% if @things.length > 0 %>
@@ -130,8 +142,6 @@
         <% end %>
   		</ol>
   		(We're only showing 50 results in the prototype.)
-    <% else %>
-      <p>We don’t have any item level data for "<%= @id %>". Sorry about that.</p>
     <% end %>
 
 	</div>

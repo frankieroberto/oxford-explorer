@@ -30,7 +30,15 @@
 
     <h6>STATS</h6>
     <ul>
-      <li><span class='<%=@collection.institution_id %>-em total-count'><%= pluralize_with_delimiter(@collection.size_int, 'thing') %></span></li>
+      <li>
+        <span class='<%=@collection.institution_id %>-em total-count'>
+          <% if @collection.size_int && (@collection.size_int > 0 ) %>
+            <%= pluralize_with_delimiter(@collection.size_int, 'thing') %>
+          <% else %>
+            We aren't sure of size
+          <% end %>
+        </span>
+      </li>
 
       <% if @collection.size_int && @collection.size_int > 0 %>
 
@@ -79,7 +87,7 @@
 
       <% else %>
 
-        <li>Collection size: <%= @collection['size'] %></li>
+        <li>Our summary data says '<%= @collection['size'] %>'</li>
 
       <% end %>
 
@@ -121,23 +129,25 @@
   		
     <% end %>
 
-		<h3><%= pluralize_with_delimiter(@collection.size_int, 'thing') %></h3>
+    <% if @collection.size_int && (@collection.size_int > 0) %>
+      <h3><%= pluralize_with_delimiter(@collection.size_int, 'thing') %></h3>
 
-    <% if @things.size > 0 %>
-  		<ol>
-        <% @things.each do |thing| %>
-          <li>
-          	<%= link_to thing.title, thing_path(thing.id) %>
-        	<% thing.types_of_things.each do |type_of_thing| %>
-	        	&nbsp;&nbsp;<%= type_of_thing.name %>
-	        <% end %>
-			</li>
+      <% if @things.size > 0 %>
+        <ol>
+          <% @things.each do |thing| %>
+            <li>
+              <%= link_to thing.title, thing_path(thing.id) %>
+            <% thing.types_of_things.each do |type_of_thing| %>
+              &nbsp;&nbsp;<%= type_of_thing.name %>
+            <% end %>
+        </li>
 
-        <% end %>
-  		</ol>
+          <% end %>
+        </ol>
+      <% end %>
     <% else %>
 
-      <p>We don’t have item level data for this collection. Sorry about that.</p>
+      <p>It's hard to know how many things there are in the '<%= @collection.name %>' collection, because we don't have digital metadata for everything.</p>
       
     <% end %>
 
