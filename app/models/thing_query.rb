@@ -108,19 +108,19 @@ class ThingQuery
           item_types: {
             terms: {
               field: 'gfs_item_type.raw',
-              size: 10
+              size: 100
             }
           },
           authors: {
             terms: {
               field: 'gfs_author.raw',
-              size: 10
+              size: 100
             }
           },
           subjects: {
             terms: {
               field: 'gfs_subject.raw',
-              size: 10
+              size: 100
             }
           },
           institutions: {

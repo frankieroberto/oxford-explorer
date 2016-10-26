@@ -65,7 +65,7 @@
 
       <% if (@things_by_subjects.size > 0) && (@superfield != 'gfs_subject') %>
         <%= pluralize_without_count(@things_count, "It relates", "They relate") %> to
-        <% subject_links = @things_by_subjects.collect do |things_by_subject| %>
+        <% subject_links = @things_by_subjects[0,10].collect do |things_by_subject| %>
           <% link_to(things_by_subject.subject, subject_path(things_by_subject.subject)) %>
         <% end.to_sentence.html_safe %>
         <%= subject_links %>.
@@ -82,7 +82,7 @@
 
       <h6>Related authors</h6>
       <p>
-        <%= @things_by_authors.collect do |things_by_authors| %>
+        <%= @things_by_authors[0,10].collect do |things_by_authors| %>
           <% link_to(things_by_authors.author, person_path(things_by_authors.author)) %>
         <% end.to_sentence(words_connector: '; ',last_word_connector: '; ').html_safe %>
       </p>
@@ -93,7 +93,7 @@
 
       <h6>Types of thing</h6>
 		  <p>
-        <%= @things_by_item_type.collect do |thing_by_item_type| %>
+        <%= @things_by_item_type[0,10].collect do |thing_by_item_type| %>
           <% link_to(thing_by_item_type.item_type, item_type_path(thing_by_item_type.item_type)) %>
         <% end.to_sentence(words_connector: '; ',last_word_connector: '; ').html_safe %>
       </p>
@@ -101,6 +101,47 @@
     <% end %>
 
 
+    <div class="js-show-details">
+      [ <span class="js-show">Show more</span> ]
+    
+
+      <div class='js-details'>
+        <div class="row">
+          <div class="six columns">
+            <% if @things_by_authors.size > 0 %>
+              <h5>Authors</h5>
+
+              <%= @things_by_authors.collect do |a| %>
+                <% link_to a.author, people_path(a.author) %>
+              <% end.join('; ').html_safe %>
+            <% end %>
+
+          </div>
+          <div class="six columns">
+            <% if @things_by_item_type.size > 0 %>
+              <h5>Types of things</h5>
+
+              <%= @things_by_item_type.collect do |type_of_thing| %>
+                <% link_to type_of_thing.item_type, item_type_path(type_of_thing.item_type) %>
+              <% end.join('; ').html_safe %>
+            <% end %>
+
+          </div>
+        </div>
+        <div class="row">
+          <div class="six columns">
+            <% if @things_by_subjects.size > 0 %>
+              <h5>Subjects</h5>
+
+              <%= @things_by_subjects.collect do |s| %>
+                <% link_to s.subject, subject_path(s.subject) %>
+              <% end.join('; ').html_safe %>
+            <% end %>
+
+          </div>
+        </div>
+      </div>
+    </div>
 		<h4>In <%= pluralize_with_delimiter(@things_in_collections.size, 'collection') %></h4>
 
 		<div class="row">
