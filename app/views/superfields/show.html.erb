@@ -100,6 +100,7 @@
       
     <% end %>
 
+    <% if @things_by_authors.any? || @things_by_item_type.any? || @things_by_subjects.any? %>
 
     <div class="js-show-details">
       [ <span class="js-show">Show more</span> ]
@@ -142,6 +143,8 @@
         </div>
       </div>
     </div>
+  <% end %>
+
 		<h4>In <%= pluralize_with_delimiter(@things_in_collections.size, 'collection') %></h4>
 
 		<div class="row">
