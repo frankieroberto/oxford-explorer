@@ -6,31 +6,27 @@
 <% end %>
 
 
-<div class="row" style="margin-top: -20px;">
-	<div class="one column inst-<%= @collection.institution_id.downcase %>-bg center"><%= link_to @collection.institution_id, institution_path(@collection.institution_id) %></div>
-	<div class="eleven columns blurb">
-		<h1><%= @collection.name %></h1>
-	</div>
-</div>
-
-
 <div class="row">
-
 	<div class="four columns stats">
-
 
     <%= render partial: 'mapette/mapette',
       locals: {selected_collection: @collection }
-
     %>
 
+	<br /><br />
 
-	<br /><br /><br />
+	<div class="row">
+		<div class="two columns inst-<%= @collection.institution_id.downcase %>-bg center"><%= link_to @collection.institution_id, institution_path(@collection.institution_id) %></div>
 
+		<div class="offset-by-set eight columns">
+	
 
     <%= render partial: 'collections/collection_pie',
       locals: {collection: @collection} %>
+		
+		</div>
 
+	</div>
 
     <h6>STATS</h6>
     <ul>
@@ -92,10 +88,9 @@
 
 	</div>
 
+	<div class="seven columns blurb">
 
-
-
-	<div class="eight columns blurb">
+		<h1><%= @collection.name %></h1>
 
 		<p>
 			This collection mostly contains
@@ -108,20 +103,22 @@
 
 	<% end %>
 
-			  dated about <a href="#" class="pretend" title="Not possible yet" data-reason="We’re not able to parse dates yet."><%= @collection.dates %></a>.
+			  dated about <a href="#" class="pretend" title="Not possible yet" data-reason="We’re not able to parse date strings properly yet."><%= @collection.dates %></a>.
 
         <% if @collection.places.size > 0 %>
-			  Materials are either from or about <%= @collection.places.collect {|places| link_to(places, "#", class: 'pretend', title: "Not possible yet", 'data-reason': "We don’t have the data for this yet.") }.to_sentence(last_word_connector: ' and ').html_safe %>.
+			  Materials are either from or about <%= @collection.places.collect {|places| link_to(places, "#", class: 'pretend', title: "Not possible yet", 'data-reason': "We don’t have usable data for places yet.") }.to_sentence(last_word_connector: ' and ').html_safe %>.
         <% end %>
 
 		</p>
 
 
     <% if @collection.people.size > 0 %>
+    
   		<h6>Related authors</h6>
   		<p>
         <%= @collection.people.collect {|person| link_to(person, person_path(person)) }.to_sentence(last_word_connector: ' and ').html_safe %>
   		</p>
+  		
     <% end %>
 
 		<h3><%= pluralize_with_delimiter(@collection.size_int, 'thing') %></h3>
@@ -141,6 +138,7 @@
     <% else %>
 
       <p>We don’t have item level data for this collection. Sorry about that.</p>
+      
     <% end %>
 
 
@@ -150,8 +148,9 @@
       <h6>Staff comments on this collection</h6>
 
       <p><%= Rinku.auto_link(@collection['catalog_comments']).html_safe %></p>
+      
     <% end %>
-	</div>
+	</div>	
 
 </div>
 
