@@ -104,20 +104,21 @@
 			This collection mostly contains
 			<%= @collection.types_of_things.collect(&:name).collect {|type_of_thing| link_to(type_of_thing, item_type_path(type_of_thing)) }.to_sentence(last_word_connector: ' and ').html_safe %>
 
-    <% if @collection.subjects.size > 0 %>
+      <% if @collection.subjects.size > 0 %>
 
-    		about
-    		<%= @collection.subjects.collect {|subject| link_to(subject, subject_path(subject)) }.to_sentence(last_word_connector: ' and ').html_safe %>
+        about
+        <%= @collection.subjects.collect {|subject| link_to(subject, subject_path(subject)) }.to_sentence(last_word_connector: ' and ').html_safe %>
 
-	<% end %>
+      <% end %>
+      <% if !@collection.dates.blank? %>
+        dated about <a href="#" class="pretend" title="Not possible yet" data-reason="We’re not able to parse date strings properly yet."><%= @collection.dates %></a>.
+      <% end %>
 
-			  dated about <a href="#" class="pretend" title="Not possible yet" data-reason="We’re not able to parse date strings properly yet."><%= @collection.dates %></a>.
+      <% if @collection.places.size > 0 %>
+        Materials are either from or about <%= @collection.places.collect {|places| link_to(places, "#", class: 'pretend', title: "Not possible yet", 'data-reason': "We don’t have usable data for places yet.") }.to_sentence(last_word_connector: ' and ').html_safe %>.
+      <% end %>
 
-        <% if @collection.places.size > 0 %>
-			  Materials are either from or about <%= @collection.places.collect {|places| link_to(places, "#", class: 'pretend', title: "Not possible yet", 'data-reason': "We don’t have usable data for places yet.") }.to_sentence(last_word_connector: ' and ').html_safe %>.
-        <% end %>
-
-		</p>
+    </p>
 
 
     <% if @collection.people.size > 0 %>
