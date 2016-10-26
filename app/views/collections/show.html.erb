@@ -1,8 +1,8 @@
-<% content_for :title, "#{@collection.name} - " %>
+<% content_for :title, "#{@collection.name} - Collections - " %>
 
 <% content_for :structural_nav do %>
   &rarr; <%= link_to "Collections", collections_path %>
-  &rarr; 
+  &rarr; <%= @collection.name %>
 <% end %>
 
 
