@@ -8,10 +8,8 @@
 
 <div class="row" style="margin-top: -20px;">
 	<div class="one column inst-<%= @collection.institution_id.downcase %>-bg center"><%= link_to @collection.institution_id, institution_path(@collection.institution_id) %></div>
-</div>
-<div class="row">
-	<div class="twelve columns">
-		<h1 class="buffer"><%= @collection.name %></h1>
+	<div class="eleven columns blurb">
+		<h1><%= @collection.name %></h1>
 	</div>
 </div>
 
