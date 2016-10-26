@@ -23,7 +23,11 @@
     <h6>Stats</h6>
     
     <ul>
-    	<li><%= pluralize_with_delimiter(@things_count, 'thing') %></li>
+        <% if @things_count > 0 %>
+          <%= pluralize_with_delimiter(@things_count, 'thing') %>
+        <% else %>
+              We aren't sure of size
+        <% end %>
     </ul>
     
     
@@ -55,7 +59,11 @@
 
  	   <p>
  	   
- 	   	There are about <%= pluralize_with_delimiter(@things_count, 'thing') %> by <%= @id %> across Oxford.
+    <% if @things_count > 0 %>
+      There <%= pluralize_without_count(@things_count, "is", "are") %> about <%= pluralize_with_delimiter(@things_count, 'thing') %> by "<%= @id %>" across Oxford.
+    <% else %>
+      It's hard to know how many things there are by '<%= @id %>' across Oxford, because we don't have digital metadata for everything.
+    <% end %>
 
       <% if @things_by_subjects.size > 0 %>
         They relate to
@@ -113,19 +121,23 @@
       <% end %>
     </div>
 
-    <h4><%= pluralize_with_delimiter(@things_count, 'thing') %></h4>
+    <% if @things_count > 0 %>
+      <h4><%= pluralize_with_delimiter(@things_count, 'thing') %></h4>
+    <% end %>
 
-    <ol>
+    <% if @things.length > 0 %>
+      <ol>
 
-      <% @things.each do |thing| %>
-        <li>
-        <%= link_to thing.title, thing_path(thing.id), class: 'thing' %>
-        	<% thing.types_of_things.each do |type_of_thing| %>
-	        	&nbsp;&nbsp;<%= type_of_thing.name %>
-	        <% end %>        
-        </li>
-      <% end %>
-    </ol>
+        <% @things.each do |thing| %>
+          <li>
+          <%= link_to thing.title, thing_path(thing.id), class: 'thing' %>
+            <% thing.types_of_things.each do |type_of_thing| %>
+              &nbsp;&nbsp;<%= type_of_thing.name %>
+            <% end %>        
+          </li>
+        <% end %>
+      </ol>
+    <% end %>
 
 	</div>
 </div>
