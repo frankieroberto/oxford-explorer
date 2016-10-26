@@ -74,7 +74,7 @@
           <h5>Types of things</h5>
 
           <%= @institution.types_of_things.sort_by(&:name).collect do |type_of_thing| %>
-            <% link_to type_of_thing.name, item_type_path(type_of_thing) %>
+            <% link_to type_of_thing.name, item_type_path(type_of_thing.name) %>
           <% end.join('; ').html_safe %>
 
         </div>
