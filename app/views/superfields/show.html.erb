@@ -53,16 +53,16 @@
     There <%= pluralize_without_count(@things_count, "is", "are") %> about <%= pluralize_with_delimiter(@things_count, 'thing') %> about "<%= @id %>" across Oxford.
 
 
-      <% if @things_by_subjects.size > 0 %>
-        They relate to
+      <% if (@things_by_subjects.size > 0) && (@superfield != 'gfs_subject') %>
+        <%= pluralize_without_count(@things_count, "It relates", "They relate") %> to
         <% subject_links = @things_by_subjects.collect do |things_by_subject| %>
           <% link_to(things_by_subject.subject, subject_path(things_by_subject.subject)) %>
         <% end.to_sentence.html_safe %>
-        <%= subject_links %>,
+        <%= subject_links %>.
       <% end %>
 
       <% if @min_pubyear && @max_pubyear %>
-        and the data we have makes it seem as if they cover a time period like <%= @min_pubyear %> to <%= @max_pubyear %> (but that may well be wrong).
+        The data we have makes it seem as if they cover a time period like <%= @min_pubyear %> to <%= @max_pubyear %> (but that may well be wrong).
       <% end %>
 
 
