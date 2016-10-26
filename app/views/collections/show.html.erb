@@ -16,9 +16,8 @@
 	<br /><br />
 
 	<div class="row">
-		<div class="two columns inst-<%= @collection.institution_id.downcase %>-bg center"><%= link_to @collection.institution_id, institution_path(@collection.institution_id) %></div>
 
-		<div class="offset-by-set eight columns">
+		<div class="offset-by-two eight columns">
 	
 
     <%= render partial: 'collections/collection_pie',
@@ -96,7 +95,9 @@
 
 	</div>
 
-	<div class="seven columns blurb">
+	<div class="eight columns collblurb">
+
+		<span style="padding: 5px;" class="inst-<%= @collection.institution_id.downcase %>-bg center"><%= link_to human_name_for_institution(@collection.institution_id), institution_path(@collection.institution_id) %></span><br /><br />
 
 		<h1><%= @collection.name %></h1>
 
