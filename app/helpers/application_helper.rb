@@ -12,6 +12,14 @@ module ApplicationHelper
     "#{number_with_delimiter(count) || 0}&nbsp;#{word}".html_safe
   end
 
+  def pluralize_without_count(count, singular, plural=nil)
+    if (count == 1 || count =~ /^1(\.0+)?$/)
+      singular
+    else
+      plural || singular.pluralize
+    end
+  end
+
   def percentage_with_varying_accuracy(decimal)
 
     percentage = decimal * 100

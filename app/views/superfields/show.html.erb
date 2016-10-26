@@ -50,7 +50,7 @@
 
 		<p>
 
-     		There are about <%= number_with_delimiter(@things_count) %> things about "<%= @id %>" across Oxford.
+    There <%= pluralize_without_count(@things_count, "is", "are") %> about <%= pluralize_with_delimiter(@things_count, 'thing') %> about "<%= @id %>" across Oxford.
 
 
       <% if @things_by_subjects.size > 0 %>
