@@ -10,8 +10,7 @@ function addShowHideDetails() {
 
     for (var j = show_hide_links.length - 1; j >= 0; j--) {
       show_hide_links[j].addEventListener('click', function() {
-        console.log(this);
-        if(this.innerText.toLowerCase().match('Show more')) {
+        if(this.innerText.trim().toLowerCase().match('show more')) {
           this.innerText = "Hide";
         } else {
           this.innerText = "Show more";
