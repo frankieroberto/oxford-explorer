@@ -105,12 +105,18 @@ select {
 
 .homeblurb {
 }
+.collblurb {
+	margin-top: 15px;
+}
+.collblurb h1 {
+	margin-top: 20px;
+}
 .homeblurb, .collblurb p {
 	font-size: 1.25em;
 }
 
 .blurb {
-	padding-top: 30px;
+/* 	padding-top: 30px; */
 }
 .blurb p {
 	font-size: 1.25em;
