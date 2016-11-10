@@ -4,17 +4,11 @@
 
 <% end %>
 
-<div class="mapette-container row">
-	<div class="twelve columns mapette">
-	</div>
-</div>
-
-
 <div class="row">
 	<div class="one column inst-<%= @thing["gfs_institution_id"].downcase %>-bg center">
     <%= link_to @thing["gfs_institution_id"], institution_path(@thing["gfs_institution_id"]) %></div>
 
-	<div class="eleven columns blurb">
+	<div class="eleven columns blurb buffer">
 		<h1><%= @thing.title %></h1>
 
     <% if @thing.authors.size > 0 %>
@@ -69,8 +63,8 @@
 		<ul style="list-style: circle;">
 			<li>Data source is <%= @thing["gfs_source_id"] %>
 </li>
-			<li><em>If we could link to an item page online for this, we would do that here.</em></li>
-			<li>Even better, if we could link to a digitised version, we'd do that here too. (Or even show it on this page.)</li>
+			<li>If we could link to an item page online at <%= @thing["gfs_institution_id"] %> for this, we would do that here.</li>
+			<li>Even better, if we could link to a digitised version there, we'd do that here too. (Or, even show it right on this page.)</li>
 		</ul>
 
 	</div>
