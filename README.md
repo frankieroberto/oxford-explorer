@@ -23,9 +23,9 @@ To start the website locally, you just need to run `bundle exec rails server`. E
 
 Some of the summary level data about institutions and collections are cached from a Google Spreadsheet. These cached copies can be updated using these commands:
 
-`bundle exec rake update:collections`
-`bundle exec rake update:institutions`
-`bundle exec rake update:types_of_thing`
+`bundle exec rake update:collections`  
+`bundle exec rake update:institutions`  
+`bundle exec rake update:types_of_thing`  
 
 These tasks assume that the URL to the CSV of the relevant Google Spreadsheet is available as an environment variable.
 
