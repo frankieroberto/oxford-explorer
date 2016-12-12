@@ -47,14 +47,20 @@
           <li>
             <% if @collection.size_int == 1 %>
               This thing has
+              <% if @collection.catalog_url %>
+                metadata online
+                <a href="<%= @collection.catalog_url %>">and you can access it here</a>
+              <% else %>
+                metadata online, but we can't link to it
+              <% end %>
             <% else %>
               None of these things have
-            <% end %>
-
-            <% if @collection.catalog_url %>
-              <a href="<%= @collection.catalog_url %>">metadata online</a>
-            <% else %>
-              metadata online
+              <% if @collection.catalog_url %>
+                metadata online
+                <a href="<%= @collection.catalog_url %>">but you could access it here</a>
+              <% else %>
+                metadata online, and we can't link to it
+              <% end %>
             <% end %>
 
           </li>
