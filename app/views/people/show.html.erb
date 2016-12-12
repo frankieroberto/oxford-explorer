@@ -105,39 +105,32 @@
       [ <span class="js-show">Show more</span> ]
     
 
-      <div class='js-details'>
-        <div class="row">
-          <div class="six columns">
-            <% if @things_by_authors.size > 0 %>
-              <h5>Authors</h5>
+      <div class='js-details show-more'>
 
-              <%= @things_by_authors.collect do |a| %>
-                <% link_to a.author, people_path(a.author) %>
-              <% end.join('; ').html_safe %>
-            <% end %>
+		<% if @things_by_authors.size > 0 %>
+		  <h5>Authors</h5>
 
-          </div>
-          <div class="six columns">
-            <% if @things_by_item_type.size > 0 %>
-              <h5>Types of things</h5>
+		  <%= @things_by_authors.collect do |a| %>
+			<% link_to a.author, people_path(a.author) %>
+		  <% end.join('; ').html_safe %>
+		<% end %>
 
-              <%= @things_by_item_type.collect do |type_of_thing| %>
-                <% link_to type_of_thing.item_type, item_type_path(type_of_thing.item_type) %>
-              <% end.join('; ').html_safe %>
-            <% end %>
+		<% if @things_by_item_type.size > 0 %>
+		  <h5>Types of things</h5>
 
-          </div>
-        </div>
-        <div class="row">
-          <div class="six columns">
-            <% if @things_by_subjects.size > 0 %>
-              <h5>Subjects</h5>
+		  <%= @things_by_item_type.collect do |type_of_thing| %>
+			<% link_to type_of_thing.item_type, item_type_path(type_of_thing.item_type) %>
+		  <% end.join('; ').html_safe %>
+		<% end %>
 
-              <%= @things_by_subjects.collect do |s| %>
-                <% link_to s.subject, subject_path(s.subject) %>
-              <% end.join('; ').html_safe %>
-            <% end %>
-          </div>
+		<% if @things_by_subjects.size > 0 %>
+		  <h5>Subjects</h5>
+
+		  <%= @things_by_subjects.collect do |s| %>
+			<% link_to s.subject, subject_path(s.subject) %>
+		  <% end.join('; ').html_safe %>
+		<% end %>
+
         </div>
       </div>
     <% end %>
