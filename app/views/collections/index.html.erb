@@ -9,8 +9,8 @@
 		<h1>Collections</h1>
 	</div>
 	<div class="six columns right">
-		<p><a href="?show=top10" <%= 'class="selected"'.html_safe if @show == 'top10' || @show.blank? %>>Top 10</a> / <a href="?show=by-size" <%= 'class="selected"'.html_safe if @show == 'by-size' %>>By Size, all</a> / <a href="?show=alphabetical" <%= 'class="selected"'.html_safe if @show == 'alphabetical' %>>Alphabetical, all</a>
-	</div>
+		<p><a href="?show=alphabetical" <%= 'class="selected"'.html_safe if @show == 'alphabetical' || @show.blank? %>>Alphabetical, all</a>
+    / <a href="?show=top10" <%= 'class="selected"'.html_safe if @show == 'top10' %>>Top 10</a> / <a href="?show=by-size" <%= 'class="selected"'.html_safe if @show == 'by-size' %>>By Size, all</a></div>
 
 </div>
 
@@ -24,13 +24,13 @@
       <div class="three columns">
         <ul>
 
-          <% if @show == 'alphabetical' %>
+          <% if @show == 'alphabetical' || @show.to_s.blank? %>
             <% group[1].sort_by!(&:name) %>
           <% else %>
             <% group[1].sort_by!(&:size_int).reverse! %>
           <% end %>
 
-          <% if @show == 'top10' || @show.to_s.blank? %>
+          <% if @show == 'top10' %>
             <% group[1] = group[1].first(10) %>
           <% end %>
 
