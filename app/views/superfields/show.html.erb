@@ -107,18 +107,15 @@
     
 
       <div class='js-details'>
-        <div class="row">
-          <div class="six columns">
+
             <% if @things_by_authors.size > 0 %>
-              <h5>Authors</h5>
+              <h5>All Related Authors</h5>
 
               <%= @things_by_authors.collect do |a| %>
                 <% link_to a.author, people_path(a.author) %>
               <% end.join('; ').html_safe %>
             <% end %>
 
-          </div>
-          <div class="six columns">
             <% if @things_by_item_type.size > 0 %>
               <h5>Types of things</h5>
 
@@ -127,10 +124,6 @@
               <% end.join('; ').html_safe %>
             <% end %>
 
-          </div>
-        </div>
-        <div class="row">
-          <div class="six columns">
             <% if @things_by_subjects.size > 0 %>
               <h5>Subjects</h5>
 
@@ -139,9 +132,6 @@
               <% end.join('; ').html_safe %>
             <% end %>
 
-          </div>
-        </div>
-      </div>
     </div>
   <% end %>
 
