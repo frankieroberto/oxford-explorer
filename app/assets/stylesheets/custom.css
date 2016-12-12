@@ -45,6 +45,7 @@ a {
 
 a.selected {
   color: #839496;
+  text-decoration: none;
 }
 a:hover {
 	color: #268bd2;
