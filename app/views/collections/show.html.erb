@@ -134,6 +134,10 @@
     <% if @collection.size_int && (@collection.size_int > 0) %>
       <h3><%= pluralize_with_delimiter(@collection.size_int, 'thing') %></h3>
 
+      <% if @things.size < @collection.size_int %>
+        <p>(Please note: We're only showing up to 50 results in this prototype.)</p>
+      <% end %>
+
       <% if @things.size > 0 %>
         <ol>
           <% @things.each do |thing| %>
@@ -147,7 +151,6 @@
           <% end %>
         </ol>
 
-	<p>(Please note: We're only showing up to 50 results in this prototype.)</p>
         
         
       <% end %>
