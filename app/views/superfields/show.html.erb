@@ -111,7 +111,7 @@
             <% if @things_by_authors.size > 0 %>
               <h5>All Related Authors</h5>
 
-              <%= @things_by_authors.collect do |a| %>
+              <%= @things_by_authors.collect do |things_by_authors| %>
                 <% link_to(things_by_authors.author, person_path(things_by_authors.author)) %>
               <% end.join('; ').html_safe %>
             <% end %>
