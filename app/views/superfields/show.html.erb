@@ -112,7 +112,7 @@
               <h5>All Related Authors</h5>
 
               <%= @things_by_authors.collect do |a| %>
-                <% link_to a.author, people_path(a.author) %>
+                <% link_to(things_by_authors.author, person_path(things_by_authors.author)) %>
               <% end.join('; ').html_safe %>
             <% end %>
 
